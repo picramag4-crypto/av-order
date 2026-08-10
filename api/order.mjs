@@ -35,9 +35,19 @@ export default {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            chat_id: chatId,
-            text: text
-          })
+  chat_id: chatId,
+  text: text,
+  reply_markup: {
+    inline_keyboard: [
+      [
+        {
+          text: "✅ Принять заказ",
+          callback_data: "accept_order"
+        }
+      ]
+    ]
+  }
+})
         }
       );
 
