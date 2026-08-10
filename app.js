@@ -122,7 +122,26 @@ async function checkout(){
     total:subtotal+fee
   };
   localStorage.setItem("av_last_order",JSON.stringify(order));
-  let text=`Заказ сформирован!\n\n${cart.map(x=>`${x.qty}× ${x.name}${x.option?` (${x.option})`:""} — ${rub(x.price*x.qty)}`).join("\n")}\n\nИтого: ${rub(order.total)}\n${fulfillment==="delivery"?"Доставка: "+address:"Самовывоз: Вокзальная площадь, 1А"}\nОплата: ${payment==="cash"?"наличными":"QR-кодом при получении"}`;
+  let text =
+`👤 Клиент: ${name}
+📞 Телефон: ${phone}
+
+🛍 ЗАКАЗ:
+${cart.map(x =>
+${x.qty}× ${x.name}${x.option ?  (${x.option})` : ""} — ${rub(x.price * x.qty)}`
+).join("\n")}
+
+💵 Товары: ${rub(subtotal)}
+${fulfillment === "delivery" ? 🚗 Доставка: ${rub(fee)} : "🚶 Самовывоз"}
+💰 ИТОГО: ${rub(order.total)}
+
+${fulfillment === "delivery"
+? 📍 Адрес: ${address}
+: "📍 Самовывоз: Вокзальная площадь, 1А (вход со стороны вокзала)"}
+
+💳 Оплата: ${payment === "cash" ? "Наличными при получении" : "QR-кодом при получении"}
+
+💬 Комментарий: ${comment || "Нет"}`;
   try {
   const response = await fetch("/api/order", {
     method: "POST",
