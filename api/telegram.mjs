@@ -36,15 +36,25 @@ export default {
               chat_id: callback.message.chat.id,
               message_id: callback.message.message_id,
               reply_markup: {
-                inline_keyboard: [
-                  [
-                    {
-                      text: "✅ Заказ принят",
-                      callback_data: "already_accepted"
-                    }
-                  ]
-                ]
-              }
+  inline_keyboard: [
+    [
+      {
+        text: "🍳 Готовится",
+        callback_data: "cooking_order"
+      }
+    ],
+    [
+      {
+        text: "✅ Готов",
+        callback_data: "ready_order"
+      },
+      {
+        text: "❌ Отменить",
+        callback_data: "cancel_order"
+      }
+    ]
+  ]
+}
             })
           }
         );
