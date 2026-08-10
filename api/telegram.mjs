@@ -34,7 +34,7 @@ export default {
 
       async function setButtons(inlineKeyboard) {
         await fetch(
-          https://api.telegram.org/bot${token}/editMessageReplyMarkup,
+          `https://api.telegram.org/bot${token}/editMessageReplyMarkup`,
           {
             method: "POST",
             headers: {
