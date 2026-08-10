@@ -100,17 +100,20 @@ function bind(){
 }
 async function checkout(){
   if(!cart.length) return alert("Корзина пустая.");
+
   const fulfillment=document.querySelector('input[name="fulfillment"]:checked').value;
   const payment=document.querySelector('input[name="payment"]:checked').value;
   const name=document.getElementById("name").value.trim();
   const phone=document.getElementById("phone").value.trim();
   const address=document.getElementById("address").value.trim();
   const comment=document.getElementById("comment").value.trim();
+
   if(!name || !phone) return alert("Укажите имя и телефон.");
   if(fulfillment==="delivery" && !address) return alert("Укажите адрес доставки.");
 
   const subtotal=cart.reduce((s,x)=>s+x.price*x.qty,0);
   const fee=fulfillment==="delivery"?200:0;
+
   const order={
     createdAt:new Date().toISOString(),
     customer:{name,phone,address,comment},
@@ -121,7 +124,9 @@ async function checkout(){
     deliveryFee:fee,
     total:subtotal+fee
   };
+
   localStorage.setItem("av_last_order",JSON.stringify(order));
+
   let text =
 `👤 Клиент: ${name}
 📞 Телефон: ${phone}
@@ -142,29 +147,30 @@ ${fulfillment === "delivery"
 💳 Оплата: ${payment === "cash" ? "Наличными при получении" : "QR-кодом при получении"}
 
 💬 Комментарий: ${comment || "Нет"}`;
+
   try {
-  const response = await fetch("/api/order", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      text: text
-    })
-  });
+    const response = await fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        text: text
+      })
+    });
 
-  const result = await response.json();
+    const result = await response.json();
 
-  if (!response.ok) {
-    console.error("Ошибка отправки:", result);
-    alert("Заказ сформирован, но не удалось отправить сотрудникам.");
-    return;
+    if (!response.ok) {
+      console.error("Ошибка отправки:", result);
+      alert("Заказ сформирован, но не удалось отправить сотрудникам.");
+      return;
+    }
+
+    alert(text + "\n\n✅ Заказ отправлен сотрудникам.");
+  } catch (error) {
+    console.error(error);
+    alert("Заказ сформирован, но произошла ошибка при отправке.");
   }
-
-  alert(text + "\n\n✅ Заказ отправлен сотрудникам.");
-} catch (error) {
-  console.error(error);
-  alert("Заказ сформирован, но произошла ошибка при отправке.");
-}
 }
 boot();
