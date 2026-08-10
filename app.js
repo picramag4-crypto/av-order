@@ -98,7 +98,7 @@ function bind(){
   });
   document.getElementById("checkoutBtn").onclick=checkout;
 }
-function checkout(){
+async function checkout(){
   if(!cart.length) return alert("Корзина пустая.");
   const fulfillment=document.querySelector('input[name="fulfillment"]:checked').value;
   const payment=document.querySelector('input[name="payment"]:checked').value;
@@ -123,6 +123,29 @@ function checkout(){
   };
   localStorage.setItem("av_last_order",JSON.stringify(order));
   let text=`Заказ сформирован!\n\n${cart.map(x=>`${x.qty}× ${x.name}${x.option?` (${x.option})`:""} — ${rub(x.price*x.qty)}`).join("\n")}\n\nИтого: ${rub(order.total)}\n${fulfillment==="delivery"?"Доставка: "+address:"Самовывоз: Вокзальная площадь, 1А"}\nОплата: ${payment==="cash"?"наличными":"QR-кодом при получении"}`;
-  alert(text+"\n\nСледующим шагом подключим автоматическую отправку заказа сотрудникам.");
+  try {
+  const response = await fetch("/api/order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      text: text
+    })
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    console.error("Ошибка отправки:", result);
+    alert("Заказ сформирован, но не удалось отправить сотрудникам.");
+    return;
+  }
+
+  alert(text + "\n\n✅ Заказ отправлен сотрудникам.");
+} catch (error) {
+  console.error(error);
+  alert("Заказ сформирован, но произошла ошибка при отправке.");
+}
 }
 boot();
