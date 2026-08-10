@@ -8,7 +8,7 @@ let selectedCategory = "Бургеры";
 let modalItem = null;
 let modalOptionIndex = 0;
 
-const rub = n => ${n.toLocaleString("ru-RU")} ₽;
+const rub = n => `${n.toLocaleString("ru-RU")} ₽`;
 
 async function boot(){
   menu = await fetch("menu.json").then(r=>r.json());
@@ -37,7 +37,7 @@ function renderMenu(){
     const card=document.createElement("article");
     card.className="card";
     const from = item.options
-  ? от ${rub(Math.min(...item.options.map(o=>o.price)))}
+  ? `от ${rub(Math.min(...item.options.map(o=>o.price)))}`
   : rub(item.price);
     card.innerHTML=`<h3>${item.name}</h3><p>${item.description||""}</p><div class="card-footer"><span class="price">${from}</span><button class="add">+</button></div>`;
     card.querySelector(".add").onclick=()=>openItem(item);
@@ -135,15 +135,15 @@ async function checkout(){
 
 🛍 ЗАКАЗ:
 ${cart.map(x =>
-${x.qty}× ${x.name}${x.option ?  (${x.option})` : ""} — ${rub(x.price * x.qty)}`
+`${x.qty}× ${x.name}${x.option ? ` (${x.option})` : ""} — ${rub(x.price * x.qty)}`
 ).join("\n")}
 
 💵 Товары: ${rub(subtotal)}
-${fulfillment === "delivery" ? 🚗 Доставка: ${rub(fee)} : "🚶 Самовывоз"}
+${fulfillment === "delivery" ? `🚗 Доставка: ${rub(fee)}` : "🚶 Самовывоз"}
 💰 ИТОГО: ${rub(order.total)}
 
 ${fulfillment === "delivery"
-? 📍 Адрес: ${address}
+? `📍 Адрес: ${address}`
 : "📍 Самовывоз: Вокзальная площадь, 1А (вход со стороны вокзала)"}
 
 💳 Оплата: ${payment === "cash" ? "Наличными при получении" : "QR-кодом при получении"}
