@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   async fetch(request) {
     if (request.method !== "POST") {
       return Response.json(
