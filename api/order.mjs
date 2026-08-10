@@ -12,7 +12,7 @@ export default {
 
     try {
       const token = process.env.TELEGRAM_BOT_TOKEN;
-      const chatId = "-1004224118459";
+      const staffChatId = "-1004224118459";
 
       if (!token) {
         return new Response(
@@ -25,45 +25,60 @@ export default {
       }
 
       const order = await request.json();
-      const text = "🍔 НОВЫЙ ЗАКАЗ\n\n" + (order.text || "Новый заказ");
 
-      const telegramResponse = await fetch(
-        `https://api.telegram.org/bot${token}/sendMessage`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-  chat_id: chatId,
-  text: text,
-  reply_markup: {
-    inline_keyboard: [
-      [
-        {
-          text: "✅ Принять заказ",
-          callback_data: "accept_order"
-        }
-      ]
-    ]
-  }
-})
-        }
-      );
+      const text =
+        "🍔 НОВЫЙ ЗАКАЗ\n\n" +
+        (order.text || "Новый заказ");
 
-      const telegramData = await telegramResponse.json();
+      const telegramUrl =
+        "https://api.telegram.org/bot" +
+        token +
+        "/sendMessage";
 
-      if (!telegramResponse.ok) {
+      // Отправляем заказ сотрудникам
+      const staffResponse = await fetch(telegramUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: staffChatId,
+          text: text
+        })
+      });
+
+      const staffData = await staffResponse.json();
+
+      if (!staffResponse.ok) {
         return new Response(
           JSON.stringify({
             error: "Telegram error",
-            details: telegramData
+            details: staffData
           }),
           {
             status: 500,
             headers: { "Content-Type": "application/json" }
           }
         );
+      }
+
+      // Отправляем подтверждение гостю
+      if (order.telegramUserId) {
+        const customerText =
+          "✅ Ваш заказ получен!\n\n" +
+          "Спасибо за заказ в АВ Бургер.\n" +
+          "Мы уже начали его обработку.";
+
+        await fetch(telegramUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: order.telegramUserId,
+            text: customerText
+          })
+        });
       }
 
       return new Response(
@@ -73,7 +88,10 @@ export default {
           headers: { "Content-Type": "application/json" }
         }
       );
+
     } catch (error) {
+      console.error(error);
+
       return new Response(
         JSON.stringify({
           error: "Failed to send order",
