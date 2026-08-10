@@ -14,51 +14,123 @@ export default {
 
       const token = process.env.TELEGRAM_BOT_TOKEN;
 
-      if (callback.data === "accept_order") {
-        await fetch(
-          `https://api.telegram.org/bot${token}/answerCallbackQuery`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              callback_query_id: callback.id,
-              text: "Заказ принят ✅"
-            })
-          }
-        );
+      if (callback.data === "cooking_order") {
+  await fetch(
+    https://api.telegram.org/bot${token}/answerCallbackQuery,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        callback_query_id: callback.id,
+        text: "Заказ готовится 🍳"
+      })
+    }
+  );
 
-        await fetch(
-          `https://api.telegram.org/bot${token}/editMessageReplyMarkup`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              chat_id: callback.message.chat.id,
-              message_id: callback.message.message_id,
-              reply_markup: {
-  inline_keyboard: [
-    [
-      {
-        text: "🍳 Готовится",
-        callback_data: "cooking_order"
-      }
-    ],
-    [
-      {
-        text: "✅ Готов",
-        callback_data: "ready_order"
-      },
-      {
-        text: "❌ Отменить",
-        callback_data: "cancel_order"
-      }
-    ]
-  ]
+  await fetch(
+    https://api.telegram.org/bot${token}/editMessageReplyMarkup,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: callback.message.chat.id,
+        message_id: callback.message.message_id,
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "🍳 Заказ готовится",
+                callback_data: "already_cooking"
+              }
+            ],
+            [
+              {
+                text: "✅ Готов",
+                callback_data: "ready_order"
+              },
+              {
+                text: "❌ Отменить",
+                callback_data: "cancel_order"
+              }
+            ]
+          ]
+        }
+      })
+    }
+  );
 }
-            })
-          }
-        );
-      }
+
+if (callback.data === "ready_order") {
+  await fetch(
+    https://api.telegram.org/bot${token}/answerCallbackQuery,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        callback_query_id: callback.id,
+        text: "Заказ готов ✅"
+      })
+    }
+  );
+
+  await fetch(
+    https://api.telegram.org/bot${token}/editMessageReplyMarkup,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: callback.message.chat.id,
+        message_id: callback.message.message_id,
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "✅ ЗАКАЗ ГОТОВ",
+                callback_data: "already_ready"
+              }
+            ]
+          ]
+        }
+      })
+    }
+  );
+}
+
+if (callback.data === "cancel_order") {
+  await fetch(
+    https://api.telegram.org/bot${token}/answerCallbackQuery,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        callback_query_id: callback.id,
+        text: "Заказ отменён ❌"
+      })
+    }
+  );
+
+  await fetch(
+    https://api.telegram.org/bot${token}/editMessageReplyMarkup,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: callback.message.chat.id,
+        message_id: callback.message.message_id,
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "❌ ЗАКАЗ ОТМЕНЁН",
+                callback_data: "already_cancelled"
+              }
+            ]
+          ]
+        }
+      })
+    }
+  );
+}
 
       return new Response("OK", { status: 200 });
 
