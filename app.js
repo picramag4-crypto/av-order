@@ -8,7 +8,7 @@ let selectedCategory = "Бургеры";
 let modalItem = null;
 let modalOptionIndex = 0;
 
-const rub = n => `${n.toLocaleString("ru-RU")} ₽`;
+const rub = n => ${n.toLocaleString("ru-RU")} ₽;
 
 async function boot(){
   menu = await fetch("menu.json").then(r=>r.json());
@@ -36,7 +36,9 @@ function renderMenu(){
   menu.filter(x=>x.category===selectedCategory).forEach((item,idx)=>{
     const card=document.createElement("article");
     card.className="card";
-    const from = item.options ? `от ${rub(Math.min(...item.options.map(o=>o.price)))}` : rub(item.price);
+    const from = item.options
+  ? от ${rub(Math.min(...item.options.map(o=>o.price)))}
+  : rub(item.price);
     card.innerHTML=`<h3>${item.name}</h3><p>${item.description||""}</p><div class="card-footer"><span class="price">${from}</span><button class="add">+</button></div>`;
     card.querySelector(".add").onclick=()=>openItem(item);
     box.appendChild(card);
@@ -147,7 +149,6 @@ ${fulfillment === "delivery"
 💳 Оплата: ${payment === "cash" ? "Наличными при получении" : "QR-кодом при получении"}
 
 💬 Комментарий: ${comment || "Нет"}`;
-
   try {
     const response = await fetch("/api/order", {
       method: "POST",
