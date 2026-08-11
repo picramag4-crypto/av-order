@@ -171,7 +171,11 @@ ${fulfillment === "delivery"
 cart = [];
 updateCart();
 document.getElementById("cartDrawer").classList.add("hidden");
-    alert(text + "\n\n✅ Заказ отправлен сотрудникам.");
+    alert(
+  "✅ Заказ успешно оформлен!\n\n" +
+  "Мы получили ваш заказ и передали его сотрудникам.\n" +
+  "Подробности заказа отправлены вам в Telegram."
+);
   } catch (error) {
     console.error(error);
     alert("Заказ сформирован, но произошла ошибка при отправке.");
