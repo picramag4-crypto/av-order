@@ -32,6 +32,11 @@ async function boot(){
   renderCategories();
   renderMenu();
   bind();
+  const promo = document.getElementById("lunchPromo");
+
+if (promo) {
+  promo.classList.toggle("hidden", !lunchDiscountActive());
+}
 }
 function categories(){
   return [...new Set(menu.map(x=>x.category))];
