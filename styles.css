@@ -55,3 +55,16 @@ main{max-width:980px;margin:auto;padding:14px}
   .modal{place-items:center}
   .modal-card{border-radius:24px}
 }
+#lunchPromo {
+  margin: 12px 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  text-align: center;
+  background: #111;
+  color: #fff;
+}
+
+#lunchPromo.hidden {
+  display: none;
+}
