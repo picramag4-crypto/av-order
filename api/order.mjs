@@ -75,9 +75,21 @@ export default {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            chat_id: order.telegramUserId,
-            text: customerText
-          })
+  chat_id: staffChatId,
+  text: text,
+  reply_markup: {
+    inline_keyboard: [
+      [
+        {
+          text: "✅ Принять заказ",
+          callback_data:
+            "accept_order:" +
+            (order.telegramUserId || "no_user")
+        }
+      ]
+    ]
+  }
+})
         });
       }
 
