@@ -68,3 +68,15 @@ main{max-width:980px;margin:auto;padding:14px}
 #lunchPromo.hidden {
   display: none;
 }
+
+.old-price {
+  text-decoration: line-through;
+  opacity: 0.55;
+  margin-right: 6px;
+}
+
+.promo-price {
+  font-weight: 800;
+}
+
+
