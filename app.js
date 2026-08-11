@@ -27,6 +27,72 @@ function discountedAmount(amount) {
     ? Math.round(amount * 0.8)
     : amount;
 }
+function updatePromoTimer() {
+  const timer = document.getElementById("promoTimer");
+  const promo = document.getElementById("lunchPromo");
+
+  if (!timer || !promo) return;
+
+  if (!lunchDiscountActive()) {
+    promo.classList.add("hidden");
+    return;
+  }
+
+  const now = new Date();
+
+  const moscowParts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Moscow",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false
+  }).formatToParts(now);
+
+  const values = {};
+
+  moscowParts.forEach(part => {
+    if (part.type !== "literal") {
+      values[part.type] = part.value;
+    }
+  });
+
+  const nowMoscow = Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    Number(values.hour),
+    Number(values.minute),
+    Number(values.second)
+  );
+
+  const endMoscow = Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    16,
+    0,
+    0
+  );
+
+  let diff = Math.max(0, endMoscow - nowMoscow);
+
+  const hours = Math.floor(diff / 3600000);
+  diff %= 3600000;
+
+  const minutes = Math.floor(diff / 60000);
+  diff %= 60000;
+
+  const seconds = Math.floor(diff / 1000);
+
+  timer.textContent =
+    "До конца акции: " +
+    String(hours).padStart(2, "0") + ":" +
+    String(minutes).padStart(2, "0") + ":" +
+    String(seconds).padStart(2, "0");
+}
 async function boot(){
   menu = await fetch("menu.json").then(r=>r.json());
   renderCategories();
@@ -37,6 +103,8 @@ async function boot(){
 if (promo) {
   promo.classList.toggle("hidden", !lunchDiscountActive());
 }
+  updatePromoTimer();
+setInterval(updatePromoTimer, 1000);
 }
 function categories(){
   return [...new Set(menu.map(x=>x.category))];
