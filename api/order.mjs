@@ -35,7 +35,7 @@ export default {
         token +
         "/sendMessage";
 
-      // Отправляем заказ сотрудникам
+      // Отправляем ОДНО сообщение сотрудникам с кнопкой
       const staffResponse = await fetch(telegramUrl, {
         method: "POST",
         headers: {
@@ -43,7 +43,19 @@ export default {
         },
         body: JSON.stringify({
           chat_id: staffChatId,
-          text: text
+          text: text,
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "✅ Принять заказ",
+                  callback_data:
+                    "accept_order:" +
+                    (order.telegramUserId || "no_user")
+                }
+              ]
+            ]
+          }
         })
       });
 
@@ -62,34 +74,23 @@ export default {
         );
       }
 
-      // Отправляем подтверждение гостю
+      // Подтверждение гостю, что заказ получен
       if (order.telegramUserId) {
         const customerText =
-  "✅ Ваш заказ получен!\n\n" +
-  (order.text || "Заказ успешно оформлен.") +
-  "\n\nЗаказ передан сотрудникам.\n" +
-  "Спасибо за заказ в АВ Бургер ❤️";
+          "✅ Ваш заказ получен!\n\n" +
+          (order.text || "Заказ успешно оформлен.") +
+          "\n\nЗаказ передан сотрудникам.\n" +
+          "Спасибо за заказ в АВ Бургер ❤️";
+
         await fetch(telegramUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-  chat_id: staffChatId,
-  text: text,
-  reply_markup: {
-    inline_keyboard: [
-      [
-        {
-          text: "✅ Принять заказ",
-          callback_data:
-            "accept_order:" +
-            (order.telegramUserId || "no_user")
-        }
-      ]
-    ]
-  }
-})
+            chat_id: order.telegramUserId,
+            text: customerText
+          })
         });
       }
 
