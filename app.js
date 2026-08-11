@@ -168,7 +168,9 @@ ${fulfillment === "delivery"
       alert("Заказ сформирован, но не удалось отправить сотрудникам.");
       return;
     }
-
+cart = [];
+updateCart();
+document.getElementById("cartDrawer").classList.add("hidden");
     alert(text + "\n\n✅ Заказ отправлен сотрудникам.");
   } catch (error) {
     console.error(error);
