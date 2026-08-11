@@ -1,4 +1,3 @@
-
 const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 
@@ -8,8 +7,26 @@ let selectedCategory = "Бургеры";
 let modalItem = null;
 let modalOptionIndex = 0;
 
-const rub = n => `${n.toLocaleString("ru-RU")} ₽`;
 
+const rub = n => n.toLocaleString("ru-RU") + " ₽";
+function lunchDiscountActive() {
+  const parts = new Intl.DateTimeFormat("ru-RU", {
+    timeZone: "Europe/Moscow",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  }).formatToParts(new Date());
+
+  const hour = Number(parts.find(x => x.type === "hour").value);
+
+  return hour >= 12 && hour < 16;
+}
+
+function discountedAmount(amount) {
+  return lunchDiscountActive()
+    ? Math.round(amount * 0.8)
+    : amount;
+}
 async function boot(){
   menu = await fetch("menu.json").then(r=>r.json());
   renderCategories();
@@ -37,7 +54,7 @@ function renderMenu(){
     const card=document.createElement("article");
     card.className="card";
     const from = item.options
-  ? `от ${rub(Math.min(...item.options.map(o=>o.price)))}`
+  ? "от " + rub(Math.min(...item.options.map(o=>o.price)))
   : rub(item.price);
     card.innerHTML=`<h3>${item.name}</h3><p>${item.description||""}</p><div class="card-footer"><span class="price">${from}</span><button class="add">+</button></div>`;
     card.querySelector(".add").onclick=()=>openItem(item);
@@ -82,11 +99,20 @@ function updateCart(){
     row.querySelector('[data-act="plus"]').onclick=()=>{x.qty++;updateCart()};
     list.appendChild(row);
   });
-  const sub=cart.reduce((s,x)=>s+x.price*x.qty,0);
-  const delivery=document.querySelector('input[name="fulfillment"]:checked')?.value==="delivery"?200:0;
-  document.getElementById("subtotal").textContent=rub(sub);
-  document.getElementById("deliveryFee").textContent=rub(delivery);
-  document.getElementById("total").textContent=rub(sub+delivery);
+  const sub = cart.reduce((s,x) => s + x.price * x.qty, 0);
+const discountedSub = discountedAmount(sub);
+const delivery =
+  document.querySelector('input[name="fulfillment"]:checked')?.value === "delivery"
+    ? 200
+    : 0;
+
+document.getElementById("subtotal").textContent =
+  lunchDiscountActive()
+    ? rub(discountedSub) + "  (скидка −20%)"
+    : rub(sub);
+
+document.getElementById("deliveryFee").textContent = rub(delivery);
+document.getElementById("total").textContent = rub(discountedSub + delivery);
 }
 function bind(){
   document.getElementById("openCart").onclick=()=>{updateCart();document.getElementById("cartDrawer").classList.remove("hidden")};
@@ -113,42 +139,66 @@ async function checkout(){
   if(!name || !phone) return alert("Укажите имя и телефон.");
   if(fulfillment==="delivery" && !address) return alert("Укажите адрес доставки.");
 
-  const subtotal=cart.reduce((s,x)=>s+x.price*x.qty,0);
-  const fee=fulfillment==="delivery"?200:0;
+  const originalSubtotal = cart.reduce((s,x) => s + x.price * x.qty, 0);
 
-  const order={
-    createdAt:new Date().toISOString(),
-    customer:{name,phone,address,comment},
-    fulfillment,
-    payment,
-    items:cart,
-    subtotal,
-    deliveryFee:fee,
-    total:subtotal+fee
-  };
+const discountActive = lunchDiscountActive();
 
+const discount = discountActive
+  ? Math.round(originalSubtotal * 0.2)
+  : 0;
+
+const subtotal = originalSubtotal - discount;
+const fee = fulfillment === "delivery" ? 200 : 0;
+
+const order = {
+  createdAt: new Date().toISOString(),
+  customer: { name, phone, address, comment },
+  fulfillment,
+  payment,
+  items: cart,
+  originalSubtotal,
+  discount,
+  subtotal,
+  deliveryFee: fee,
+  total: subtotal + fee
+};
   localStorage.setItem("av_last_order",JSON.stringify(order));
 
   let text =
-`👤 Клиент: ${name}
-📞 Телефон: ${phone}
+  "👤 Клиент: " + name + "\n" +
+  "📞 Телефон: " + phone + "\n\n" +
 
-🛍 ЗАКАЗ:
-${cart.map(x =>
-`${x.qty}× ${x.name}${x.option ? ` (${x.option})` : ""} — ${rub(x.price * x.qty)}`
-).join("\n")}
+  "🛍 ЗАКАЗ:\n" +
+  cart.map(x =>
+    x.qty + "× " +
+    x.name +
+    (x.option ? " (" + x.option + ")" : "") +
+    " — " +
+    rub(x.price * x.qty)
+  ).join("\n") +
 
-💵 Товары: ${rub(subtotal)}
-${fulfillment === "delivery" ? `🚗 Доставка: ${rub(fee)}` : "🚶 Самовывоз"}
-💰 ИТОГО: ${rub(order.total)}
+  "\n\n💵 Товары: " + rub(originalSubtotal) +
 
-${fulfillment === "delivery"
-? `📍 Адрес: ${address}`
-: "📍 Самовывоз: Вокзальная площадь, 1А (вход со стороны вокзала)"}
+  (discountActive
+    ? "\n🔥 Скидка 20% (12:00–16:00 МСК): −" + rub(discount)
+    : "") +
 
-💳 Оплата: ${payment === "cash" ? "Наличными при получении" : "QR-кодом при получении"}
+  (fulfillment === "delivery"
+    ? "\n🚗 Доставка: " + rub(fee)
+    : "\n🚶 Самовывоз") +
 
-💬 Комментарий: ${comment || "Нет"}`;
+  "\n💰 ИТОГО: " + rub(order.total) +
+
+  (fulfillment === "delivery"
+    ? "\n\n📍 Адрес: " + address
+    : "\n\n📍 Самовывоз: Вокзальная площадь, 1А (вход со стороны вокзала)") +
+
+  "\n\n💳 Оплата: " +
+  (payment === "cash"
+    ? "Наличными при получении"
+    : "QR-кодом при получении") +
+
+  "\n\n💬 Комментарий: " + (comment || "Нет");
   try {
     const response = await fetch("/api/order", {
       method: "POST",
