@@ -306,11 +306,17 @@ if (loyaltyItems.length > 0) {
   );
 
   if (loyaltyReward() === "discount20") {
-    loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.2);
+    if (!lunchDiscountActive()) {
+      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.2);
+    }
   }
 
   if (loyaltyReward() === "free") {
-    loyaltyDiscount = cheapestDrinkPrice;
+    if (lunchDiscountActive()) {
+      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.8);
+    } else {
+      loyaltyDiscount = cheapestDrinkPrice;
+    }
   }
 }
 
@@ -372,7 +378,44 @@ const discount = discountActive
   ? Math.round(originalSubtotal * 0.2)
   : 0;
 
-const subtotal = originalSubtotal - discount;
+const loyaltyItems = cart.filter(item =>
+  [
+    "Кофе",
+    "Холодный кофе",
+    "Авторский кофе",
+    "Лимонады",
+    "Чаи",
+    "Милки"
+  ].includes(item.category)
+);
+
+let loyaltyDiscount = 0;
+
+if (loyaltyItems.length > 0) {
+  const cheapestDrinkPrice = Math.min(
+    ...loyaltyItems.map(item => item.price)
+  );
+
+  if (loyaltyReward() === "discount20") {
+    if (!discountActive) {
+      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.2);
+    }
+  }
+
+  if (loyaltyReward() === "free") {
+    if (discountActive) {
+      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.8);
+    } else {
+      loyaltyDiscount = cheapestDrinkPrice;
+    }
+  }
+}
+
+const subtotal =
+  originalSubtotal -
+  discount -
+  loyaltyDiscount;
+
 const fee = fulfillment === "delivery" ? 200 : 0;
 
 const order = {
@@ -382,10 +425,11 @@ const order = {
   payment,
   items: cart,
   originalSubtotal,
-  discount,
-  subtotal,
-  deliveryFee: fee,
-  total: subtotal + fee
+discount,
+loyaltyDiscount,
+subtotal,
+deliveryFee: fee,
+total: subtotal + fee
 };
   localStorage.setItem("av_last_order",JSON.stringify(order));
 
@@ -407,7 +451,9 @@ const order = {
   (discountActive
     ? "\n🔥 Скидка 20% (12:00–16:00 МСК): −" + rub(discount)
     : "") +
-
+(loyaltyDiscount > 0
+  ? "\n🎁 Карта лояльности: −" + rub(loyaltyDiscount)
+  : "") +
   (fulfillment === "delivery"
     ? "\n🚗 Доставка: " + rub(fee)
     : "\n🚶 Самовывоз") +
