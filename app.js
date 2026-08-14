@@ -129,7 +129,7 @@ async function loadLoyalty() {
     const progress = document.getElementById("loyaltyProgress");
     const hint = document.getElementById("loyaltyHint");
 
-    if (!card  !progress  !hint) return;
+    if (!(card && progress && hint)) return;
 
     card.classList.remove("hidden");
     progress.textContent = position + " из 10";
