@@ -196,15 +196,22 @@ function addModalItem(){
   const option=modalItem.options?.[modalOptionIndex];
   const key=modalItem.name+"__"+(option?.label||"");
   const found=cart.find(x=>x.key===key);
-  if(found) found.qty++;
-  else cart.push({
-  key,
-  name: modalItem.name,
-  category: modalItem.category,
-  option: option?.label || "",
-  price: option?.price ?? modalItem.price,
-  qty: 1
-});
+
+  if(found) {
+    found.qty++;
+  } else {
+    cart.push({
+      key,
+      name: modalItem.name,
+      category: modalItem.category,
+      option: option?.label || "",
+      price: option?.price ?? modalItem.price,
+      qty: 1
+    });
+  }
+
+  document.getElementById("modal").classList.add("hidden");
+  updateCart();
 }
 function updateCart(){
   document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
