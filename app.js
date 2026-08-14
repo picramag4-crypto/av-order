@@ -183,9 +183,14 @@ function addModalItem(){
   const key=modalItem.name+"__"+(option?.label||"");
   const found=cart.find(x=>x.key===key);
   if(found) found.qty++;
-  else cart.push({key,name:modalItem.name,option:option?.label||"",price:option?.price??modalItem.price,qty:1});
-  document.getElementById("modal").classList.add("hidden");
-  updateCart();
+  else cart.push({
+  key,
+  name: modalItem.name,
+  category: modalItem.category,
+  option: option?.label || "",
+  price: option?.price ?? modalItem.price,
+  qty: 1
+});
 }
 function updateCart(){
   document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
