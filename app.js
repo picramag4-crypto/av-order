@@ -284,19 +284,60 @@ function updateCart(){
     list.appendChild(row);
   });
   const sub = cart.reduce((s,x) => s + x.price * x.qty, 0);
-const discountedSub = discountedAmount(sub);
+
+const lunchSub = discountedAmount(sub);
+
+const loyaltyItems = cart.filter(item =>
+  [
+    "Кофе",
+    "Холодный кофе",
+    "Авторский кофе",
+    "Лимонады",
+    "Чаи",
+    "Милки"
+  ].includes(item.category)
+);
+
+let loyaltyDiscount = 0;
+
+if (loyaltyItems.length > 0) {
+  const cheapestDrinkPrice = Math.min(
+    ...loyaltyItems.map(item => item.price)
+  );
+
+  if (loyaltyReward() === "discount20") {
+    loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.2);
+  }
+
+  if (loyaltyReward() === "free") {
+    loyaltyDiscount = cheapestDrinkPrice;
+  }
+}
+
 const delivery =
   document.querySelector('input[name="fulfillment"]:checked')?.value === "delivery"
     ? 200
     : 0;
 
+const loyaltyRow = document.getElementById("loyaltyDiscountRow");
+const loyaltyValue = document.getElementById("loyaltyDiscount");
+
+if (loyaltyDiscount > 0) {
+  loyaltyRow.classList.remove("hidden");
+  loyaltyValue.textContent = "−" + rub(loyaltyDiscount);
+} else {
+  loyaltyRow.classList.add("hidden");
+}
+
 document.getElementById("subtotal").textContent =
   lunchDiscountActive()
-    ? rub(discountedSub) + "  (скидка −20%)"
+    ? rub(lunchSub) + "  (скидка −20%)"
     : rub(sub);
 
 document.getElementById("deliveryFee").textContent = rub(delivery);
-document.getElementById("total").textContent = rub(discountedSub + delivery);
+
+document.getElementById("total").textContent =
+  rub(lunchSub - loyaltyDiscount + delivery);
 }
 function bind(){
   document.getElementById("openCart").onclick=()=>{updateCart();document.getElementById("cartDrawer").classList.remove("hidden")};
