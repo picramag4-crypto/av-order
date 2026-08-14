@@ -326,7 +326,8 @@ const order = {
       },
       body: JSON.stringify({
   text: text,
-  telegramUserId: tg?.initDataUnsafe?.user?.id || null
+  telegramUserId: tg?.initDataUnsafe?.user?.id || null,
+  loyaltyDrinks: loyaltyDrinksCount()
 })
     });
 
