@@ -27,6 +27,20 @@ function discountedAmount(amount) {
     ? Math.round(amount * 0.8)
     : amount;
 }
+function loyaltyDrinksCount() {
+  const loyaltyCategories = [
+    "Кофе",
+    "Холодный кофе",
+    "Авторский кофе",
+    "Лимонады",
+    "Чаи",
+    "Милки"
+  ];
+
+  return cart
+    .filter(item => loyaltyCategories.includes(item.category))
+    .reduce((sum, item) => sum + item.qty, 0);
+}
 function updatePromoTimer() {
   const timer = document.getElementById("promoTimer");
   const promo = document.getElementById("lunchPromo");
