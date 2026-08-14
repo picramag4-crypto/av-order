@@ -50,8 +50,10 @@ export default {
                 {
                   text: "✅ Принять заказ",
                   callback_data:
-                    "accept_order:" +
-                    (order.telegramUserId || "no_user")
+  "accept_order:" +
+  (order.telegramUserId || "no_user") +
+  ":" +
+  Math.max(0, Number(order.loyaltyDrinks) || 0)
                 }
               ]
             ]
