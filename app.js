@@ -41,6 +41,19 @@ function loyaltyDrinksCount() {
     .filter(item => loyaltyCategories.includes(item.category))
     .reduce((sum, item) => sum + item.qty, 0);
 }
+let loyaltyPosition = 0;
+
+function loyaltyReward() {
+  if (loyaltyPosition === 4) {
+    return "discount20";
+  }
+
+  if (loyaltyPosition === 9) {
+    return "free";
+  }
+
+  return null;
+}
 function updatePromoTimer() {
   const timer = document.getElementById("promoTimer");
   const promo = document.getElementById("lunchPromo");
@@ -124,6 +137,7 @@ async function loadLoyalty() {
 
     const count = Number(data.drinksCount || 0);
     const position = count % 10;
+    loyaltyPosition = position;
 
     const card = document.getElementById("loyaltyCard");
     const progress = document.getElementById("loyaltyProgress");
