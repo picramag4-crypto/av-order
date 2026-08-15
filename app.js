@@ -438,7 +438,7 @@ const order = {
   originalSubtotal,
 discount,
 loyaltyDiscount,
-subtotal: goodsTotal
+subtotal: goodsTotal,
 deliveryFee: fee,
 total: goodsTotal + fee
 };
