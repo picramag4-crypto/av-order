@@ -10,16 +10,25 @@ let modalOptionIndex = 0;
 
 const rub = n => n.toLocaleString("ru-RU") + " ₽";
 function lunchDiscountActive() {
-  const parts = new Intl.DateTimeFormat("ru-RU", {
+  const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "Europe/Moscow",
+    weekday: "short",
     hour: "2-digit",
     minute: "2-digit",
     hour12: false
   }).formatToParts(new Date());
 
-  const hour = Number(parts.find(x => x.type === "hour").value);
+  const hour = Number(
+    parts.find(x => x.type === "hour").value
+  );
 
-  return hour >= 12 && hour < 16;
+  const weekday =
+    parts.find(x => x.type === "weekday").value;
+
+  const weekend =
+    weekday === "Sat" || weekday === "Sun";
+
+  return !weekend && hour >= 12 && hour < 16;
 }
 
 function discountedAmount(amount) {
