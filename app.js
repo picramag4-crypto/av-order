@@ -320,9 +320,14 @@ if (loyaltyItems.length > 0) {
   }
 }
 
+const goodsTotal = lunchSub - loyaltyDiscount;
+
+const isDelivery =
+  document.querySelector('input[name="fulfillment"]:checked')?.value === "delivery";
+
 const delivery =
-  document.querySelector('input[name="fulfillment"]:checked')?.value === "delivery"
-    ? 200
+  isDelivery
+    ? (goodsTotal >= 2000 ? 0 : 200)
     : 0;
 
 const loyaltyRow = document.getElementById("loyaltyDiscountRow");
@@ -340,10 +345,13 @@ document.getElementById("subtotal").textContent =
     ? rub(lunchSub) + "  (скидка −20%)"
     : rub(sub);
 
-document.getElementById("deliveryFee").textContent = rub(delivery);
+document.getElementById("deliveryFee").textContent =
+  isDelivery && goodsTotal >= 2000
+    ? "Бесплатно"
+    : rub(delivery);
 
 document.getElementById("total").textContent =
-  rub(lunchSub - loyaltyDiscount + delivery);
+  rub(goodsTotal + delivery);
 }
 function bind(){
   document.getElementById("openCart").onclick=()=>{updateCart();document.getElementById("cartDrawer").classList.remove("hidden")};
@@ -411,12 +419,15 @@ if (loyaltyItems.length > 0) {
   }
 }
 
-const subtotal =
+const goodsTotal =
   originalSubtotal -
   discount -
   loyaltyDiscount;
 
-const fee = fulfillment === "delivery" ? 200 : 0;
+const fee =
+  fulfillment === "delivery"
+    ? (goodsTotal >= 2000 ? 0 : 200)
+    : 0;
 
 const order = {
   createdAt: new Date().toISOString(),
@@ -427,9 +438,9 @@ const order = {
   originalSubtotal,
 discount,
 loyaltyDiscount,
-subtotal,
+subtotal: goodsTotal
 deliveryFee: fee,
-total: subtotal + fee
+total: goodsTotal + fee
 };
   localStorage.setItem("av_last_order",JSON.stringify(order));
 
@@ -454,9 +465,9 @@ total: subtotal + fee
 (loyaltyDiscount > 0
   ? "\n🎁 Карта лояльности: −" + rub(loyaltyDiscount)
   : "") +
-  (fulfillment === "delivery"
-    ? "\n🚗 Доставка: " + rub(fee)
-    : "\n🚶 Самовывоз") +
+(fulfillment === "delivery"
+  ? "\n🚗 Доставка: " + (fee === 0 ? "Бесплатно" : rub(fee))
+  : "\n🚶 Самовывоз") +
 
   "\n💰 ИТОГО: " + rub(order.total) +
 
