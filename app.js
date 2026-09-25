@@ -306,14 +306,45 @@ function addModalItem(){
 }
 function updateCart(){
   document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
+  const cartMeta = document.getElementById("cartMeta");
+
+if (cartMeta) {
+  const cartQty = cart.reduce((s,x) => s + x.qty, 0);
+  const cartSum = cart.reduce((s,x) => s + x.price * x.qty, 0);
+
+  const word =
+    cartQty === 1 ? "позиция" :
+    cartQty >= 2 && cartQty <= 4 ? "позиции" :
+    "позиций";
+
+  cartMeta.textContent =
+    cartQty + " " + word + " · " + rub(cartSum);
+}
   const list=document.getElementById("cartItems");
   list.innerHTML="";
   cart.forEach((x,i)=>{
     const row=document.createElement("div");
     row.className="cart-row";
-    row.innerHTML=`<div><strong>${x.name}</strong><div class="small">${x.option}</div><div>${rub(x.price*x.qty)}</div></div><div class="qty"><button data-act="minus">−</button><span>${x.qty}</span><button data-act="plus">+</button></div>`;
+    row.innerHTML=`
+  <div>
+    <strong>${x.name}</strong>
+    <div class="small">${x.option}</div>
+    <div>${rub(x.price*x.qty)}</div>
+  </div>
+
+  <div class="qty">
+    <button data-act="minus">−</button>
+    <span>${x.qty}</span>
+    <button data-act="plus">+</button>
+    <button data-act="delete" class="cart-delete">🗑</button>
+  </div>
+`;
     row.querySelector('[data-act="minus"]').onclick=()=>{x.qty--;if(x.qty<=0)cart.splice(i,1);updateCart()};
     row.querySelector('[data-act="plus"]').onclick=()=>{x.qty++;updateCart()};
+    row.querySelector('[data-act="delete"]').onclick=()=>{
+  cart.splice(i,1);
+  updateCart();
+};
     list.appendChild(row);
   });
   const sub = cart.reduce((s,x) => s + x.price * x.qty, 0);
