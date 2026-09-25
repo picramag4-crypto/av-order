@@ -858,3 +858,49 @@ main{
     border-radius:24px;
   }
 }
+.delivery-progress {
+  margin: 14px 0;
+  padding: 16px;
+  border-radius: 18px;
+  background: #f6ead9;
+  border: 1px solid rgba(59,41,32,.08);
+}
+
+.delivery-progress-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.delivery-progress-title > span {
+  font-size: 28px;
+}
+
+.delivery-progress-title strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.25;
+  color: #3b2920;
+}
+
+.delivery-progress-sub {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #8a7669;
+}
+
+.delivery-progress-bar {
+  height: 8px;
+  margin-top: 13px;
+  background: #e3d7c8;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#deliveryProgressFill {
+  width: 0;
+  height: 100%;
+  background: #b65f3d;
+  border-radius: 999px;
+  transition: width .35s ease;
+}
