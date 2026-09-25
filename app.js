@@ -283,6 +283,23 @@ function openItem(item){
   }
   document.getElementById("modal").classList.remove("hidden");
 }
+function openQuickPick(name) {
+  const item = menu.find(x => x.name === name);
+
+  if (!item) {
+    alert("Позиция временно недоступна");
+    return;
+  }
+
+  openItem(item);
+}
+
+  modalItem = item;
+  modalOptionIndex = 0;
+  renderModal();
+
+  document.getElementById("modal").classList.remove("hidden");
+}
 function addModalItem(){
   const option=modalItem.options?.[modalOptionIndex];
   const key=modalItem.name+"__"+(option?.label||"");
@@ -303,6 +320,16 @@ function addModalItem(){
 
   document.getElementById("modal").classList.add("hidden");
   updateCart();
+}
+function selectQuickCategory(category) {
+  selectedCategory = category;
+  renderCategories();
+  renderMenu();
+
+  document.getElementById("menu").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 function updateCart(){
   document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
