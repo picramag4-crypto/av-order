@@ -43,7 +43,70 @@
 </button>
 
   </section>
+<section class="quick-picks">
+  <div class="section-title-row">
+    <div>
+      <span class="section-kicker">🔥 СЕГОДНЯ В АВ</span>
+      <h2>Попробуйте сегодня</h2>
+    </div>
+  </div>
 
+  <div class="quick-picks-grid">
+
+    <button class="quick-pick-card" onclick="openQuickPick('Бургер «Чили Моцарелла»')">
+      <div class="quick-pick-icon">🍔</div>
+      <div class="quick-pick-info">
+        <strong>Чили Моцарелла</strong>
+        <span>Сочная говядина · моцарелла · чили</span>
+        <b>599 ₽</b>
+      </div>
+      <span class="quick-pick-arrow">→</span>
+    </button>
+
+    <button class="quick-pick-card" onclick="openQuickPick('Тыквенный Раф')">
+      <div class="quick-pick-icon">☕</div>
+      <div class="quick-pick-info">
+        <strong>Тыквенный Раф</strong>
+        <span>Сливочный раф с тыквой и специями</span>
+        <b>от 299 ₽</b>
+      </div>
+      <span class="quick-pick-arrow">→</span>
+    </button>
+
+    <button class="quick-pick-card" onclick="openQuickPick('Бургер «Чикен Бекон»')">
+      <div class="quick-pick-icon">🍔</div>
+      <div class="quick-pick-info">
+        <strong>Чикен Бекон</strong>
+        <span>Курица · хрустящий бекон · фирменный соус</span>
+        <b>599 ₽</b>
+      </div>
+      <span class="quick-pick-arrow">→</span>
+    </button>
+
+  </div>
+</section>
+
+<section class="quick-categories">
+  <button onclick="selectQuickCategory('🍂 Осеннее меню')">
+    <span>🍂</span>
+    <b>Осеннее меню</b>
+  </button>
+
+  <button onclick="selectQuickCategory('Бургеры')">
+    <span>🍔</span>
+    <b>Бургеры</b>
+  </button>
+
+  <button onclick="selectQuickCategory('Кофе')">
+    <span>☕</span>
+    <b>Кофе</b>
+  </button>
+
+  <button onclick="selectQuickCategory('Напитки')">
+    <span>🥤</span>
+    <b>Напитки</b>
+  </button>
+</section>
 
   <div id="lunchPromo" class="hidden">
     🔥 Счастливые часы: скидка 20% на всё меню
