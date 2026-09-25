@@ -904,3 +904,279 @@ main{
   border-radius: 999px;
   transition: width .35s ease;
 }
+/* =========================
+   НОВАЯ КОРЗИНА АВ
+   ========================= */
+
+.cart-head {
+  align-items: flex-start;
+}
+
+.cart-head h2 {
+  margin-bottom: 3px;
+}
+
+.cart-meta {
+  font-size: 13px;
+  color: #8a7669;
+}
+
+.drawer-close {
+  flex-shrink: 0;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 4px 0 14px;
+}
+
+.cart-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  background: #fffaf3;
+  border: 1px solid rgba(59,41,32,.08);
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(59,41,32,.05);
+}
+
+.cart-row > div:first-child {
+  min-width: 0;
+  flex: 1;
+}
+
+.cart-row strong {
+  display: block;
+  padding-right: 8px;
+  color: #3b2920;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.cart-row .small {
+  margin-top: 4px;
+  color: #8a7669;
+  font-size: 12px;
+}
+
+.cart-row .qty {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px;
+  background: #f2e7da;
+  border-radius: 14px;
+}
+
+.cart-row .qty button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: #fffaf3;
+  color: #3b2920;
+  font-size: 19px;
+  line-height: 30px;
+  box-shadow: 0 2px 6px rgba(59,41,32,.06);
+}
+
+.cart-row .qty span {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 700;
+  color: #3b2920;
+}
+
+.cart-summary {
+  margin-top: 4px;
+  padding: 16px;
+  background: #f7eee4;
+  border: 1px solid rgba(59,41,32,.07);
+  border-radius: 20px;
+}
+
+.cart-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.cart-summary > div:last-child {
+  margin-bottom: 0;
+}
+
+.cart-summary span {
+  color: #806e62;
+  font-size: 14px;
+}
+
+.cart-summary strong {
+  color: #3b2920;
+}
+
+.cart-summary .total {
+  margin-top: 13px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(59,41,32,.10);
+}
+
+.cart-summary .total span {
+  color: #3b2920;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cart-summary .total strong {
+  color: #b65f3d;
+  font-size: 21px;
+}
+
+.checkout h3 {
+  margin-top: 22px;
+  margin-bottom: 10px;
+  color: #3b2920;
+  font-size: 16px;
+}
+
+.choice-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.choice-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 68px;
+  padding: 11px;
+  border: 1.5px solid rgba(59,41,32,.12);
+  border-radius: 17px;
+  background: #fffaf3;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.choice-card:has(input:checked) {
+  border-color: #b65f3d;
+  background: #fbefe5;
+  box-shadow: 0 4px 12px rgba(182,95,61,.10);
+}
+
+.choice-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.choice-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: #f2e4d7;
+  font-size: 18px;
+}
+
+.choice-text {
+  min-width: 0;
+}
+
+.choice-text strong {
+  display: block;
+  color: #3b2920;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.choice-text small {
+  display: block;
+  margin-top: 3px;
+  color: #8a7669;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.contact-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.contact-fields input,
+.contact-fields textarea,
+#deliveryFields input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(59,41,32,.10);
+  border-radius: 15px;
+  background: #fffaf3;
+  color: #3b2920;
+  outline: none;
+}
+
+.contact-fields input:focus,
+.contact-fields textarea:focus,
+#deliveryFields input:focus {
+  border-color: #b65f3d;
+  box-shadow: 0 0 0 3px rgba(182,95,61,.08);
+}
+
+.contact-fields textarea {
+  min-height: 82px;
+  resize: vertical;
+}
+
+#deliveryFields {
+  margin-top: 9px;
+}
+
+.payment-group {
+  margin-bottom: 4px;
+}
+
+.checkout-main-btn {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 20px;
+  border-radius: 17px;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(182,95,61,.18);
+}
+
+.checkout-note {
+  margin: 9px 4px 2px;
+  text-align: center;
+  color: #97877c;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* На небольших экранах карточки выбора остаются удобными */
+@media (max-width: 390px) {
+  .choice-group {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-card {
+    min-height: 60px;
+  }
+
+  .cart-row {
+    padding: 12px;
+  }
+}
