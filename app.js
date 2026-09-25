@@ -306,7 +306,21 @@ function openItem(item){
 }
 
 function openQuickPick(name){
-  const item=menu.find(x=>x.name===name);
+  let item = menu.find(x => x.name === name);
+
+  if(!item){
+    item = menu.find(x =>
+      x.name.includes("Чили Моцарелла") &&
+      name.includes("Чили Моцарелла")
+    );
+  }
+
+  if(!item){
+    item = menu.find(x =>
+      x.name.includes("Чикен Бекон") &&
+      name.includes("Чикен Бекон")
+    );
+  }
 
   if(!item){
     alert("Позиция временно недоступна");
