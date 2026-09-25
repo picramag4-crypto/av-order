@@ -1180,3 +1180,9 @@ main{
     padding: 12px;
   }
 }
+.cart-delete {
+  margin-left: 3px;
+  background: #eadbd0 !important;
+  color: #9b6048 !important;
+  font-size: 14px !important;
+}
