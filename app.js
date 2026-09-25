@@ -209,17 +209,27 @@ setInterval(updatePromoTimer, 1000);
 function categories(){
   return ["🍂 Осеннее меню", ...[...new Set(menu.map(x=>x.category))]];
 }
+
 function renderCategories(){
   const box=document.getElementById("categories");
   box.innerHTML="";
+
   categories().forEach(c=>{
     const b=document.createElement("button");
     b.textContent=c;
     b.className=c===selectedCategory?"active":"";
-    b.onclick=()=>{selectedCategory=c;renderCategories();renderMenu();window.scrollTo({top:0,behavior:"smooth"})};
+
+    b.onclick=()=>{
+      selectedCategory=c;
+      renderCategories();
+      renderMenu();
+      window.scrollTo({top:0,behavior:"smooth"});
+    };
+
     box.appendChild(b);
   });
 }
+
 function renderMenu(){
   const box=document.getElementById("menu");
   box.innerHTML="";
@@ -231,74 +241,79 @@ function renderMenu(){
   items.forEach((item,idx)=>{
     const card=document.createElement("article");
     card.className="card";
+
     const originalPrice = item.options
-  ? Math.min(...item.options.map(o => o.price))
-  : item.price;
+      ? Math.min(...item.options.map(o => o.price))
+      : item.price;
 
-let priceHtml;
+    let priceHtml;
 
-if (lunchDiscountActive()) {
-  const newPrice = Math.round(originalPrice * 0.8);
+    if (lunchDiscountActive()) {
+      const newPrice = Math.round(originalPrice * 0.8);
 
-  priceHtml =
-    '<span class="old-price">' +
-    (item.options ? "от " : "") +
-    rub(originalPrice) +
-    '</span> ' +
-    '<span class="promo-price">' +
-    (item.options ? "от " : "") +
-    rub(newPrice) +
-    '</span>';
-} else {
-  priceHtml =
-    (item.options ? "от " : "") +
-    rub(originalPrice);
-}
+      priceHtml =
+        '<span class="old-price">' +
+        (item.options ? "от " : "") +
+        rub(originalPrice) +
+        '</span> ' +
+        '<span class="promo-price">' +
+        (item.options ? "от " : "") +
+        rub(newPrice) +
+        '</span>';
+    } else {
+      priceHtml =
+        (item.options ? "от " : "") +
+        rub(originalPrice);
+    }
 
-card.innerHTML =
-  `<h3>${item.name}</h3>
-   <p>${item.description || ""}</p>
-   <div class="card-footer">
-     <span class="price">${priceHtml}</span>
-     <button class="add">+</button>
-   </div>`;
+    card.innerHTML =
+      `<h3>${item.name}</h3>
+       <p>${item.description || ""}</p>
+       <div class="card-footer">
+         <span class="price">${priceHtml}</span>
+         <button class="add">+</button>
+       </div>`;
+
     card.querySelector(".add").onclick=()=>openItem(item);
     box.appendChild(card);
   });
 }
+
 function openItem(item){
-  modalItem=item; modalOptionIndex=0;
+  modalItem=item;
+  modalOptionIndex=0;
+
   document.getElementById("modalTitle").textContent=item.name;
   document.getElementById("modalDesc").textContent=item.description||"";
+
   const opts=document.getElementById("modalOptions");
   opts.innerHTML="";
+
   if(item.options){
     item.options.forEach((o,i)=>{
       const label=document.createElement("label");
       label.className="option";
-      label.innerHTML=`<input type="radio" name="itemOption" ${i===0?"checked":""}> ${o.label} — ${rub(o.price)}`;
+
+      label.innerHTML=
+        `<input type="radio" name="itemOption" ${i===0?"checked":""}> ${o.label} — ${rub(o.price)}`;
+
       label.querySelector("input").onchange=()=>modalOptionIndex=i;
       opts.appendChild(label);
     });
   }
+
   document.getElementById("modal").classList.remove("hidden");
 }
-function openQuickPick(name) {
-  const item = menu.find(x => x.name === name);
 
-  if (!item) {
+function openQuickPick(name){
+  const item=menu.find(x=>x.name===name);
+
+  if(!item){
     alert("Позиция временно недоступна");
     return;
   }
 
   openItem(item);
-}
-
-  modalItem = item;
-  modalOptionIndex = 0;
-  renderModal();
-
-  document.getElementById("modal").classList.remove("hidden");
 }
 function addModalItem(){
   const option=modalItem.options?.[modalOptionIndex];
