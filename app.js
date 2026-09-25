@@ -3,7 +3,26 @@ if (tg) { tg.ready(); tg.expand(); }
 
 let menu = [];
 let cart = [];
-let selectedCategory = "Бургеры";
+let selectedCategory = "🍂 Осеннее меню";
+const autumnItems = [
+  "Бургер «Чикен Бекон»",
+  "Картофель фри с беконом и соусом на выбор",
+  "Бургер «Чили Моцарелла»",
+  "Фалафель-Бургер «АВ»",
+  "Салат «Чикен Барбекю»",
+  "Тыквенный крем-суп с жареными креветками",
+  "Драники с лососем",
+  "Паста с креветками и соусом песто",
+  "Тарталетка «Яблоко-Корица»",
+  "Чай «Облепиха-Апельсин»",
+  "Какао с маршмеллоу",
+  "Тыквенный Раф",
+  "Кленовый латте",
+  "Раф «Синнабон»",
+  "Глинтвейн Безалкогольный",
+  "Чай Ягодный осенний",
+  "Бамбл Вишневый"
+];
 let modalItem = null;
 let modalOptionIndex = 0;
 
@@ -188,7 +207,7 @@ setInterval(updatePromoTimer, 1000);
   loadLoyalty();
 }
 function categories(){
-  return [...new Set(menu.map(x=>x.category))];
+  return ["🍂 Осеннее меню", ...[...new Set(menu.map(x=>x.category))]];
 }
 function renderCategories(){
   const box=document.getElementById("categories");
@@ -204,7 +223,12 @@ function renderCategories(){
 function renderMenu(){
   const box=document.getElementById("menu");
   box.innerHTML="";
-  menu.filter(x=>x.category===selectedCategory).forEach((item,idx)=>{
+
+  const items = selectedCategory === "🍂 Осеннее меню"
+    ? menu.filter(x => autumnItems.includes(x.name))
+    : menu.filter(x => x.category === selectedCategory);
+
+  items.forEach((item,idx)=>{
     const card=document.createElement("article");
     card.className="card";
     const originalPrice = item.options
