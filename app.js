@@ -358,6 +358,34 @@ const goodsTotal = lunchSub - loyaltyDiscount;
 const isDelivery =
   document.querySelector('input[name="fulfillment"]:checked')?.value === "delivery";
 
+const freeDeliveryLimit = 2000;
+const progressBox = document.getElementById("deliveryProgress");
+const progressFill = document.getElementById("deliveryProgressFill");
+const progressText = document.getElementById("deliveryProgressText");
+const progressAmount = document.getElementById("deliveryProgressAmount");
+
+if (isDelivery) {
+  progressBox.classList.remove("hidden");
+
+  const progress = Math.min(goodsTotal / freeDeliveryLimit, 1);
+  progressFill.style.width = (progress * 100) + "%";
+
+  if (goodsTotal >= freeDeliveryLimit) {
+    progressText.textContent = "🎉 Бесплатная доставка!";
+    progressAmount.textContent =
+      rub(freeDeliveryLimit) + " / " + rub(freeDeliveryLimit);
+  } else {
+    const remaining = freeDeliveryLimit - goodsTotal;
+
+    progressText.textContent =
+      "До бесплатной доставки осталось " + rub(remaining);
+
+    progressAmount.textContent =
+      rub(goodsTotal) + " / " + rub(freeDeliveryLimit);
+  }
+} else {
+  progressBox.classList.add("hidden");
+}
 const delivery =
   isDelivery
     ? (goodsTotal >= 2000 ? 0 : 200)
