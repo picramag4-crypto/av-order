@@ -1186,3 +1186,122 @@ main{
   color: #9b6048 !important;
   font-size: 14px !important;
 }
+/* =========================
+   КОМПАКТНЫЙ БЛОК «СЕГОДНЯ В АВ»
+   ========================= */
+
+.quick-picks {
+  margin: 22px 0 18px;
+  padding: 0 2px;
+}
+
+.quick-picks-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 13px;
+}
+
+.quick-picks-heading > span {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.quick-picks-kicker {
+  margin-bottom: 2px;
+  color: #a27661;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.quick-picks-heading h2 {
+  margin: 0;
+  color: #3b2920;
+  font-size: 21px;
+  line-height: 1.15;
+}
+
+.quick-picks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-pick-card {
+  width: 100%;
+  min-height: 78px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 13px 13px 16px;
+
+  border: 1px solid rgba(59,41,32,.08);
+  border-radius: 17px;
+
+  background: rgba(255,250,243,.88);
+  box-shadow: 0 3px 12px rgba(59,41,32,.045);
+
+  text-align: left;
+  color: #3b2920;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.quick-pick-card:active {
+  transform: scale(.985);
+}
+
+.quick-pick-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.quick-pick-info strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.quick-pick-info span {
+  display: block;
+  overflow: hidden;
+
+  color: #89776c;
+  font-size: 12px;
+  line-height: 1.25;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.quick-pick-info b {
+  display: block;
+  margin-top: 7px;
+
+  color: #b65f3d;
+  font-size: 14px;
+}
+
+.quick-pick-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+
+  border-radius: 12px;
+  background: #3b2920;
+  color: #fffaf3;
+
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+}
