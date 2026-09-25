@@ -198,6 +198,7 @@
           <strong id="deliveryProgressText">
             До бесплатной доставки осталось 2 000 ₽
           </strong>
+
           <div class="delivery-progress-sub">
             <span id="deliveryProgressAmount">0 ₽ / 2 000 ₽</span>
           </div>
@@ -210,6 +211,7 @@
     </div>
 
     <div class="summary cart-summary">
+
       <div>
         <span>Товары</span>
         <strong id="subtotal">0 ₽</strong>
@@ -229,6 +231,7 @@
         <span>Итого</span>
         <strong id="total">0 ₽</strong>
       </div>
+
     </div>
 
     <div class="checkout">
@@ -244,7 +247,9 @@
             value="pickup"
             checked
           >
+
           <span class="choice-icon">🚶</span>
+
           <span class="choice-text">
             <strong>Самовывоз</strong>
             <small>Бесплатно</small>
@@ -257,7 +262,9 @@
             name="fulfillment"
             value="delivery"
           >
+
           <span class="choice-icon">🚗</span>
+
           <span class="choice-text">
             <strong>Доставка</strong>
             <small>200 ₽ · от 2 000 ₽ бесплатно</small>
@@ -276,6 +283,7 @@
       <h3>Контакты</h3>
 
       <div class="contact-fields">
+
         <input
           id="name"
           placeholder="Ваше имя"
@@ -291,6 +299,7 @@
           id="comment"
           placeholder="Комментарий к заказу"
         ></textarea>
+
       </div>
 
       <h3>Оплата при получении</h3>
@@ -304,7 +313,9 @@
             value="cash"
             checked
           >
+
           <span class="choice-icon">💵</span>
+
           <span class="choice-text">
             <strong>Наличными</strong>
             <small>При получении</small>
@@ -317,7 +328,9 @@
             name="payment"
             value="qr"
           >
+
           <span class="choice-icon">📱</span>
+
           <span class="choice-text">
             <strong>QR-кодом</strong>
             <small>При получении</small>
@@ -339,135 +352,9 @@
       </p>
 
     </div>
+
   </div>
 </div>
-
-      <div id="cartItems"></div>
-<div id="deliveryProgress" class="delivery-progress hidden">
-  <div class="delivery-progress-title">
-    <span>🚚</span>
-    <div>
-      <strong id="deliveryProgressText">До бесплатной доставки осталось 110 ₽</strong>
-      <div class="delivery-progress-sub">
-        <span id="deliveryProgressAmount">1 890 ₽ / 2 000 ₽</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="delivery-progress-bar">
-    <div id="deliveryProgressFill"></div>
-  </div>
-</div>
-      <div class="summary">
-
-        <div>
-          <span>Товары</span>
-          <strong id="subtotal">0 ₽</strong>
-        </div>
-
-        <div id="loyaltyDiscountRow" class="hidden">
-          <span>🎁 Карта лояльности</span>
-          <strong id="loyaltyDiscount">0 ₽</strong>
-        </div>
-
-        <div>
-          <span>Доставка</span>
-          <strong id="deliveryFee">0 ₽</strong>
-        </div>
-
-        <div class="total">
-          <span>Итого</span>
-          <strong id="total">0 ₽</strong>
-        </div>
-
-      </div>
-
-
-      <div class="checkout">
-
-        <h3>Получение</h3>
-
-        <label>
-          <input
-            type="radio"
-            name="fulfillment"
-            value="pickup"
-            checked>
-          Самовывоз
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="fulfillment"
-            value="delivery">
-          Доставка (+200 ₽)
-        </label>
-
-
-        <div id="deliveryFields" class="hidden">
-          <input
-            id="address"
-            placeholder="Адрес доставки в Электрогорске">
-        </div>
-
-
-        <h3>Контакты</h3>
-
-        <input
-          id="name"
-          placeholder="Ваше имя">
-
-        <input
-          id="phone"
-          placeholder="+7 ___ ___-__-__"
-          inputmode="tel">
-
-        <textarea
-          id="comment"
-          placeholder="Комментарий к заказу">
-        </textarea>
-
-
-        <h3>Оплата при получении</h3>
-
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="cash"
-            checked>
-          Наличными
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="qr">
-          QR-кодом
-        </label>
-
-
-        <button
-          id="checkoutBtn"
-          class="primary"
-          type="button">
-          Оформить заказ
-        </button>
-
-        <p class="small">
-          На этом этапе заказ формируется внутри приложения.
-          Подключение отправки заказа сотрудникам сделаем следующим шагом.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
   <div id="modal" class="modal hidden">
 
     <div class="modal-card">
