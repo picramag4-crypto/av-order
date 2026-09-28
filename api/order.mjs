@@ -27,8 +27,8 @@ export default {
       const order = await request.json();
 
       const text =
-        "🍔 НОВЫЙ ЗАКАЗ\n\n" +
-        (order.text || "Новый заказ");
+  "🧪 ТЕСТОВЫЙ ЗАКАЗ ИЗ VK — НЕ ГОТОВИТЬ\n\n" +
+  (order.text || "Проверка оформления заказа");
 
       const telegramUrl =
         "https://api.telegram.org/bot" +
