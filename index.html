@@ -382,7 +382,17 @@
   </div>
 
 
-  <script src="app.js"></script>
+<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+<script>
+  if (window.vkBridge) {
+    window.vkBridge.send("VKWebAppInit")
+      .then(() => console.log("VK готов"))
+      .catch(error => console.error("VK Bridge:", error));
+  }
+</script>
+
+<script src="app.js"></script>
 
 </body>
 </html>
