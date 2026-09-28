@@ -502,6 +502,13 @@ document.getElementById("total").textContent =
   rub(goodsTotal + delivery);
 }
 function bind(){
+    const checkoutBtn = document.getElementById("checkoutBtn");
+  if (checkoutBtn) {
+    checkoutBtn.onclick = checkout;
+    console.log("Кнопка оформления подключена");
+  } else {
+    console.error("Не найдена кнопка checkoutBtn");
+  }
   document.getElementById("openCart").onclick=()=>{updateCart();document.getElementById("cartDrawer").classList.remove("hidden")};
   document.getElementById("closeCart").onclick=()=>document.getElementById("cartDrawer").classList.add("hidden");
   document.getElementById("modalClose").onclick=()=>document.getElementById("modal").classList.add("hidden");
@@ -511,7 +518,6 @@ function bind(){
     document.getElementById("deliveryFields").classList.toggle("hidden",!isDel);
     updateCart();
   });
-  document.getElementById("checkoutBtn").onclick=checkout;
 }
 async function checkout(){
   if(!cart.length) return alert("Корзина пустая.");
