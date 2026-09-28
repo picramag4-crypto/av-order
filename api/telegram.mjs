@@ -22,6 +22,77 @@ export default {
 
       const data = callback.data || "";
 
+      // Статусы заказов из VK
+      if (data.startsWith("vk_status:")) {
+        const status = data.split(":")[1];
+
+        const statuses = {
+          accepted: {
+            text: "🧑‍🍳 Заказ VK принят в работу",
+            next: "ready",
+            button: "🍔 Заказ готов"
+          },
+          ready: {
+            text: "🍔 Заказ VK готов",
+            next: "done",
+            button: "✅ Заказ выдан"
+          },
+          done: {
+            text: "✅ Заказ VK выдан",
+            next: null,
+            button: null
+          }
+        };
+
+        const current = statuses[status];
+
+        if (current) {
+          const answerUrl =
+            "https://api.telegram.org/bot" +
+            token +
+            "/answerCallbackQuery";
+
+          await fetch(answerUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              callback_query_id: callback.id,
+              text: current.text
+            })
+          });
+
+          const editUrl =
+            "https://api.telegram.org/bot" +
+            token +
+            "/editMessageReplyMarkup";
+
+          const keyboard = current.next
+            ? [[{
+                text: current.button,
+                callback_data:
+                  "vk_status:" + current.next
+              }]]
+            : [];
+
+          await fetch(editUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              chat_id: callback.message.chat.id,
+              message_id: callback.message.message_id,
+              reply_markup: {
+                inline_keyboard: keyboard
+              }
+            })
+          });
+        }
+
+        return new Response("OK", { status: 200 });
+      }
       if (data.startsWith("accept_order:")) {
         const parts = data.split(":");
 
