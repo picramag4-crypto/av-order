@@ -658,13 +658,104 @@ total: goodsTotal + fee
 cart = [];
 updateCart();
 document.getElementById("cartDrawer").classList.add("hidden");
-    alert(
-  "✅ Заказ успешно оформлен!\n\n" +
-  "Мы получили ваш заказ и передали его сотрудникам."
-);
+    showOrderSuccess();
   } catch (error) {
     console.error(error);
     alert("Заказ сформирован, но произошла ошибка при отправке.");
   }
+}
+
+function showOrderSuccess() {
+  const style = document.createElement("style");
+  style.textContent = `
+    .av-success-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(20, 20, 20, 0.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .av-success-card {
+      width: 100%;
+      max-width: 340px;
+      box-sizing: border-box;
+      background: #f7f3ed;
+      color: #292723;
+      border-radius: 22px;
+      padding: 30px 22px 24px;
+      text-align: center;
+      font-family: inherit;
+      box-shadow: 0 15px 50px rgba(0,0,0,.25);
+      animation: avPop .22s ease-out;
+    }
+    .av-success-icon {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #dce8d9;
+      color: #3e6945;
+      font-size: 36px;
+      line-height: 66px;
+      font-weight: bold;
+    }
+    .av-success-card h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+    .av-success-card p {
+      margin: 0 0 24px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #625e57;
+    }
+    .av-success-card button {
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 15px;
+      background: #292723;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    @keyframes avPop {
+      from { opacity: 0; transform: scale(.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const overlay = document.createElement("div");
+  overlay.className = "av-success-overlay";
+  overlay.innerHTML = `
+    <div class="av-success-card">
+      <div class="av-success-icon">✓</div>
+      <h2>Заказ принят!</h2>
+      <p>
+        Спасибо, что выбрали АВ ❤️<br>
+        Мы получили ваш заказ и уже передали его сотрудникам.
+      </p>
+      <button type="button">Отлично</button>
+    </div>
+  `;
+
+  overlay.querySelector("button").addEventListener("click", () => {
+    overlay.remove();
+    style.remove();
+  });
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      overlay.remove();
+      style.remove();
+    }
+  });
+
+  document.body.appendChild(overlay);
 }
 boot();
