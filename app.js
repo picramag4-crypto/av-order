@@ -661,8 +661,7 @@ updateCart();
 document.getElementById("cartDrawer").classList.add("hidden");
     alert(
   "✅ Заказ успешно оформлен!\n\n" +
-  "Мы получили ваш заказ и передали его сотрудникам.\n" +
-  "Подробности заказа отправлены вам в Telegram."
+  "Мы получили ваш заказ и передали его сотрудникам."
 );
   } catch (error) {
     console.error(error);
