@@ -44,27 +44,37 @@ export default {
         text: text
       };
 
-      // Кнопка принятия только для заказов из Telegram:
-      // у VK-заказа нет Telegram ID для бонусной системы.
-      if (isTelegramOrder) {
-        message.reply_markup = {
-          inline_keyboard: [
-            [
-              {
-                text: "✅ Принять заказ",
-                callback_data:
-                  "accept_order:" +
-                  order.telegramUserId +
-                  ":" +
-                  Math.max(
-                    0,
-                    Number(order.loyaltyDrinks) || 0
-                  )
-              }
-            ]
-          ]
-        };
-      }
+    // Кнопки для Telegram и VK
+if (isTelegramOrder) {
+  message.reply_markup = {
+    inline_keyboard: [
+      [
+        {
+          text: "✅ Принять заказ",
+          callback_data:
+            "accept_order:" +
+            order.telegramUserId +
+            ":" +
+            Math.max(
+              0,
+              Number(order.loyaltyDrinks) || 0
+            )
+        }
+      ]
+    ]
+  };
+} else {
+  message.reply_markup = {
+    inline_keyboard: [
+      [
+        {
+          text: "🧑‍🍳 Принять заказ VK",
+          callback_data: "vk_status:accepted"
+        }
+      ]
+    ]
+  };
+}
 
       const staffResponse = await fetch(telegramUrl, {
         method: "POST",
