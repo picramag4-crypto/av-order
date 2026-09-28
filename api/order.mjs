@@ -1,3 +1,4 @@
+
 export default {
   async fetch(request) {
     if (request.method !== "POST") {
@@ -25,40 +26,52 @@ export default {
       }
 
       const order = await request.json();
+      const isTelegramOrder = Boolean(order.telegramUserId);
 
       const text =
-  "🧪 ТЕСТОВЫЙ ЗАКАЗ ИЗ VK — НЕ ГОТОВИТЬ\n\n" +
-  (order.text || "Проверка оформления заказа");
+        (isTelegramOrder
+          ? "📱 ЗАКАЗ ИЗ TELEGRAM\n\n"
+          : "🟣 ЗАКАЗ ИЗ VK\n\n") +
+        (order.text || "Новый заказ");
 
       const telegramUrl =
         "https://api.telegram.org/bot" +
         token +
         "/sendMessage";
 
-      // Отправляем ОДНО сообщение сотрудникам с кнопкой
+      const message = {
+        chat_id: staffChatId,
+        text: text
+      };
+
+      // Кнопка принятия только для заказов из Telegram:
+      // у VK-заказа нет Telegram ID для бонусной системы.
+      if (isTelegramOrder) {
+        message.reply_markup = {
+          inline_keyboard: [
+            [
+              {
+                text: "✅ Принять заказ",
+                callback_data:
+                  "accept_order:" +
+                  order.telegramUserId +
+                  ":" +
+                  Math.max(
+                    0,
+                    Number(order.loyaltyDrinks) || 0
+                  )
+              }
+            ]
+          ]
+        };
+      }
+
       const staffResponse = await fetch(telegramUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          chat_id: staffChatId,
-          text: text,
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: "✅ Принять заказ",
-                  callback_data:
-  "accept_order:" +
-  (order.telegramUserId || "no_user") +
-  ":" +
-  Math.max(0, Number(order.loyaltyDrinks) || 0)
-                }
-              ]
-            ]
-          }
-        })
+        body: JSON.stringify(message)
       });
 
       const staffData = await staffResponse.json();
@@ -76,8 +89,8 @@ export default {
         );
       }
 
-      // Подтверждение гостю, что заказ получен
-      if (order.telegramUserId) {
+      // Подтверждение гостю в Telegram
+      if (isTelegramOrder) {
         const customerText =
           "✅ Ваш заказ получен!\n\n" +
           (order.text || "Заказ успешно оформлен.") +
