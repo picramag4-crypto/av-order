@@ -635,7 +635,6 @@ total: goodsTotal + fee
     : "QR-кодом при получении") +
 
   "\n\n💬 Комментарий: " + (comment || "Нет");
-  text = "🟣 ЗАКАЗ ИЗ VK\n\n" + text;
   try {
     const response = await fetch("/api/order", {
       method: "POST",
