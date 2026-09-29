@@ -458,6 +458,7 @@ function renderCartDessertOffer() {
 function updateCart(){
   document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
     renderCartFriesOffer();
+  renderCartDessertOffer();
   const cartMeta = document.getElementById("cartMeta");
 
 if (cartMeta) {
