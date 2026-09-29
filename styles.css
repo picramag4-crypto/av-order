@@ -1337,3 +1337,77 @@ main{
 .quick-categories button b {
   font-weight: 600;
 }
+
+/* Предложение картошки фри в корзине */
+.cart-fries-offer {
+  margin: 14px 0;
+  padding: 16px;
+  border: 2px solid #d99b38;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff8e9, #f8ead0);
+  color: #30291f;
+  box-shadow: 0 5px 18px rgba(120, 75, 20, 0.12);
+}
+
+.cart-fries-offer.hidden {
+  display: none;
+}
+
+.cart-fries-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-fries-emoji {
+  flex: 0 0 54px;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #f4d99e;
+  font-size: 34px;
+}
+
+.cart-fries-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-fries-info strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+
+.cart-fries-info span {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #655844;
+}
+
+.cart-fries-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.cart-fries-price {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.cart-fries-button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: #30291f;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
