@@ -1411,3 +1411,58 @@ main{
   font-weight: 700;
   cursor: pointer;
 }
+.cart-dessert-offer {
+  margin: 14px 0;
+  padding: 16px;
+  border: 2px solid #b98b68;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff7ef, #f1dfcf);
+  color: #30291f;
+  box-shadow: 0 5px 18px rgba(100, 60, 30, 0.12);
+}
+.cart-dessert-offer.hidden { display: none; }
+.cart-dessert-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cart-dessert-emoji {
+  flex: 0 0 54px;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #ead0b8;
+  font-size: 34px;
+}
+.cart-dessert-info { flex: 1; min-width: 0; }
+.cart-dessert-info strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+.cart-dessert-info span {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #655844;
+}
+.cart-dessert-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+}
+.cart-dessert-price { font-size: 17px; font-weight: 800; }
+.cart-dessert-button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: #30291f;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
