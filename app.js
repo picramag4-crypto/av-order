@@ -408,6 +408,53 @@ function renderCartFriesOffer() {
     openItem(fries);
   };
 }
+function renderCartDessertOffer() {
+  const box = document.getElementById("cartDessertOffer");
+  if (!box) return;
+
+  const alreadyHasDessert = cart.some(item =>
+    /чизкейк|тирамису|десерт/i.test(item.name)
+  );
+
+  const dessert = menu.find(item =>
+    /мини.*тирамису|тирамису/i.test(item.name)
+  ) || menu.find(item =>
+    /чизкейк/i.test(item.name)
+  );
+
+  if (!cart.length || alreadyHasDessert || !dessert) {
+    box.classList.add("hidden");
+    box.innerHTML = "";
+    return;
+  }
+
+  const price = dessert.options
+    ? Math.min(...dessert.options.map(o => o.price))
+    : dessert.price;
+
+  box.classList.remove("hidden");
+  box.innerHTML = `
+    <div class="cart-dessert-top">
+      <div class="cart-dessert-emoji">🍰</div>
+      <div class="cart-dessert-info">
+        <strong>Оставим место для сладкого?</strong>
+        <span>Добавим к заказу десерт от АВ — маленькое удовольствие после вкусного обеда.</span>
+      </div>
+    </div>
+    <div class="cart-dessert-bottom">
+      <div class="cart-dessert-price">
+        ${dessert.options ? "от " : ""}${rub(price)}
+      </div>
+      <button type="button" class="cart-dessert-button">
+        ＋ Добавить
+      </button>
+    </div>
+  `;
+
+  box.querySelector(".cart-dessert-button").onclick = () => {
+    openItem(dessert);
+  };
+}
 function updateCart(){
   document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
     renderCartFriesOffer();
