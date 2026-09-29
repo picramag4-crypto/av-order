@@ -352,65 +352,8 @@ function addModalItem(){
   document.getElementById("modal").classList.add("hidden");
   updateCart();
 
-  const isBurger = addedItem.name.toLowerCase().includes("бургер");
-  const alreadyHasFries = cart.some(x =>
-    /фри/i.test(x.name)
-  );
-
-  if (isBurger && !alreadyHasFries) {
-    showFriesOffer();
-  }
 }
 
-function showFriesOffer() {
-  const fries = menu.find(item =>
-    /картофель фри/i.test(item.name)
-  );
-
-  if (!fries) return;
-
-  const overlay = document.createElement("div");
-  overlay.className = "av-success-overlay";
-  overlay.style.zIndex = "9999";
-
-  const price = fries.options
-    ? Math.min(...fries.options.map(o => o.price))
-    : fries.price;
-
-  overlay.innerHTML = `
-    <div class="av-success-card">
-      <div style="font-size:42px;margin-bottom:12px">🍟</div>
-      <h2>Добавим фри?</h2>
-      <p>
-        Хрустящая картошечка отлично дополнит ваш бургер.
-        <br><br>
-        <strong>${rub(price)}</strong>
-      </p>
-      <button type="button" class="av-fries-add">
-        Добавить к заказу
-      </button>
-      <button type="button" class="av-fries-skip"
-        style="margin-top:10px;background:transparent;color:#625e57">
-        Не сейчас
-      </button>
-    </div>
-  `;
-
-  overlay.querySelector(".av-fries-add").onclick = () => {
-    overlay.remove();
-    openItem(fries);
-  };
-
-  overlay.querySelector(".av-fries-skip").onclick = () => {
-    overlay.remove();
-  };
-
-  overlay.addEventListener("click", event => {
-    if (event.target === overlay) overlay.remove();
-  });
-
-  document.body.appendChild(overlay);
-}
 function selectQuickCategory(category) {
   selectedCategory = category;
   renderCategories();
@@ -421,8 +364,53 @@ function selectQuickCategory(category) {
     block: "start"
   });
 }
+
+function renderCartFriesOffer() {
+  const box = document.getElementById("cartFriesOffer");
+  if (!box) return;
+
+  const alreadyHasFries = cart.some(item =>
+    /фри/i.test(item.name)
+  );
+
+  const fries = menu.find(item =>
+    /картофель фри/i.test(item.name)
+  );
+
+  if (!cart.length || alreadyHasFries || !fries) {
+    box.classList.add("hidden");
+    box.innerHTML = "";
+    return;
+  }
+
+  const price = fries.options
+    ? Math.min(...fries.options.map(o => o.price))
+    : fries.price;
+
+  box.classList.remove("hidden");
+  box.innerHTML = `
+    <div class="cart-fries-top">
+      <div class="cart-fries-emoji">🍟</div>
+      <div class="cart-fries-info">
+        <strong>Добавим хрустящую фри?</strong>
+        <span>Бургеры и картошка — отличная пара. Приготовим после заказа!</span>
+      </div>
+    </div>
+    <div class="cart-fries-bottom">
+      <div class="cart-fries-price">от ${rub(price)}</div>
+      <button type="button" class="cart-fries-button">
+        ＋ Добавить
+      </button>
+    </div>
+  `;
+
+  box.querySelector(".cart-fries-button").onclick = () => {
+    openItem(fries);
+  };
+}
 function updateCart(){
   document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
+    renderCartFriesOffer();
   const cartMeta = document.getElementById("cartMeta");
 
 if (cartMeta) {
