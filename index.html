@@ -383,17 +383,22 @@
   </div>
 
 
-<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-
-<script>
-  if (window.vkBridge) {
-    window.vkBridge.send("VKWebAppInit")
-      .then(() => console.log("VK готов"))
-      .catch(error => console.error("VK Bridge:", error));
-  }
+<script
+  async
+  src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js">
 </script>
 
 <script src="app.js"></script>
+
+<script>
+  window.addEventListener("load", function () {
+    if (window.vkBridge) {
+      window.vkBridge.send("VKWebAppInit")
+        .then(() => console.log("VK готов"))
+        .catch(error => console.error("VK Bridge:", error));
+    }
+  });
+</script>
 
 </body>
 </html>
