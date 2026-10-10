@@ -501,98 +501,140 @@ document.getElementById("deliveryFee").textContent =
 document.getElementById("total").textContent =
   rub(goodsTotal + delivery);
   
+
   // === ДОПРОДАЖИ В КОРЗИНЕ ===
   const upsellBox = document.createElement("div");
+
   upsellBox.style.cssText =
     "margin-top:18px;padding:14px;background:#f5f1eb;border-radius:14px;color:#222;";
 
-  upsellBox.innerHTML =
-    '<div style="font-size:17px;font-weight:700;margin-bottom:12px;">Добавим что-нибудь вкусное? 😋</div>';
-
-  
-  const upsellNames = [];
-
-  // Если в корзине есть бургер или ролл — предлагаем фри
   const hasBurgerOrRoll = cart.some(item =>
     /бургер|ролл|чиабатт/i.test(item.name) ||
     /бургеры|роллы|чиабатты/i.test(item.category || "")
   );
 
-  // Если в корзине есть кофе — предлагаем десерты
   const hasCoffee = cart.some(item =>
-    /кофе|эспрессо|американо|капучино|латте|раф|флэт уайт/i.test(item.name)
+    ["Кофе", "Холодный кофе", "Авторский кофе"].includes(item.category) ||
+    /эспрессо|американо|капучино|латте|раф|флэт уайт|бамбл/i.test(item.name)
   );
 
+  const upsellItems = [];
+
   if (hasBurgerOrRoll) {
-    upsellNames.push("Картофель фри");
+    upsellItems.push({
+      name: "Картофель фри",
+      emoji: "🍟",
+      subtitle: "Хрустящий гарнир"
+    });
   }
 
   if (hasCoffee) {
-    upsellNames.push(
-      "Профитроль дубайский",
-      "Профитроль малиновый"
+    upsellItems.push(
+      {
+        name: "Профитроль дубайский",
+        emoji: "🍫",
+        subtitle: "Десерт к кофе"
+      },
+      {
+        name: "Тарталетка «Яблоко-Корица»",
+        emoji: "🍎",
+        subtitle: "Нежная яблочная начинка"
+      },
+      {
+        name: "Чизкейк в ассортименте",
+        emoji: "🍰",
+        subtitle: "Выберите любимый вкус"
+      }
     );
   }
 
-  upsellNames.forEach(name => {
-    const item = menu.find(x => x.name === name);
-    if (!item) return;
+  if (upsellItems.length > 0) {
+    upsellBox.innerHTML = `
+      <div style="font-size:17px;font-weight:700;margin-bottom:6px;">
+        😋 Добавим что-нибудь вкусное?
+      </div>
+      <div style="font-size:13px;color:#666;margin-bottom:10px;">
+        Отличное дополнение к вашему заказу
+      </div>
+    `;
 
-    if (cart.some(x => x.name === item.name)) return;
+    upsellItems.forEach(suggestion => {
+      const item = menu.find(x => x.name === suggestion.name);
+      if (!item) return;
 
-    const price = item.options
-      ? Math.min(...item.options.map(o => o.price))
-      : item.price;
+      if (cart.some(x => x.name === item.name)) return;
 
-    const row = document.createElement("div");
-    row.style.cssText =
-      "display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #ddd;";
+      const price = item.options
+        ? Math.min(...item.options.map(o => o.price))
+        : item.price;
 
-    const title = document.createElement("div");
-    title.style.fontSize = "14px";
-    title.textContent =
-      item.name + " · " + rub(discountedAmount(price));
+      const row = document.createElement("div");
 
-    const button = document.createElement("button");
-    button.textContent = "+ Добавить";
-    button.style.cssText =
-      "border:0;border-radius:9px;padding:9px 10px;background:#222;color:#fff;white-space:nowrap;";
+      row.style.cssText =
+        "display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid #ddd;";
 
-    button.onclick = () => {
-      if (item.options) {
-        openItem(item);
-        return;
-      }
+      const emoji = document.createElement("div");
+      emoji.textContent = suggestion.emoji;
+      emoji.style.cssText =
+        "width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;font-size:25px;";
 
-      const key = item.name + "__";
-      const found = cart.find(x => x.key === key);
+      const info = document.createElement("div");
+      info.style.cssText = "flex:1;min-width:0;";
 
-      if (found) {
-        found.qty++;
-      } else {
+      const name = document.createElement("div");
+      name.textContent = item.name;
+      name.style.cssText =
+        "font-size:13px;font-weight:700;line-height:1.35;";
+
+      const subtitle = document.createElement("div");
+      subtitle.textContent = suggestion.subtitle;
+      subtitle.style.cssText =
+        "font-size:11px;color:#777;margin-top:3px;";
+
+      const priceEl = document.createElement("div");
+      priceEl.textContent = "от " + rub(discountedAmount(price));
+      priceEl.style.cssText =
+        "font-size:13px;font-weight:700;margin-top:4px;";
+
+      info.appendChild(name);
+      info.appendChild(subtitle);
+      info.appendChild(priceEl);
+
+      const button = document.createElement("button");
+      button.textContent = "+";
+      button.setAttribute("aria-label", "Добавить " + item.name);
+      button.style.cssText =
+        "width:36px;height:36px;flex-shrink:0;border:0;border-radius:11px;background:#222;color:#fff;font-size:23px;";
+
+      button.onclick = () => {
+        if (item.options) {
+          openItem(item);
+          return;
+        }
+
         cart.push({
-          key,
+          key: item.name + "__",
           name: item.name,
           category: item.category,
           option: "",
           price: item.price,
           qty: 1
         });
-      }
 
-      updateCart();
-    };
+        updateCart();
+      };
 
-    row.appendChild(title);
-    row.appendChild(button);
-    upsellBox.appendChild(row);
-  });
+      row.appendChild(emoji);
+      row.appendChild(info);
+      row.appendChild(button);
+      upsellBox.appendChild(row);
+    });
 
-  if (upsellBox.children.length > 1) {
-    list.appendChild(upsellBox);
+    if (upsellBox.children.length > 2) {
+      list.appendChild(upsellBox);
+    }
   }
   // === КОНЕЦ ДОПРОДАЖ ===
-}
 function bind(){
   document.getElementById("openCart").onclick=()=>{updateCart();document.getElementById("cartDrawer").classList.remove("hidden")};
   document.getElementById("closeCart").onclick=()=>document.getElementById("cartDrawer").classList.add("hidden");
