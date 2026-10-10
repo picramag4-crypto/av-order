@@ -509,11 +509,30 @@ document.getElementById("total").textContent =
   upsellBox.innerHTML =
     '<div style="font-size:17px;font-weight:700;margin-bottom:12px;">Добавим что-нибудь вкусное? 😋</div>';
 
-  const upsellNames = [
-    "Картофель фри",
-    "Профитроль дубайский",
-    "Профитроль малиновый"
-  ];
+  
+  const upsellNames = [];
+
+  // Если в корзине есть бургер или ролл — предлагаем фри
+  const hasBurgerOrRoll = cart.some(item =>
+    /бургер|ролл|чиабатт/i.test(item.name) ||
+    /бургеры|роллы|чиабатты/i.test(item.category || "")
+  );
+
+  // Если в корзине есть кофе — предлагаем десерты
+  const hasCoffee = cart.some(item =>
+    /кофе|эспрессо|американо|капучино|латте|раф|флэт уайт/i.test(item.name)
+  );
+
+  if (hasBurgerOrRoll) {
+    upsellNames.push("Картофель фри");
+  }
+
+  if (hasCoffee) {
+    upsellNames.push(
+      "Профитроль дубайский",
+      "Профитроль малиновый"
+    );
+  }
 
   upsellNames.forEach(name => {
     const item = menu.find(x => x.name === name);
