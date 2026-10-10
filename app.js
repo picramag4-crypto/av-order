@@ -500,6 +500,79 @@ document.getElementById("deliveryFee").textContent =
 
 document.getElementById("total").textContent =
   rub(goodsTotal + delivery);
+  
+  // === ДОПРОДАЖИ В КОРЗИНЕ ===
+  const upsellBox = document.createElement("div");
+  upsellBox.style.cssText =
+    "margin-top:18px;padding:14px;background:#f5f1eb;border-radius:14px;color:#222;";
+
+  upsellBox.innerHTML =
+    '<div style="font-size:17px;font-weight:700;margin-bottom:12px;">Добавим что-нибудь вкусное? 😋</div>';
+
+  const upsellNames = [
+    "Картофель фри",
+    "Профитроль дубайский",
+    "Профитроль малиновый"
+  ];
+
+  upsellNames.forEach(name => {
+    const item = menu.find(x => x.name === name);
+    if (!item) return;
+
+    if (cart.some(x => x.name === item.name)) return;
+
+    const price = item.options
+      ? Math.min(...item.options.map(o => o.price))
+      : item.price;
+
+    const row = document.createElement("div");
+    row.style.cssText =
+      "display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #ddd;";
+
+    const title = document.createElement("div");
+    title.style.fontSize = "14px";
+    title.textContent =
+      item.name + " · " + rub(discountedAmount(price));
+
+    const button = document.createElement("button");
+    button.textContent = "+ Добавить";
+    button.style.cssText =
+      "border:0;border-radius:9px;padding:9px 10px;background:#222;color:#fff;white-space:nowrap;";
+
+    button.onclick = () => {
+      if (item.options) {
+        openItem(item);
+        return;
+      }
+
+      const key = item.name + "__";
+      const found = cart.find(x => x.key === key);
+
+      if (found) {
+        found.qty++;
+      } else {
+        cart.push({
+          key,
+          name: item.name,
+          category: item.category,
+          option: "",
+          price: item.price,
+          qty: 1
+        });
+      }
+
+      updateCart();
+    };
+
+    row.appendChild(title);
+    row.appendChild(button);
+    upsellBox.appendChild(row);
+  });
+
+  if (upsellBox.children.length > 1) {
+    list.appendChild(upsellBox);
+  }
+  // === КОНЕЦ ДОПРОДАЖ ===
 }
 function bind(){
   document.getElementById("openCart").onclick=()=>{updateCart();document.getElementById("cartDrawer").classList.remove("hidden")};
