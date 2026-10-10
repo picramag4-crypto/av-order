@@ -635,6 +635,7 @@ document.getElementById("total").textContent =
     }
   }
   // === КОНЕЦ ДОПРОДАЖ ===
+  }
 function bind(){
   document.getElementById("openCart").onclick=()=>{updateCart();document.getElementById("cartDrawer").classList.remove("hidden")};
   document.getElementById("closeCart").onclick=()=>document.getElementById("cartDrawer").classList.add("hidden");
