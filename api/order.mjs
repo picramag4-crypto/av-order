@@ -16,8 +16,7 @@ async function verifyTelegramInitData(initData, botToken) {
 
     if (!receivedHash) return null;
 
-    params.delete("hash");
-    params.delete("signature");
+   params.delete("hash");
 
     const dataCheckString = [...params.entries()]
       .sort(([a], [b]) => a.localeCompare(b))
