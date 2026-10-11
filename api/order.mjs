@@ -115,6 +115,13 @@ export default {
 
       const orderId = crypto.randomUUID();
 
+console.log("Order loyalty diagnostics", {
+  hasInitData: Boolean(order.initData),
+  verifiedTelegramUser: Boolean(telegramUserId),
+  hasPointsToRedeem: order.pointsToRedeem !== undefined,
+  hasSupabaseConfig: Boolean(supabaseUrl && supabaseKey)
+});
+
       // Если пользователь подтверждён, создаём запись в бонусной системе.
       // goodsTotal и pointsToRedeem будут передаваться из обновлённого app.js.
       if (telegramUserId && order.pointsToRedeem !== undefined) {
