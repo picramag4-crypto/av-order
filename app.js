@@ -839,23 +839,26 @@ total: goodsTotal + fee
 
   "\n\n💬 Комментарий: " + (comment || "Нет");
   try {
-    const response = await fetch("/api/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      
-
-{
-  text: text,
-  initData: tg?.initData || "",
-  telegramUserId: tg?.initDataUnsafe?.user?.id || null,
-  originalSubtotal: originalSubtotal,
-  pointsToRedeem: loyaltyDiscount
-}
-
-
-    });
+    
+const response = await fetch("/api/order", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    text: text,
+    initData: tg?.initData || "",
+    telegramUserId: tg?.initDataUnsafe?.user?.id || null,
+    originalSubtotal: originalSubtotal,
+    pointsToRedeem: loyaltyDiscount,
+    deliveryFee: fee,
+    fulfillment: fulfillment,
+    payment: payment,
+    customer: { name, phone, address, comment },
+    items: cart,
+    total: goodsTotal + fee
+  })
+});
 
     const result = await response.json();
 
