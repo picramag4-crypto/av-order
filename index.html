@@ -112,11 +112,37 @@
   </div>
 
 
-  <div id="loyaltyCard" class="hidden">
-    ☕ Карта напитков:
-    <strong id="loyaltyProgress">0 из 10</strong>
-    <div id="loyaltyHint"></div>
+ 
+<div id="loyaltyCard" class="hidden">
+  <div>
+    ⭐ Ваши бонусы:
+    <strong id="loyaltyBalance">0 ₽</strong>
   </div>
+
+  <div id="loyaltyHint">
+    Бонусами можно оплатить до 20% стоимости товаров.
+  </div>
+
+  <label for="loyaltyRedeemInput">
+    Сколько бонусов списать?
+  </label>
+
+  <input
+    id="loyaltyRedeemInput"
+    type="number"
+    min="0"
+    step="1"
+    value="0"
+    placeholder="Введите сумму в рублях"
+  />
+
+  <button id="redeemMaxBtn" type="button">
+    Списать максимум
+  </button>
+
+  <div id="loyaltyMaxRedeem"></div>
+</div>
+
 
 
   <main>
@@ -217,10 +243,12 @@
         <strong id="subtotal">0 ₽</strong>
       </div>
 
-      <div id="loyaltyDiscountRow" class="hidden">
-        <span>🎁 Карта лояльности</span>
-        <strong id="loyaltyDiscount">0 ₽</strong>
-      </div>
+      
+<div id="loyaltyDiscountRow" class="hidden">
+  <span>⭐ Списано бонусов</span>
+  <strong id="loyaltyDiscount">0 ₽</strong>
+</div>
+
 
       <div>
         <span>Доставка</span>
