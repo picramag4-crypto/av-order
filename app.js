@@ -123,7 +123,34 @@ function updatePromoTimer() {
     String(seconds).padStart(2, "0");
 }
 
+
 let loyaltyPoints = 0;
+
+function getMaxRedeem() {
+  const balance = Math.max(0, Math.floor(Number(loyaltyPoints) || 0));
+
+  const subtotal = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+
+  // При списании бонусов обеденная скидка не действует.
+  // Поэтому лимит рассчитываем от полной стоимости товаров.
+  const maxByOrder = Math.floor(subtotal * 0.2);
+
+  return Math.min(balance, maxByOrder);
+}
+
+function getRedeemAmount() {
+  const input = document.getElementById("loyaltyRedeemInput");
+
+  const requested = Math.max(
+    0,
+    Math.floor(Number(input?.value) || 0)
+  );
+
+  return Math.min(requested, getMaxRedeem());
+}
 
 
 function getGoodsSubtotal() {
