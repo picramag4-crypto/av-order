@@ -55,33 +55,7 @@ function discountedAmount(amount) {
     ? Math.round(amount * 0.8)
     : amount;
 }
-function loyaltyDrinksCount() {
-  const loyaltyCategories = [
-    "Кофе",
-    "Холодный кофе",
-    "Авторский кофе",
-    "Лимонады",
-    "Чаи",
-    "Милки"
-  ];
 
-  return cart
-    .filter(item => loyaltyCategories.includes(item.category))
-    .reduce((sum, item) => sum + item.qty, 0);
-}
-let loyaltyPosition = 0;
-
-function loyaltyReward() {
-  if (loyaltyPosition === 4) {
-    return "discount20";
-  }
-
-  if (loyaltyPosition === 9) {
-    return "free";
-  }
-
-  return null;
-}
 function updatePromoTimer() {
   const timer = document.getElementById("promoTimer");
   const promo = document.getElementById("lunchPromo");
@@ -150,6 +124,32 @@ function updatePromoTimer() {
 }
 
 let loyaltyPoints = 0;
+
+function getGoodsSubtotal() {
+  const subtotal = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+
+  return lunchDiscountActive()
+    ? subtotal - Math.round(subtotal * 0.2)
+    : subtotal;
+}
+
+function getMaxRedeem() {
+  return Math.min(
+    loyaltyPoints,
+    Math.floor(getGoodsSubtotal() * 0.2)
+  );
+}
+
+function getRedeemAmount() {
+  const input = document.getElementById("loyaltyRedeemInput");
+  const requested = Math.max(0, Math.floor(Number(input?.value) || 0));
+
+  return Math.min(requested, getMaxRedeem());
+}
+
 
 async function loadLoyalty() {
   if (!tg?.initData) return;
@@ -399,40 +399,8 @@ if (cartMeta) {
 
 const lunchSub = discountedAmount(sub);
 
-const loyaltyItems = cart.filter(item =>
-  [
-    "Кофе",
-    "Холодный кофе",
-    "Авторский кофе",
-    "Лимонады",
-    "Чаи",
-    "Милки"
-  ].includes(item.category)
-);
-
-let loyaltyDiscount = 0;
-
-if (loyaltyItems.length > 0) {
-  const cheapestDrinkPrice = Math.min(
-    ...loyaltyItems.map(item => item.price)
-  );
-
-  if (loyaltyReward() === "discount20") {
-    if (!lunchDiscountActive()) {
-      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.2);
-    }
-  }
-
-  if (loyaltyReward() === "free") {
-    if (lunchDiscountActive()) {
-      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.8);
-    } else {
-      loyaltyDiscount = cheapestDrinkPrice;
-    }
-  }
-}
-
-const goodsTotal = lunchSub - loyaltyDiscount;
+const loyaltyDiscount = getRedeemAmount();
+const goodsTotal = Math.max(0, lunchSub - loyaltyDiscount);
 
 const isDelivery =
   document.querySelector('input[name="fulfillment"]:checked')?.value === "delivery";
@@ -661,44 +629,9 @@ const discount = discountActive
   ? Math.round(originalSubtotal * 0.2)
   : 0;
 
-const loyaltyItems = cart.filter(item =>
-  [
-    "Кофе",
-    "Холодный кофе",
-    "Авторский кофе",
-    "Лимонады",
-    "Чаи",
-    "Милки"
-  ].includes(item.category)
-);
-
-let loyaltyDiscount = 0;
-
-if (loyaltyItems.length > 0) {
-  const cheapestDrinkPrice = Math.min(
-    ...loyaltyItems.map(item => item.price)
-  );
-
-  if (loyaltyReward() === "discount20") {
-    if (!discountActive) {
-      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.2);
-    }
-  }
-
-  if (loyaltyReward() === "free") {
-    if (discountActive) {
-      loyaltyDiscount = Math.round(cheapestDrinkPrice * 0.8);
-    } else {
-      loyaltyDiscount = cheapestDrinkPrice;
-    }
-  }
-}
-
-const goodsTotal =
-  originalSubtotal -
-  discount -
-  loyaltyDiscount;
-
+const subtotalAfterLunch = originalSubtotal - discount;
+const loyaltyDiscount = getRedeemAmount();
+const goodsTotal = Math.max(0, subtotalAfterLunch - loyaltyDiscount);
 const fee =
   fulfillment === "delivery"
     ? (goodsTotal >= 2000 ? 0 : 200)
