@@ -195,7 +195,9 @@ const hint = document.getElementById("loyaltyHint");
 
   } catch (error) {
     console.error("Loyalty error:", error);
-    async function loadLoyaltyHistory() {
+      }
+}
+async function loadLoyaltyHistory() {
   const list = document.getElementById("loyaltyHistoryList");
   const panel = document.getElementById("loyaltyHistoryPanel");
 
@@ -254,7 +256,9 @@ const hint = document.getElementById("loyaltyHint");
       const sign = item.operation === "redeem" ? "−" : "+";
       amount.textContent = sign + rub(item.points);
       amount.className =
-        item.operation === "redeem" ? "loyalty-history-negative" : "loyalty-history-positive";
+        item.operation === "redeem"
+          ? "loyalty-history-negative"
+          : "loyalty-history-positive";
 
       row.append(info, amount);
       list.appendChild(row);
@@ -264,7 +268,7 @@ const hint = document.getElementById("loyaltyHint");
     list.textContent = "Ошибка загрузки истории. Попробуйте позже.";
   }
 }
-
+    
 async function boot(){
   menu = await fetch("menu.json").then(r=>r.json());
   renderCategories();
@@ -706,6 +710,21 @@ if (redeemMaxBtn) {
       input.value = getMaxRedeem();
       updateCart();
     }
+  });
+}
+
+const historyButton = document.getElementById("loyaltyHistoryBtn");
+
+if (historyButton) {
+  historyButton.addEventListener("click", () => {
+    const panel = document.getElementById("loyaltyHistoryPanel");
+
+    if (panel && !panel.classList.contains("hidden")) {
+      panel.classList.add("hidden");
+      return;
+    }
+
+    loadLoyaltyHistory();
   });
 }
 
