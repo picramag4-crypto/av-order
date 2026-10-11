@@ -1,4 +1,27 @@
 
+function isLunchDiscountTime() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Moscow",
+    weekday: "short",
+    hour: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(new Date());
+
+  const weekday = parts.find(
+    part => part.type === "weekday"
+  )?.value;
+
+  const hour = Number(
+    parts.find(part => part.type === "hour")?.value
+  );
+
+  const isWeekday = [
+    "Mon", "Tue", "Wed", "Thu", "Fri"
+  ].includes(weekday);
+
+  return isWeekday && hour >= 12 && hour < 16;
+}
+
 async function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
