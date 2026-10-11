@@ -146,6 +146,15 @@ console.log("Order loyalty diagnostics", {
 
       
       // Сервер самостоятельно рассчитывает скидку и сумму товаров.
+      if (
+  Number(order.pointsToRedeem || 0) > 0 &&
+  !telegramUserId
+) {
+  return jsonResponse(
+    { error: "Telegram verification required to redeem points" },
+    401
+  );
+}
       if (telegramUserId && order.pointsToRedeem !== undefined) {
         if (!supabaseUrl || !supabaseKey) {
           return jsonResponse(
@@ -210,11 +219,25 @@ const rpcResponse = await fetch(
   }
 );
 
-    
-      const telegramUrl =
-        `https://api.telegram.org/bot${token}/sendMessage`;
+const rpcData = await rpcResponse.json().catch(() => null);
 
-      
+if (!rpcResponse.ok || rpcData?.success !== true) {
+  console.error("Loyalty redemption failed:", rpcData);
+
+  return jsonResponse(
+    {
+      error: "Loyalty operation failed",
+      details: rpcData
+    },
+    400
+  );
+}
+}
+
+// Отправка заказа сотрудникам
+const telegramUrl =
+  `https://api.telegram.org/bot${token}/sendMessage`;
+
 const staffText =
   "🍔 НОВЫЙ ЗАКАЗ\n" +
   `🧾 № ${orderId}\n\n` +
