@@ -81,7 +81,14 @@ export default {
     if (request.method !== "POST") {
       return response();
     }
+const webhookSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
 
+if (
+  !webhookSecret ||
+  request.headers.get("x-telegram-bot-api-secret-token") !== webhookSecret
+) {
+  return new Response("Forbidden", { status: 403 });
+}
     try {
       const update = await request.json();
       const callback = update.callback_query;
