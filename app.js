@@ -184,11 +184,10 @@ updateCart();
 
 
     const card = document.getElementById("loyaltyCard");
-    const progress = document.getElementById("loyaltyProgress");
-    const hint = document.getElementById("loyaltyHint");
+const hint = document.getElementById("loyaltyHint");
 
     if (card) card.classList.remove("hidden");
-    if (progress) progress.textContent = loyaltyPoints + " ₽";
+    
 
     if (hint) {
       hint.textContent = "Бонусами можно оплатить до 20% стоимости товаров.";
@@ -731,11 +730,15 @@ total: goodsTotal + fee
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
+      
+body: JSON.stringify({
   text: text,
+  initData: tg?.initData || "",
   telegramUserId: tg?.initDataUnsafe?.user?.id || null,
-  loyaltyDrinks: loyaltyDrinksCount()
+  goodsTotal: subtotalAfterLunch,
+  pointsToRedeem: loyaltyDiscount
 })
+
     });
 
     const result = await response.json();
