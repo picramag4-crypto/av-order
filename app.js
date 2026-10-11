@@ -148,50 +148,42 @@ function updatePromoTimer() {
     String(minutes).padStart(2, "0") + ":" +
     String(seconds).padStart(2, "0");
 }
-async function loadLoyalty() {
-  const telegramUserId = tg?.initDataUnsafe?.user?.id;
 
-  if (!telegramUserId) return;
+let loyaltyPoints = 0;
+
+async function loadLoyalty() {
+  if (!tg?.initData) return;
 
   try {
     const response = await fetch(
-      "/api/loyalty?telegramUserId=" +
-      encodeURIComponent(telegramUserId)
+      "/api/loyalty?initData=" + encodeURIComponent(tg.initData)
     );
 
     const data = await response.json();
 
-    if (!response.ok || !data.ok) return;
+    if (!response.ok || !data.ok) {
+      console.error("Не удалось загрузить бонусы:", data);
+      return;
+    }
 
-    const count = Number(data.drinksCount || 0);
-    const position = count % 10;
-    loyaltyPosition = position;
+    loyaltyPoints = Math.max(0, Number(data.points) || 0);
 
     const card = document.getElementById("loyaltyCard");
     const progress = document.getElementById("loyaltyProgress");
     const hint = document.getElementById("loyaltyHint");
 
-    if (!(card && progress && hint)) return;
+    if (card) card.classList.remove("hidden");
+    if (progress) progress.textContent = loyaltyPoints + " ₽";
 
-    card.classList.remove("hidden");
-    progress.textContent = position + " из 10";
-
-    if (position === 4) {
-      hint.textContent = "🎉 Следующий напиток со скидкой 20%";
-    } else if (position === 9) {
-      hint.textContent = "🎁 Следующий напиток бесплатно";
-    } else if (position < 4) {
-      hint.textContent =
-        "До скидки 20% осталось: " + (4 - position);
-    } else {
-      hint.textContent =
-        "До бесплатного напитка осталось: " + (9 - position);
+    if (hint) {
+      hint.textContent = "Бонусами можно оплатить до 20% стоимости товаров.";
     }
 
   } catch (error) {
     console.error("Loyalty error:", error);
   }
 }
+
 async function boot(){
   menu = await fetch("menu.json").then(r=>r.json());
   renderCategories();
