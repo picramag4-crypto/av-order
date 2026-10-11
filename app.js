@@ -195,6 +195,73 @@ const hint = document.getElementById("loyaltyHint");
 
   } catch (error) {
     console.error("Loyalty error:", error);
+    async function loadLoyaltyHistory() {
+  const list = document.getElementById("loyaltyHistoryList");
+  const panel = document.getElementById("loyaltyHistoryPanel");
+
+  if (!list || !panel || !tg?.initData) return;
+
+  panel.classList.remove("hidden");
+  list.textContent = "Загружаем историю…";
+
+  try {
+    const response = await fetch(
+      "/api/loyalty-history?initData=" +
+      encodeURIComponent(tg.initData),
+      { cache: "no-store" }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.ok) {
+      list.textContent = "Не удалось загрузить историю. Попробуйте позже.";
+      return;
+    }
+
+    list.replaceChildren();
+
+    if (!data.history.length) {
+      list.textContent = "Пока операций нет. Первые бонусы появятся после выдачи заказа.";
+      return;
+    }
+
+    data.history.forEach(item => {
+      const row = document.createElement("div");
+      row.className = "loyalty-history-item";
+
+      const info = document.createElement("div");
+      const title = document.createElement("strong");
+      const date = document.createElement("div");
+      date.className = "small";
+
+      const operationNames = {
+        earn: "⭐ Начисление бонусов",
+        redeem: "🎁 Списание бонусов",
+        refund: "↩️ Возврат бонусов"
+      };
+
+      title.textContent =
+        operationNames[item.operation] || "Операция с бонусами";
+
+      const parsedDate = new Date(item.createdAt);
+      date.textContent = Number.isNaN(parsedDate.getTime())
+        ? ""
+        : parsedDate.toLocaleString("ru-RU");
+
+      info.append(title, date);
+
+      const amount = document.createElement("strong");
+      const sign = item.operation === "redeem" ? "−" : "+";
+      amount.textContent = sign + rub(item.points);
+      amount.className =
+        item.operation === "redeem" ? "loyalty-history-negative" : "loyalty-history-positive";
+
+      row.append(info, amount);
+      list.appendChild(row);
+    });
+  } catch (error) {
+    console.error("Loyalty history error:", error);
+    list.textContent = "Ошибка загрузки истории. Попробуйте позже.";
   }
 }
 
