@@ -1,11 +1,15 @@
 export default {
   async fetch() {
     const token = process.env.TELEGRAM_BOT_TOKEN;
+    const secret = process.env.TELEGRAM_WEBHOOK_SECRET;
     const webhookUrl = "https://av-order.vercel.app/api/telegram";
 
-    if (!token) {
+    if (!token || !secret) {
       return new Response(
-        JSON.stringify({ ok: false, error: "TOKEN_MISSING" }),
+        JSON.stringify({
+          ok: false,
+          error: !token ? "TOKEN_MISSING" : "WEBHOOK_SECRET_MISSING"
+        }),
         {
           status: 500,
           headers: { "Content-Type": "application/json" }
@@ -22,6 +26,7 @@ export default {
         },
         body: JSON.stringify({
           url: webhookUrl,
+          secret_token: secret,
           allowed_updates: ["callback_query"]
         })
       }
@@ -29,12 +34,9 @@ export default {
 
     const result = await response.json();
 
-    return new Response(
-      JSON.stringify(result),
-      {
-        status: response.status,
-        headers: { "Content-Type": "application/json" }
-      }
-    );
+    return new Response(JSON.stringify(result), {
+      status: response.status,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 };
