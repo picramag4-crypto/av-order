@@ -845,17 +845,15 @@ total: goodsTotal + fee
         "Content-Type": "application/json"
       },
       
-body: JSON.stringify({
+
+{
   text: text,
   initData: tg?.initData || "",
   telegramUserId: tg?.initDataUnsafe?.user?.id || null,
-  
-goodsTotal: discountActive
-  ? subtotalAfterLunch
-  : originalSubtotal,
-pointsToRedeem: loyaltyDiscount
+  originalSubtotal: originalSubtotal,
+  pointsToRedeem: loyaltyDiscount
+}
 
-})
 
     });
 
