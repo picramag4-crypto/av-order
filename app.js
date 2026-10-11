@@ -167,6 +167,21 @@ async function loadLoyalty() {
     }
 
     loyaltyPoints = Math.max(0, Number(data.points) || 0);
+    
+const balance = document.getElementById("loyaltyBalance");
+const maxRedeem = document.getElementById("loyaltyMaxRedeem");
+
+if (balance) {
+  balance.textContent = loyaltyPoints + " ₽";
+}
+
+if (maxRedeem) {
+  maxRedeem.textContent =
+    "Сейчас можно списать до " + getMaxRedeem() + " ₽";
+}
+
+updateCart();
+
 
     const card = document.getElementById("loyaltyCard");
     const progress = document.getElementById("loyaltyProgress");
@@ -607,6 +622,27 @@ function bind(){
     updateCart();
   });
   document.getElementById("checkoutBtn").onclick=checkout;
+  
+const redeemInput = document.getElementById("loyaltyRedeemInput");
+const redeemMaxBtn = document.getElementById("redeemMaxBtn");
+
+if (redeemInput) {
+  redeemInput.addEventListener("input", () => {
+    updateCart();
+  });
+}
+
+if (redeemMaxBtn) {
+  redeemMaxBtn.addEventListener("click", () => {
+    const input = document.getElementById("loyaltyRedeemInput");
+
+    if (input) {
+      input.value = getMaxRedeem();
+      updateCart();
+    }
+  });
+}
+
 }
 async function checkout(){
   if(!cart.length) return alert("Корзина пустая.");
