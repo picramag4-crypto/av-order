@@ -1,7 +1,85 @@
+const STAFF_CHAT_ID = "-1004224118459";
+
+function response() {
+  return new Response("OK", { status: 200 });
+}
+
+async function telegramRequest(token, method, body) {
+  const res = await fetch(
+    `https://api.telegram.org/bot${token}/${method}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    }
+  );
+
+  const data = await res.json();
+
+  if (!res.ok || !data.ok) {
+    throw new Error(
+      `Telegram ${method}: ${JSON.stringify(data)}`
+    );
+  }
+
+  return data;
+}
+
+async function supabaseRequest(url, key, path, options = {}) {
+  const res = await fetch(`${url.replace(/\/$/, "")}${path}`, {
+    ...options,
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    }
+  });
+
+  const text = await res.text();
+  let data = null;
+
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = text;
+  }
+
+  if (!res.ok) {
+    throw new Error(`Supabase: ${text}`);
+  }
+
+  return data;
+}
+
+async function answerCallback(token, callback, text) {
+  await telegramRequest(token, "answerCallbackQuery", {
+    callback_query_id: callback.id,
+    text
+  });
+}
+
+async function editKeyboard(token, message, keyboard) {
+  await telegramRequest(token, "editMessageReplyMarkup", {
+    chat_id: message.chat.id,
+    message_id: message.message_id,
+    reply_markup: { inline_keyboard: keyboard }
+  });
+}
+
+async function sendCustomerMessage(token, userId, text) {
+  if (!userId) return;
+
+  await telegramRequest(token, "sendMessage", {
+    chat_id: userId,
+    text
+  });
+}
+
 export default {
   async fetch(request) {
     if (request.method !== "POST") {
-      return new Response("OK", { status: 200 });
+      return response();
     }
 
     try {
@@ -9,7 +87,7 @@ export default {
       const callback = update.callback_query;
 
       if (!callback) {
-        return new Response("OK", { status: 200 });
+        return response();
       }
 
       const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -17,12 +95,15 @@ export default {
       const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
       if (!token) {
-        return new Response("OK", { status: 200 });
+        return response();
       }
 
       const data = callback.data || "";
+      const message = callback.message;
 
-      // Статусы заказов из VK
+      // =========================================
+      // ЗАКАЗЫ VK — СОХРАНЯЕМ ПРЕЖНЮЮ ЛОГИКУ
+      // =========================================
       if (data.startsWith("vk_status:")) {
         const status = data.split(":")[1];
 
@@ -46,238 +127,232 @@ export default {
 
         const current = statuses[status];
 
-        const answerUrl =
-          "https://api.telegram.org/bot" +
-          token +
-          "/answerCallbackQuery";
-
-        await fetch(answerUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            callback_query_id: callback.id,
-            text: current
-              ? current.text
-              : "Неизвестный статус"
-          })
+        await telegramRequest(token, "answerCallbackQuery", {
+          callback_query_id: callback.id,
+          text: current ? current.text : "Неизвестный статус"
         });
 
-        if (current && callback.message) {
+        if (current && message) {
           const keyboard = current.next
             ? [[{
                 text: current.button,
-                callback_data:
-                  "vk_status:" + current.next
+                callback_data: "vk_status:" + current.next
               }]]
             : [];
 
-          const editUrl =
-            "https://api.telegram.org/bot" +
-            token +
-            "/editMessageReplyMarkup";
-
-          await fetch(editUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              chat_id: callback.message.chat.id,
-              message_id: callback.message.message_id,
-              reply_markup: {
-                inline_keyboard: keyboard
-              }
-            })
+          await telegramRequest(token, "editMessageReplyMarkup", {
+            chat_id: message.chat.id,
+            message_id: message.message_id,
+            reply_markup: { inline_keyboard: keyboard }
           });
         }
 
-        return new Response("OK", { status: 200 });
+        return response();
       }
-      if (data.startsWith("accept_order:")) {
-        const parts = data.split(":");
 
-        const telegramUserId = parts[1];
-        const loyaltyDrinks = Math.max(
-          0,
-          Number(parts[2]) || 0
+      // =========================================
+      // TELEGRAM: ПРИНЯТИЕ ЗАКАЗА
+      // =========================================
+      if (data.startsWith("accept_order:")) {
+        if (
+          !message ||
+          String(message.chat.id) !== STAFF_CHAT_ID
+        ) {
+          await answerCallback(
+            token,
+            callback,
+            "Нет доступа к управлению заказом"
+          );
+          return response();
+        }
+
+        const orderId = data.slice("accept_order:".length);
+
+        if (!orderId) {
+          await answerCallback(token, callback, "Не указан ID заказа");
+          return response();
+        }
+
+        if (!supabaseUrl || !supabaseKey) {
+          await answerCallback(
+            token,
+            callback,
+            "Не настроена бонусная система"
+          );
+          return response();
+        }
+
+        // Ищем бонусную запись. У гостевых заказов её может не быть.
+        const rows = await supabaseRequest(
+          supabaseUrl,
+          supabaseKey,
+          `/rest/v1/loyalty_orders?order_id=eq.${encodeURIComponent(orderId)}&select=order_id,telegram_user_id,status`
         );
 
-        const answerUrl =
-          "https://api.telegram.org/bot" +
-          token +
-          "/answerCallbackQuery";
+        const loyaltyOrder = Array.isArray(rows) ? rows[0] : null;
 
-        await fetch(answerUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            callback_query_id: callback.id,
-            text: "Заказ принят ✅"
-          })
-        });
-
-        const editUrl =
-          "https://api.telegram.org/bot" +
-          token +
-          "/editMessageReplyMarkup";
-
-        await fetch(editUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            chat_id: callback.message.chat.id,
-            message_id: callback.message.message_id,
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "✅ Заказ принят",
-                    callback_data: "already_accepted"
-                  }
-                ]
-              ]
-            }
-          })
-        });
-
-        let newDrinksCount = null;
-
-        // Начисляем напитки в карту лояльности
-        if (
-          telegramUserId &&
-          telegramUserId !== "no_user" &&
-          loyaltyDrinks > 0 &&
-          supabaseUrl &&
-          supabaseKey
-        ) {
-          const getUrl =
-            supabaseUrl +
-            "/rest/v1/loyalty?telegram_user_id=eq." +
-            encodeURIComponent(telegramUserId) +
-            "&select=telegram_user_id,drinks_count";
-
-          const getResponse = await fetch(getUrl, {
-            method: "GET",
-            headers: {
-              "apikey": supabaseKey,
-              "Authorization": "Bearer " + supabaseKey,
-              "Content-Type": "application/json"
-            }
-          });
-
-          const rows = await getResponse.json();
-
-          if (getResponse.ok) {
-            const oldCount =
-              rows.length > 0
-                ? Number(rows[0].drinks_count || 0)
-                : 0;
-
-            newDrinksCount =
-              oldCount + loyaltyDrinks;
-
-            if (rows.length > 0) {
-              const updateUrl =
-                supabaseUrl +
-                "/rest/v1/loyalty?telegram_user_id=eq." +
-                encodeURIComponent(telegramUserId);
-
-              await fetch(updateUrl, {
-                method: "PATCH",
-                headers: {
-                  "apikey": supabaseKey,
-                  "Authorization":
-                    "Bearer " + supabaseKey,
-                  "Content-Type":
-                    "application/json"
-                },
-                body: JSON.stringify({
-                  drinks_count: newDrinksCount,
-                  updated_at:
-                    new Date().toISOString()
-                })
-              });
-
-            } else {
-              const insertUrl =
-                supabaseUrl +
-                "/rest/v1/loyalty";
-
-              await fetch(insertUrl, {
-                method: "POST",
-                headers: {
-                  "apikey": supabaseKey,
-                  "Authorization":
-                    "Bearer " + supabaseKey,
-                  "Content-Type":
-                    "application/json"
-                },
-                body: JSON.stringify({
-                  telegram_user_id:
-                    telegramUserId,
-                  drinks_count:
-                    newDrinksCount
-                })
-              });
-            }
-          }
+        if (loyaltyOrder?.status === "cancelled") {
+          await answerCallback(token, callback, "Заказ уже отменён");
+          return response();
         }
 
-        // Сообщение гостю
-        if (
-          telegramUserId &&
-          telegramUserId !== "no_user"
-        ) {
-          const sendUrl =
-            "https://api.telegram.org/bot" +
-            token +
-            "/sendMessage";
-
-          let customerText =
-            "✅ Ваш заказ принят сотрудниками.\n\n" +
-            "Заказ передан на кухню.";
-
-          if (
-            loyaltyDrinks > 0 &&
-            newDrinksCount !== null
-          ) {
-            const position =
-              newDrinksCount % 10;
-
-            customerText +=
-              "\n\n☕ На карту лояльности начислено: " +
-              loyaltyDrinks;
-
-            customerText +=
-              "\nВаша карта: " +
-              position +
-              " из 10";
-          }
-
-          await fetch(sendUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              chat_id: telegramUserId,
-              text: customerText
-            })
-          });
+        if (loyaltyOrder?.status === "completed") {
+          await answerCallback(token, callback, "Заказ уже выдан");
+          return response();
         }
+
+        if (loyaltyOrder?.status === "pending") {
+          await supabaseRequest(
+            supabaseUrl,
+            supabaseKey,
+            `/rest/v1/loyalty_orders?order_id=eq.${encodeURIComponent(orderId)}&status=eq.pending`,
+            {
+              method: "PATCH",
+              headers: { Prefer: "return=representation" },
+              body: JSON.stringify({ status: "accepted" })
+            }
+          );
+        }
+
+        await answerCallback(token, callback, "Заказ принят ✅");
+
+        await editKeyboard(token, message, [[{
+          text: "📦 Заказ принят — выдать",
+          callback_data: `complete_order:${orderId}`
+        }]]);
+
+        if (loyaltyOrder?.telegram_user_id) {
+          await sendCustomerMessage(
+            token,
+            loyaltyOrder.telegram_user_id,
+            "🧑‍🍳 Ваш заказ принят и передан на кухню.\n\nСпасибо, что выбираете АВ ❤️"
+          );
+        }
+
+        return response();
       }
 
-      return new Response("OK", { status: 200 });
+      // =========================================
+      // TELEGRAM: ЗАКАЗ ВЫДАН КЛИЕНТУ
+      // =========================================
+      if (data.startsWith("complete_order:")) {
+        if (
+          !message ||
+          String(message.chat.id) !== STAFF_CHAT_ID
+        ) {
+          await answerCallback(
+            token,
+            callback,
+            "Нет доступа к управлению заказом"
+          );
+          return response();
+        }
 
+        const orderId = data.slice("complete_order:".length);
+
+        if (!orderId || !supabaseUrl || !supabaseKey) {
+          await answerCallback(
+            token,
+            callback,
+            "Не удалось обработать заказ"
+          );
+          return response();
+        }
+
+        const rows = await supabaseRequest(
+          supabaseUrl,
+          supabaseKey,
+          `/rest/v1/loyalty_orders?order_id=eq.${encodeURIComponent(orderId)}&select=order_id,telegram_user_id,status`
+        );
+
+        const loyaltyOrder = Array.isArray(rows) ? rows[0] : null;
+
+        // Гостевой заказ не участвует в бонусной системе.
+        if (!loyaltyOrder) {
+          await answerCallback(
+            token,
+            callback,
+            "Заказ выдан. Бонусная запись отсутствует."
+          );
+
+          await editKeyboard(token, message, [[{
+            text: "✅ Заказ выдан",
+            callback_data: "already_completed"
+          }]]);
+
+          return response();
+        }
+
+        if (loyaltyOrder.status === "cancelled") {
+          await answerCallback(token, callback, "Заказ отменён");
+          return response();
+        }
+
+        if (loyaltyOrder.status === "pending") {
+          await answerCallback(
+            token,
+            callback,
+            "Сначала примите заказ"
+          );
+          return response();
+        }
+
+        if (loyaltyOrder.status === "completed") {
+          await answerCallback(token, callback, "Заказ уже выдан");
+          return response();
+        }
+
+        const result = await supabaseRequest(
+          supabaseUrl,
+          supabaseKey,
+          "/rest/v1/rpc/complete_loyalty_order",
+          {
+            method: "POST",
+            body: JSON.stringify({ p_order_id: orderId })
+          }
+        );
+
+        // RPC может вернуть объект либо массив объектов.
+        const completion = Array.isArray(result) ? result[0] : result;
+
+        if (!completion || completion.success !== true) {
+          console.error("Order completion failed:", completion);
+
+          await answerCallback(
+            token,
+            callback,
+            "Не удалось завершить заказ. Проверьте статус."
+          );
+          return response();
+        }
+
+        await answerCallback(token, callback, "Заказ выдан ✅");
+
+        await editKeyboard(token, message, [[{
+          text: "✅ Заказ выдан",
+          callback_data: "already_completed"
+        }]]);
+
+        const earned = Math.max(
+          0,
+          Number(completion.points_earned) || 0
+        );
+
+        await sendCustomerMessage(
+          token,
+          loyaltyOrder.telegram_user_id,
+          earned > 0
+            ? `❤️ Спасибо за заказ в АВ!\n\nНачислено бонусов: ${earned} ₽.\nИх можно использовать для оплаты до 20% стоимости товаров в следующем заказе.`
+            : "❤️ Спасибо за заказ в АВ!\n\nЗаказ выдан. Будем рады видеть вас снова."
+        );
+
+        return response();
+      }
+
+      return response();
     } catch (error) {
-      console.error(error);
-      return new Response("OK", { status: 200 });
+      console.error("Telegram webhook error:", error);
+      return response();
     }
   }
 };
