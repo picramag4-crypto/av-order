@@ -193,9 +193,9 @@ const hint = document.getElementById("loyaltyHint");
       hint.textContent = "Бонусами можно оплатить до 20% стоимости товаров.";
     }
 
-  } catch (error) {
+    } catch (error) {
     console.error("Loyalty error:", error);
-      }
+  }
 }
 async function loadLoyaltyHistory() {
   const list = document.getElementById("loyaltyHistoryList");
