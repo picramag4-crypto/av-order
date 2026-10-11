@@ -190,74 +190,27 @@ console.log("Order loyalty diagnostics", {
           );
         }
 
-        const rpcResponse = await fetch(
-          `${supabaseUrl.replace(/\/$/, "")}/rest/v1/rpc/redeem_loyalty_points`,
-          {
-            method: "POST",
-            headers: {
-              apikey: supabaseKey,
-              Authorization: `Bearer ${supabaseKey}`,
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              p_order_id: orderId,
-              p_telegram_user_id: telegramUserId,
-              p_goods_total: goodsTotal,
-              p_points_to_redeem: pointsToRedeem
-            })
-          }
-        );
+       
+const rpcResponse = await fetch(
+  `${supabaseUrl.replace(/\/$/, "")}/rest/v1/rpc/redeem_loyalty_points`,
+  {
+    method: "POST",
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      p_order_id: orderId,
+      p_telegram_user_id: telegramUserId,
+      p_goods_total: goodsTotal,
+      p_points_to_redeem: pointsToRedeem,
+      p_lunch_discount_applied: lunchDiscountApplied
+    })
+  }
+);
 
-        const rpcData = await rpcResponse.json().catch(() => null);
-
-        if (!rpcResponse.ok || rpcData?.success !== true) {
-          console.error("Loyalty redemption failed:", rpcData);
-
-          return jsonResponse(
-            {
-              error: "Could not process loyalty points",
-              details: rpcData
-            },
-            400
-          );
-        }
-
-        // Записываем признак акции в созданную бонусную запись.
-        const updateResponse = await fetch(
-          `${supabaseUrl.replace(/\/$/, "")}/rest/v1/loyalty_orders?order_id=eq.${encodeURIComponent(orderId)}&telegram_user_id=eq.${encodeURIComponent(telegramUserId)}`,
-          {
-            method: "PATCH",
-            headers: {
-              apikey: supabaseKey,
-              Authorization: `Bearer ${supabaseKey}`,
-              "Content-Type": "application/json",
-              Prefer: "return=minimal"
-            },
-            body: JSON.stringify({
-              lunch_discount_applied: lunchDiscountApplied
-            })
-          }
-        );
-
-        if (!updateResponse.ok) {
-          console.error(
-            "Could not save lunch discount flag:",
-            await updateResponse.text()
-          );
-
-          // Не отправляем заказ дальше, если запись акции не удалась.
-          // Списание в этом случае нужно проверить и при необходимости вернуть.
-          return jsonResponse(
-            {
-              error: "Could not save loyalty order details",
-              orderId,
-              loyaltyMayNeedRefund: pointsToRedeem > 0
-            },
-            500
-          );
-        }
-      }
-
+    
       const telegramUrl =
         `https://api.telegram.org/bot${token}/sendMessage`;
 
