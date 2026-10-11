@@ -144,8 +144,8 @@ console.log("Order loyalty diagnostics", {
   hasSupabaseConfig: Boolean(supabaseUrl && supabaseKey)
 });
 
-      // Если пользователь подтверждён, создаём запись в бонусной системе.
-      // goodsTotal и pointsToRedeem будут передаваться из обновлённого app.js.
+      
+      // Сервер самостоятельно рассчитывает скидку и сумму товаров.
       if (telegramUserId && order.pointsToRedeem !== undefined) {
         if (!supabaseUrl || !supabaseKey) {
           return jsonResponse(
@@ -154,17 +154,38 @@ console.log("Order loyalty diagnostics", {
           );
         }
 
-        const goodsTotal = Number(order.goodsTotal);
+        const originalSubtotal = Number(order.originalSubtotal);
         const pointsToRedeem = Number(order.pointsToRedeem);
 
         if (
-          !Number.isSafeInteger(goodsTotal) ||
-          goodsTotal < 0 ||
+          !Number.isSafeInteger(originalSubtotal) ||
+          originalSubtotal < 0 ||
           !Number.isSafeInteger(pointsToRedeem) ||
           pointsToRedeem < 0
         ) {
           return jsonResponse(
             { error: "Invalid loyalty order values" },
+            400
+          );
+        }
+
+        // Бонусы и обеденная скидка взаимоисключающие.
+        const lunchDiscountApplied =
+          pointsToRedeem === 0 && isLunchDiscountTime();
+
+        const discount = lunchDiscountApplied
+          ? Math.round(originalSubtotal * 0.2)
+          : 0;
+
+        const goodsTotal = originalSubtotal - discount;
+
+        // Проверяем лимит списания на сервере.
+        if (pointsToRedeem > Math.floor(goodsTotal * 0.2)) {
+          return jsonResponse(
+            {
+              error: "Loyalty redemption limit exceeded",
+              maxPoints: Math.floor(goodsTotal * 0.2)
+            },
             400
           );
         }
@@ -198,6 +219,41 @@ console.log("Order loyalty diagnostics", {
               details: rpcData
             },
             400
+          );
+        }
+
+        // Записываем признак акции в созданную бонусную запись.
+        const updateResponse = await fetch(
+          `${supabaseUrl.replace(/\/$/, "")}/rest/v1/loyalty_orders?order_id=eq.${encodeURIComponent(orderId)}&telegram_user_id=eq.${encodeURIComponent(telegramUserId)}`,
+          {
+            method: "PATCH",
+            headers: {
+              apikey: supabaseKey,
+              Authorization: `Bearer ${supabaseKey}`,
+              "Content-Type": "application/json",
+              Prefer: "return=minimal"
+            },
+            body: JSON.stringify({
+              lunch_discount_applied: lunchDiscountApplied
+            })
+          }
+        );
+
+        if (!updateResponse.ok) {
+          console.error(
+            "Could not save lunch discount flag:",
+            await updateResponse.text()
+          );
+
+          // Не отправляем заказ дальше, если запись акции не удалась.
+          // Списание в этом случае нужно проверить и при необходимости вернуть.
+          return jsonResponse(
+            {
+              error: "Could not save loyalty order details",
+              orderId,
+              loyaltyMayNeedRefund: pointsToRedeem > 0
+            },
+            500
           );
         }
       }
