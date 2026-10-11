@@ -1337,3 +1337,58 @@ main{
 .quick-categories button b {
   font-weight: 600;
 }
+
+#loyaltyHistoryBtn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #d8cfc3;
+  border-radius: 12px;
+  background: #f5f1eb;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#loyaltyHistoryPanel {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8f6f2;
+  color: #222;
+}
+
+#loyaltyHistoryPanel h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.loyalty-history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5dfd6;
+}
+
+.loyalty-history-item:last-child {
+  border-bottom: none;
+}
+
+.loyalty-history-positive {
+  color: #24834a;
+  white-space: nowrap;
+}
+
+.loyalty-history-negative {
+  color: #c0392b;
+  white-space: nowrap;
+}
+
+.loyalty-history-item .small {
+  margin-top: 4px;
+  color: #777;
+  font-size: 12px;
+}
