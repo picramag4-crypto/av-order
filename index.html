@@ -113,43 +113,86 @@
 
 
  
-<div id="loyaltyCard" class="hidden">
-  <div>
-    ⭐ Ваши бонусы:
-    <strong id="loyaltyBalance">0 ₽</strong>
+<div id="loyaltyCard" class="loyalty-card hidden">
+  <div class="loyalty-premium-card">
+    <div class="loyalty-card-top">
+      <div>
+        <div class="loyalty-eyebrow">КОФЕЙНЯ-БУРГЕРНАЯ</div>
+        <div class="loyalty-brand">АВ</div>
+        <div class="loyalty-card-caption">Карта гостя</div>
+      </div>
+      <div class="loyalty-star" aria-hidden="true">✳</div>
+    </div>
+
+    <div class="loyalty-balance-label">ВАШИ БОНУСЫ</div>
+    <div class="loyalty-balance-value" id="loyaltyBalance">0 ₽</div>
+
+    <div class="loyalty-card-divider"></div>
+
+    <div class="loyalty-card-bottom">
+      <span class="loyalty-status-dot"></span>
+      <span>Бонусы за ваши любимые заказы</span>
+    </div>
   </div>
 
-  <div id="loyaltyHint">
-    Бонусами можно оплатить до 20% стоимости товаров.
+  <div class="loyalty-redeem-card">
+    <div class="loyalty-section-title">
+      <div>
+        <div class="loyalty-eyebrow">ВАША ВЫГОДА</div>
+        <h3>Оплатите бонусами</h3>
+      </div>
+      <span class="loyalty-gift-icon">✦</span>
+    </div>
+
+    <div id="loyaltyHint" class="loyalty-hint">
+      Бонусами можно оплатить до 20% стоимости товаров.
+    </div>
+
+    <label class="loyalty-input-label" for="loyaltyRedeemInput">
+      Сколько списать?
+    </label>
+
+    <div class="loyalty-input-wrap">
+      <input
+        id="loyaltyRedeemInput"
+        type="number"
+        min="0"
+        step="1"
+        value="0"
+        placeholder="0"
+        inputmode="numeric"
+      />
+      <span>₽</span>
+    </div>
+
+    <div id="loyaltyMaxRedeem" class="loyalty-max-info"></div>
+
+    <button id="redeemMaxBtn" class="loyalty-max-btn" type="button">
+      ✦ Списать максимум
+    </button>
   </div>
 
-  <label for="loyaltyRedeemInput">
-    Сколько бонусов списать?
-  </label>
-
-  <input
-    id="loyaltyRedeemInput"
-    type="number"
-    min="0"
-    step="1"
-    value="0"
-    placeholder="Введите сумму в рублях"
-  />
-
-  <button id="redeemMaxBtn" type="button">
-    Списать максимум
+  <button
+    id="loyaltyHistoryBtn"
+    class="loyalty-history-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="loyaltyHistoryPanel"
+  >
+    <span class="loyalty-history-icon">↗</span>
+    <span class="loyalty-history-button-text">
+      <strong>История бонусов</strong>
+      <small>Начисления, списания и возвраты</small>
+    </span>
+    <span class="loyalty-history-arrow">⌄</span>
   </button>
 
-  <div id="loyaltyMaxRedeem"></div>
-  <button id="loyaltyHistoryBtn" type="button">
-  📋 История бонусов
-</button>
+  <div id="loyaltyHistoryPanel" class="loyalty-history-panel hidden">
+    <h3>История операций</h3>
+    <div id="loyaltyHistoryList"></div>
+  </div>
+</div>
 
-<div id="loyaltyHistoryPanel" class="hidden">
-  <h3>История бонусов</h3>
-  <div id="loyaltyHistoryList"></div>
-</div>
-</div>
 
 
 
