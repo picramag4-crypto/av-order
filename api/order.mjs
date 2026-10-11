@@ -214,10 +214,12 @@ const rpcResponse = await fetch(
       const telegramUrl =
         `https://api.telegram.org/bot${token}/sendMessage`;
 
-      const staffText =
-        "🍔 НОВЫЙ ЗАКАЗ\n" +
-        `🧾 № ${orderId}\n\n` +
-        order.text;
+      
+const staffText =
+  "🍔 НОВЫЙ ЗАКАЗ\n" +
+  `🧾 № ${orderId}\n\n` +
+  order.text;
+
 
       // Сначала отправляем заказ сотрудникам.
       const staffResponse = await fetch(telegramUrl, {
