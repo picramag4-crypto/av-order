@@ -125,30 +125,30 @@ function updatePromoTimer() {
 
 let loyaltyPoints = 0;
 
+
 function getGoodsSubtotal() {
   const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.qty,
     0
   );
 
+  const redeemInput = document.getElementById("loyaltyRedeemInput");
+  const requested = Math.max(
+    0,
+    Math.floor(Number(redeemInput?.value) || 0)
+  );
+
+  // Если клиент хочет списать баллы,
+  // обеденная скидка не применяется.
+  if (requested > 0) {
+    return subtotal;
+  }
+
   return lunchDiscountActive()
     ? subtotal - Math.round(subtotal * 0.2)
     : subtotal;
 }
 
-function getMaxRedeem() {
-  return Math.min(
-    loyaltyPoints,
-    Math.floor(getGoodsSubtotal() * 0.2)
-  );
-}
-
-function getRedeemAmount() {
-  const input = document.getElementById("loyaltyRedeemInput");
-  const requested = Math.max(0, Math.floor(Number(input?.value) || 0));
-
-  return Math.min(requested, getMaxRedeem());
-}
 
 
 async function loadLoyalty() {
@@ -482,10 +482,23 @@ if (cartMeta) {
   });
   const sub = cart.reduce((s,x) => s + x.price * x.qty, 0);
 
-const lunchSub = discountedAmount(sub);
+
 
 const loyaltyDiscount = getRedeemAmount();
-const goodsTotal = Math.max(0, lunchSub - loyaltyDiscount);
+
+const discountActive =
+  lunchDiscountActive() && loyaltyDiscount === 0;
+
+const lunchSub = discountActive
+  ? sub - Math.round(sub * 0.2)
+  : sub;
+
+const goodsTotal = Math.max(
+  0,
+  lunchSub - loyaltyDiscount
+);
+
+
 
 const isDelivery =
   document.querySelector('input[name="fulfillment"]:checked')?.value === "delivery";
@@ -533,10 +546,12 @@ if (loyaltyDiscount > 0) {
   loyaltyRow.classList.add("hidden");
 }
 
+
 document.getElementById("subtotal").textContent =
-  lunchDiscountActive()
+  discountActive
     ? rub(lunchSub) + "  (скидка −20%)"
     : rub(sub);
+
 
 document.getElementById("deliveryFee").textContent =
   isDelivery && goodsTotal >= 2000
@@ -742,17 +757,30 @@ async function checkout(){
   if(!name || !phone) return alert("Укажите имя и телефон.");
   if(fulfillment==="delivery" && !address) return alert("Укажите адрес доставки.");
 
-  const originalSubtotal = cart.reduce((s,x) => s + x.price * x.qty, 0);
+ 
+const originalSubtotal = cart.reduce(
+  (sum, item) => sum + item.price * item.qty,
+  0
+);
 
-const discountActive = lunchDiscountActive();
+
+const loyaltyDiscount = getRedeemAmount();
+
+const discountActive =
+  lunchDiscountActive() && loyaltyDiscount === 0;
 
 const discount = discountActive
   ? Math.round(originalSubtotal * 0.2)
   : 0;
 
 const subtotalAfterLunch = originalSubtotal - discount;
-const loyaltyDiscount = getRedeemAmount();
-const goodsTotal = Math.max(0, subtotalAfterLunch - loyaltyDiscount);
+
+const goodsTotal = Math.max(
+  0,
+  subtotalAfterLunch - loyaltyDiscount
+);
+
+
 const fee =
   fulfillment === "delivery"
     ? (goodsTotal >= 2000 ? 0 : 200)
@@ -821,8 +849,12 @@ body: JSON.stringify({
   text: text,
   initData: tg?.initData || "",
   telegramUserId: tg?.initDataUnsafe?.user?.id || null,
-  goodsTotal: subtotalAfterLunch,
-  pointsToRedeem: loyaltyDiscount
+  
+goodsTotal: discountActive
+  ? subtotalAfterLunch
+  : originalSubtotal,
+pointsToRedeem: loyaltyDiscount
+
 })
 
     });
