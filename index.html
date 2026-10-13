@@ -135,42 +135,6 @@
     </div>
   </div>
 
-  <div class="loyalty-redeem-card">
-    <div class="loyalty-section-title">
-      <div>
-        <div class="loyalty-eyebrow">ВАША ВЫГОДА</div>
-        <h3>Оплатите бонусами</h3>
-      </div>
-      <span class="loyalty-gift-icon">✦</span>
-    </div>
-
-    <div id="loyaltyHint" class="loyalty-hint">
-      Бонусами можно оплатить до 20% стоимости товаров.
-    </div>
-
-    <label class="loyalty-input-label" for="loyaltyRedeemInput">
-      Сколько списать?
-    </label>
-
-    <div class="loyalty-input-wrap">
-      <input
-        id="loyaltyRedeemInput"
-        type="number"
-        min="0"
-        step="1"
-        value="0"
-        placeholder="0"
-        inputmode="numeric"
-      />
-      <span>₽</span>
-    </div>
-
-    <div id="loyaltyMaxRedeem" class="loyalty-max-info"></div>
-
-    <button id="redeemMaxBtn" class="loyalty-max-btn" type="button">
-      ✦ Списать максимум
-    </button>
-  </div>
 
   <button
     id="loyaltyHistoryBtn"
@@ -270,6 +234,42 @@
 
     <div id="cartItems" class="cart-items"></div>
 
+<div id="loyaltyRedeemCard" class="loyalty-redeem-card">
+  <div class="loyalty-section-title">
+    <div>
+      <div class="loyalty-eyebrow">ВАША ВЫГОДА</div>
+      <h3>Оплатить бонусами</h3>
+    </div>
+    <span class="loyalty-gift-icon">✦</span>
+  </div>
+
+  <div id="loyaltyHint" class="loyalty-hint">
+    Бонусами можно оплатить до 20% стоимости товаров.
+  </div>
+
+  <label class="loyalty-input-label" for="loyaltyRedeemInput">
+    Сколько списать?
+  </label>
+
+  <div class="loyalty-input-wrap">
+    <input
+      id="loyaltyRedeemInput"
+      type="number"
+      min="0"
+      step="1"
+      value="0"
+      placeholder="0"
+      inputmode="numeric"
+    />
+    <span>₽</span>
+  </div>
+
+  <div id="loyaltyMaxRedeem" class="loyalty-max-info"></div>
+
+  <button id="redeemMaxBtn" class="loyalty-max-btn" type="button">
+    ✦ Списать максимум
+  </button>
+</div>
     <div id="deliveryProgress" class="delivery-progress hidden">
       <div class="delivery-progress-title">
         <span>🚚</span>
