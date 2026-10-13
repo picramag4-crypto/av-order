@@ -513,6 +513,12 @@ if (cartMeta) {
 
 
 const loyaltyDiscount = getRedeemAmount();
+  const maxRedeemInfo = document.getElementById("loyaltyMaxRedeem");
+
+if (maxRedeemInfo) {
+  maxRedeemInfo.textContent =
+    "Сейчас можно списать до " + getMaxRedeem() + " ₽";
+}
 
 const discountActive =
   lunchDiscountActive() && loyaltyDiscount === 0;
