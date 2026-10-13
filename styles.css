@@ -1878,3 +1878,44 @@ body.loyalty-rules-open { overflow: hidden; }
   padding: 9px 12px;
   font-size: 12px;
 }
+
+/* Исправление видимости блока списания бонусов в корзине */
+#loyaltyRedeemCard {
+  background: #fffaf4 !important;
+  color: #39271f !important;
+  border: 1px solid #eadfd4 !important;
+  box-shadow: 0 4px 16px rgba(57, 39, 31, 0.06) !important;
+}
+
+#loyaltyRedeemCard .loyalty-section-title,
+#loyaltyRedeemCard .loyalty-section-title h3,
+#loyaltyRedeemCard .loyalty-hint,
+#loyaltyRedeemCard .loyalty-input-label,
+#loyaltyRedeemCard .loyalty-max-info {
+  color: #705d50 !important;
+}
+
+#loyaltyRedeemCard .loyalty-section-title h3 {
+  color: #39271f !important;
+}
+
+#loyaltyRedeemCard .loyalty-input-wrap {
+  background: #ffffff !important;
+  border: 1px solid #d8c8b8 !important;
+}
+
+#loyaltyRedeemCard .loyalty-input-wrap input {
+  color: #39271f !important;
+  background: transparent !important;
+  -webkit-text-fill-color: #39271f !important;
+}
+
+#loyaltyRedeemCard .loyalty-input-wrap span {
+  color: #b95f3d !important;
+}
+
+#loyaltyRedeemCard .loyalty-max-btn {
+  background: #f2e5d7 !important;
+  color: #70442f !important;
+  border: 1px solid #d8bda4 !important;
+}
