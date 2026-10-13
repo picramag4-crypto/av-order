@@ -301,6 +301,7 @@ async function boot(){
   renderCategories();
   renderMenu();
   bind();
+  bindLoyaltyRules();
   const promo = document.getElementById("lunchPromo");
 
 if (promo) {
@@ -908,3 +909,30 @@ document.getElementById("cartDrawer").classList.add("hidden");
   }
 }
 boot();
+
+function bindLoyaltyRules() {
+  const modal = document.getElementById("loyaltyRulesModal");
+  const openBtn = document.getElementById("loyaltyRulesBtn");
+  const closeBtn = document.getElementById("loyaltyRulesClose");
+  const backBtn = document.getElementById("loyaltyRulesBack");
+  if (!modal || !openBtn) return;
+
+  const close = () => {
+    modal.classList.add("hidden");
+    document.body.classList.remove("loyalty-rules-open");
+    openBtn.focus();
+  };
+  openBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    document.body.classList.add("loyalty-rules-open");
+    if (closeBtn) closeBtn.focus();
+  });
+  if (closeBtn) closeBtn.addEventListener("click", close);
+  if (backBtn) backBtn.addEventListener("click", close);
+  modal.addEventListener("click", event => {
+    if (event.target === modal) close();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !modal.classList.contains("hidden")) close();
+  });
+}
