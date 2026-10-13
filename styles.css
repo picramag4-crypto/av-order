@@ -1832,3 +1832,49 @@ body.loyalty-rules-open { overflow: hidden; }
 @media (max-width: 380px) { .loyalty-rules-header h2 { font-size: 16px; } .loyalty-rules-body { font-size: 12px; } }
 }
 }
+
+/* Компактный блок списания бонусов в корзине */
+#loyaltyRedeemCard {
+  margin: 10px 0 14px;
+  padding: 13px;
+  border-radius: 16px;
+}
+
+#loyaltyRedeemCard .loyalty-section-title h3 {
+  margin-top: 3px;
+  font-size: 16px;
+}
+
+#loyaltyRedeemCard .loyalty-gift-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+}
+
+#loyaltyRedeemCard .loyalty-hint {
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+#loyaltyRedeemCard .loyalty-input-label {
+  margin: 12px 0 6px;
+  font-size: 12px;
+}
+
+#loyaltyRedeemCard .loyalty-input-wrap input {
+  height: 40px;
+  font-size: 17px;
+}
+
+#loyaltyRedeemCard .loyalty-max-info {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+#loyaltyRedeemCard .loyalty-max-btn {
+  min-height: 38px;
+  margin-top: 9px;
+  padding: 9px 12px;
+  font-size: 12px;
+}
