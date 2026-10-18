@@ -36,7 +36,7 @@ export default {
         body: JSON.stringify({
           url: webhookUrl,
           secret_token: secret,
-          allowed_updates: ["callback_query"]
+          allowed_updates: ["message", "callback_query"]
         })
       }
     );
