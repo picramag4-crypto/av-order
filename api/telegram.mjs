@@ -91,13 +91,50 @@ if (
 }
     try {
       const update = await request.json();
-      const callback = update.callback_query;
+const callback = update.callback_query;
+const incomingMessage = update.message;
 
-      if (!callback) {
-        return response();
-      }
+const token = process.env.TELEGRAM_BOT_TOKEN;
 
-      const token = process.env.TELEGRAM_BOT_TOKEN;
+if (!token) {
+  return response();
+}
+
+// =========================================
+// ПРИВЕТСТВИЕ НОВОГО ГОСТЯ
+// =========================================
+if (
+  incomingMessage?.text &&
+  /^\/start(?:@\w+)?(?:\s|$)/i.test(incomingMessage.text)
+) {
+  const chatId = incomingMessage.chat.id;
+
+  await telegramRequest(token, "sendMessage", {
+    chat_id: chatId,
+    text:
+      "Привет! Добро пожаловать в АВ ☕🍔\n\n" +
+      "У нас — сочные бургеры, ароматный кофе, хрустящая картошечка и десерты, ради которых хочется сделать небольшую паузу в делах. ❤️\n\n" +
+      "⭐ Карта лояльности уже ждёт тебя в магазине: получай 3% бонусами за подходящие заказы и оплачивай бонусами до 20% стоимости товаров.\n\n" +
+      "Выбирай любимое — а мы приготовим с душой!",
+    reply_markup: {
+      inline_keyboard: [[
+        {
+          text: "🍔 Открыть меню АВ",
+          web_app: {
+            url: "https://av-order.vercel.app/"
+          }
+        }
+      ]]
+    }
+  });
+
+  return response();
+}
+
+if (!callback) {
+  return response();
+}
+
       const supabaseUrl = process.env.SUPABASE_URL;
       const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
