@@ -3510,4 +3510,83 @@ body {
   color: #35171e !important;
   box-shadow: 0 5px 18px rgba(0,0,0,.12) !
 }
-  }
+/* AV — WINTER DECORATION LAYER */
+
+.winter-hero {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+}
+
+/* Декоративный слой */
+.winter-hero .winter-decoration {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 58% !important;
+  height: 100% !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  opacity: .85 !important;
+  background:
+    radial-gradient(
+      ellipse at 85% 20%,
+      rgba(215,179,120,.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(78,105,79,.35),
+      transparent 65%
+    ) !important;
+}
+
+/* Ветка хвои */
+.winter-hero .winter-decoration::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 240px !important;
+  height: 240px !important;
+  right: -75px !important;
+  bottom: -70px !important;
+  transform: rotate(-35deg) !important;
+  opacity: .65 !important;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(126,150,113,.55) 9px,
+      rgba(126,150,113,.55) 11px,
+      transparent 12px,
+      transparent 17px
+    ) !important;
+  border-radius: 50% !important;
+  mask-image: radial-gradient(
+    circle,
+    black 20%,
+    transparent 72%
+  ) !important;
+}
+
+/* Мягкие огоньки */
+.winter-hero .winter-decoration::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(circle at 78% 26%, rgba(255,222,168,.65) 1px, transparent 4px),
+    radial-gradient(circle at 89% 39%, rgba(255,222,168,.45) 1px, transparent 5px),
+    radial-gradient(circle at 72% 48%, rgba(255,222,168,.35) 1px, transparent 4px),
+    radial-gradient(circle at 94% 61%, rgba(255,222,168,.5) 1px, transparent 5px),
+    radial-gradient(circle at 83% 73%, rgba(255,222,168,.35) 1px, transparent 4px) !important;
+}
+
+/* Текст поверх декора */
+.winter-hero > h2,
+.winter-hero > p,
+.winter-hero > .season-badge,
+.winter-hero > .season-button {
+  position: relative !important;
+  z-index: 2 !important;
+}
