@@ -3014,86 +3014,42 @@ body {
     transition-duration: .01ms !important;
   }
 
-/* ===== AV WINTER ATMOSPHERE ===== */
+/* ===== AV WINTER SNOW V2 ===== */
 
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 200px);
   pointer-events: none;
-  z-index: 9998;
+  z-index: 99999;
 
   background-image:
-    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.85) 99%, transparent),
-    radial-gradient(3px 3px at 100px 150px, rgba(255,255,255,.7) 99%, transparent),
-    radial-gradient(2px 2px at 200px 80px, rgba(255,255,255,.8) 99%, transparent),
-    radial-gradient(3px 3px at 300px 220px, rgba(255,255,255,.65) 99%, transparent),
-    radial-gradient(2px 2px at 150px 300px, rgba(255,255,255,.8) 99%, transparent),
-    radial-gradient(2px 2px at 350px 100px, rgba(255,255,255,.7) 99%, transparent);
+    radial-gradient(circle, #fff 1.5px, transparent 2px),
+    radial-gradient(circle, #fff 2px, transparent 3px),
+    radial-gradient(circle, rgba(255,255,255,.9) 1px, transparent 2px);
 
-  background-size:
-    400px 400px,
-    500px 500px,
-    350px 350px,
-    600px 600px,
-    450px 450px,
-    550px 550px;
+  background-size: 120px 120px, 200px 200px, 80px 80px;
+  background-position: 0 0, 50px 80px, 30px 40px;
 
-  animation: avWinterSnow 25s linear infinite;
-  opacity: .45;
+  animation: avSnowFall 12s linear infinite;
+  opacity: .85;
 }
 
-@keyframes avWinterSnow {
+@keyframes avSnowFall {
   from {
-    background-position:
-      0 0,
-      0 0,
-      0 0,
-      0 0,
-      0 0,
-      0 0;
+    background-position: 0 0, 50px 80px, 30px 40px;
   }
-
   to {
-    background-position:
-      0 400px,
-      0 500px,
-      0 350px,
-      0 600px,
-      0 450px,
-      0 550px;
+    background-position: 0 600px, 50px 680px, 30px 440px;
   }
 }
-
-/* Мягкое зимнее свечение */
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9997;
-
-  background:
-    radial-gradient(
-      ellipse at 0% 0%,
-      rgba(190, 210, 190, .10),
-      transparent 45%
-    ),
-    radial-gradient(
-      ellipse at 100% 100%,
-      rgba(160, 45, 65, .07),
-      transparent 50%
-    );
-
-  opacity: .8;
-}
-
-/* Отключение анимации при системном ограничении движения */
 
 @media (prefers-reduced-motion: reduce) {
   body::before {
-    animation: none;
+    animation: avSnowFall 12s linear infinite !important;
   }
 }
 
