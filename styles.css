@@ -2450,3 +2450,392 @@ body {
 #menu .add:active {
   transform: scale(.95);
 }
+/* =========================================
+   AV WINTER — CART REDESIGN
+   ========================================= */
+
+/* Затемнение фона */
+#cartDrawer.drawer {
+  background: rgba(24, 17, 18, .58) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Основное окно корзины */
+#cartDrawer .drawer-card {
+  background: #f4f6f2 !important;
+  color: #321e1d !important;
+  border: 1px solid rgba(255,255,255,.5) !important;
+  border-radius: 28px !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  max-height: 92dvh !important;
+  overflow-y: auto !important;
+  padding: 22px 18px 28px !important;
+  box-shadow: 0 25px 70px rgba(0,0,0,.22) !important;
+  overscroll-behavior: contain;
+}
+
+/* Заголовок */
+#cartDrawer .cart-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-bottom: 18px !important;
+  border-bottom: 1px solid #dce2dc !important;
+  margin-bottom: 18px !important;
+}
+
+/* Заголовок корзины */
+#cartDrawer .cart-head h2 {
+  color: #3a171c !important;
+  font-size: 23px !important;
+  font-weight: 800 !important;
+  letter-spacing: -.5px !important;
+  margin: 0 !important;
+}
+
+/* Подзаголовок */
+#cartDrawer .cart-meta {
+  color: #81756d !important;
+  font-size: 13px !important;
+  margin-top: 5px !important;
+}
+
+/* Кнопка закрытия */
+#cartDrawer .drawer-close {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 14px !important;
+  border: 1px solid #e0d8d0 !important;
+  background: #fffaf4 !important;
+  color: #3a171c !important;
+  font-size: 19px !important;
+}
+
+/* Список товаров */
+#cartDrawer .cart-items {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+/* Строка товара */
+#cartDrawer .cart-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 15px !important;
+  background: #fffaf5 !important;
+  border: 1px solid rgba(58,23,28,.07) !important;
+  border-radius: 19px !important;
+}
+
+/* Информация о товаре */
+#cartDrawer .cart-row > div:first-child {
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+/* Название */
+#cartDrawer .cart-row strong {
+  display: block !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  color: #321e1d !important;
+}
+
+/* Дополнительная информация */
+#cartDrawer .cart-row .small {
+  color: #84776f !important;
+  font-size: 12px !important;
+  margin: 4px 0 !important;
+}
+
+/* Стоимость товара */
+#cartDrawer .cart-row > div:first-child > div:last-child {
+  font-weight: 800 !important;
+  color: #57252c !important;
+  margin-top: 6px !important;
+}
+
+/* Управление количеством */
+#cartDrawer .qty {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Кнопки количества */
+#cartDrawer .qty button {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 11px !important;
+  border: 1px solid #e3d7ce !important;
+  background: #f2e8de !important;
+  color: #3a171c !important;
+  font-size: 17px !important;
+}
+
+/* Число */
+#cartDrawer .qty span {
+  min-width: 20px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* Удаление */
+#cartDrawer .qty .cart-delete {
+  background: #f7e8e5 !important;
+  color: #9b4c48 !important;
+  border-color: #edd8d3 !important;
+  font-size: 14px !important;
+}
+
+/* Бонусная секция */
+#cartDrawer .loyalty-redeem-card {
+  margin-top: 18px !important;
+  padding: 18px !important;
+  background: linear-gradient(145deg,#ecefe8,#e4e9e2) !important;
+  border: 1px solid #dce3da !important;
+  border-radius: 22px !important;
+}
+
+/* Заголовки бонусов */
+#cartDrawer .loyalty-section-title h3 {
+  color: #3a171c !important;
+  font-size: 18px !important;
+  margin: 5px 0 0 !important;
+}
+
+/* Подсказка */
+#cartDrawer .loyalty-hint {
+  color: #746c65 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin: 12px 0 !important;
+}
+
+/* Поле бонусов */
+#cartDrawer .loyalty-input-wrap {
+  display: flex !important;
+  align-items: center !important;
+  background: #fffaf4 !important;
+  border: 1px solid #d9d8cf !important;
+  border-radius: 14px !important;
+  padding: 0 14px !important;
+}
+
+/* Ввод */
+#cartDrawer .loyalty-input-wrap input {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-width: 0 !important;
+  padding: 14px 0 !important;
+  color: #3a171c !important;
+}
+
+/* Максимум бонусов */
+#cartDrawer .loyalty-max-btn {
+  border-radius: 13px !important;
+  background: #3a171c !important;
+  color: #fffaf3 !important;
+  margin-top: 12px !important;
+}
+
+/* Прогресс доставки */
+#cartDrawer .delivery-progress {
+  margin-top: 16px !important;
+  padding: 17px !important;
+  border-radius: 20px !important;
+  background: #e8eee8 !important;
+  border: 1px solid #dbe3db !important;
+}
+
+/* Прогресс-бар */
+#cartDrawer .delivery-progress-bar {
+  overflow: hidden !important;
+  border-radius: 999px !important;
+  background: #d3ddd4 !important;
+  height: 8px !important;
+  margin-top: 12px !important;
+}
+
+/* Заполнение */
+#cartDrawer #deliveryProgressFill {
+  border-radius: 999px !important;
+  background: #57252c !important;
+}
+
+/* Итоговая сумма */
+#cartDrawer .cart-summary {
+  background: #fffaf5 !important;
+  border: 1px solid rgba(58,23,28,.07) !important;
+  border-radius: 22px !important;
+  padding: 18px !important;
+  margin-top: 18px !important;
+}
+
+/* Строки суммы */
+#cartDrawer .cart-summary > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+  color: #786b63 !important;
+}
+
+/* Итого */
+#cartDrawer .cart-summary .total {
+  border-top: 1px solid #e5dcd2 !important;
+  padding-top: 14px !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+}
+
+/* Значение итого */
+#cartDrawer .cart-summary .total strong {
+  color: #3a171c !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+}
+
+/* Блок оформления */
+#cartDrawer .checkout {
+  margin-top: 24px !important;
+}
+
+/* Заголовки оформления */
+#cartDrawer .checkout h3 {
+  color: #3a171c !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  margin: 22px 0 12px !important;
+}
+
+/* Варианты получения и оплаты */
+#cartDrawer .choice-group {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+}
+
+/* Карточки выбора */
+#cartDrawer .choice-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 14px 12px !important;
+  border-radius: 17px !important;
+  background: #fffaf5 !important;
+  border: 1px solid #e3d9d0 !important;
+}
+
+/* Выбранный вариант */
+#cartDrawer .choice-card:has(input:checked) {
+  border: 1.5px solid #57252c !important;
+  background: #f1e6df !important;
+}
+
+/* Иконки */
+#cartDrawer .choice-icon {
+  font-size: 22px !important;
+}
+
+/* Текст выбора */
+#cartDrawer .choice-text strong {
+  color: #3a171c !important;
+  font-size: 13px !important;
+}
+
+/* Подписи */
+#cartDrawer .choice-text small {
+  color: #84776f !important;
+  font-size: 11px !important;
+}
+
+/* Поля */
+#cartDrawer .contact-fields {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 11px !important;
+}
+
+/* Поля контактов и адрес */
+#cartDrawer input:not([type="radio"]),
+#cartDrawer textarea {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: #fffaf5 !important;
+  color: #321e1d !important;
+  border: 1px solid #e2d8cf !important;
+  border-radius: 15px !important;
+  padding: 15px !important;
+  font-size: 15px !important;
+  outline: none !important;
+}
+
+/* Фокус */
+#cartDrawer input:focus,
+#cartDrawer textarea:focus {
+  border-color: #8b5a5c !important;
+  box-shadow: 0 0 0 3px rgba(87,37,44,.08) !important;
+}
+
+/* Комментарий */
+#cartDrawer textarea {
+  min-height: 90px !important;
+  resize: vertical !important;
+}
+
+/* Основная кнопка */
+#cartDrawer .checkout-main-btn {
+  width: 100% !important;
+  min-height: 56px !important;
+  margin-top: 22px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(135deg,#57252c,#3a171c) !important;
+  color: #fffaf3 !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 8px 20px rgba(58,23,28,.16) !important;
+}
+
+/* Подпись под оформлением */
+#cartDrawer .checkout-note {
+  color: #84776f !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  margin-top: 12px !important;
+}
+
+/* Адаптация под маленькие экраны */
+@media (max-width: 380px) {
+  #cartDrawer .drawer-card {
+    padding: 18px 13px 24px !important;
+  }
+
+  #cartDrawer .choice-card {
+    padding: 11px 9px !important;
+  }
+
+  #cartDrawer .qty {
+    gap: 4px !important;
+  }
+
+  #cartDrawer .qty button {
+    width: 29px !important;
+    height: 29px !important;
+    min-width: 29px !important;
+  }
+}
