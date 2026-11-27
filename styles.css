@@ -2170,3 +2170,34 @@ body {
 .categories {
   background: transparent;
 }
+/* AV WINTER — BACKGROUND REFINEMENT */
+
+body {
+  background:
+    radial-gradient(
+      circle at 92% 4%,
+      rgba(87, 37, 44, 0.045),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #e4e9e5 0%,
+      #dce3df 50%,
+      #e6e8e3 100%
+    ) !important;
+}
+
+/* Верхняя шапка */
+.hero {
+  background: rgba(235, 240, 236, 0.96) !important;
+}
+
+/* Область категорий */
+#categories {
+  background: transparent !important;
+}
+
+/* Не затрагиваем действующую осеннюю акцию */
+#lunchPromo {
+  background: linear-gradient(135deg, #3a171c, #71353b);
+}
