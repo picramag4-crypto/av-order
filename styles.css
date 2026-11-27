@@ -3040,4 +3040,40 @@ body {
 
   z-index: 0;
 }
+  /* ===== AV WINTER BOTANICAL DECOR ===== */
+
+.winter-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.winter-decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.winter-decoration::before {
+  content: "❦";
+  position: absolute;
+  top: -18px;
+  right: -8px;
+  font-size: 130px;
+  color: rgba(61, 91, 68, 0.16);
+  transform: rotate(25deg);
+  line-height: 1;
+}
+
+.winter-decoration::after {
+  content: "✦   ❄   ✦";
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  font-size: 16px;
+  letter-spacing: 7px;
+  color: rgba(190, 155, 105, 0.65);
+}
+
+/* ===== END AV WINTER BOTANICAL DECOR ===== */
 
