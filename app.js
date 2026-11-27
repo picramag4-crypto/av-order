@@ -336,16 +336,16 @@ function renderCategories(){
 }
 
 function renderMenu(){
-  const box=document.getElementById("menu");
-  box.innerHTML="";
+  const box = document.getElementById("menu");
+  box.innerHTML = "";
 
   const items = selectedCategory === "🍂 Осеннее меню"
     ? menu.filter(x => autumnItems.includes(x.name))
     : menu.filter(x => x.category === selectedCategory);
 
-  items.forEach((item,idx)=>{
-    const card=document.createElement("article");
-    card.className="card";
+  items.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "card";
 
     const originalPrice = item.options
       ? Math.min(...item.options.map(o => o.price))
@@ -371,15 +371,33 @@ function renderMenu(){
         rub(originalPrice);
     }
 
-    card.innerHTML =
-      `<h3>${item.name}</h3>
-       <p>${item.description || ""}</p>
-       <div class="card-footer">
-         <span class="price">${priceHtml}</span>
-         <button class="add">+</button>
-       </div>`;
+    const content = document.createElement("div");
+    content.className = "product-content";
 
-    card.querySelector(".add").onclick=()=>openItem(item);
+    const title = document.createElement("h3");
+    title.textContent = item.name;
+
+    const description = document.createElement("p");
+    description.textContent = item.description || "";
+
+    const footer = document.createElement("div");
+    footer.className = "card-footer";
+
+    const price = document.createElement("span");
+    price.className = "price";
+    price.innerHTML = priceHtml;
+
+    const addButton = document.createElement("button");
+    addButton.className = "add";
+    addButton.textContent = "+";
+    addButton.setAttribute("aria-label", "Добавить " + item.name);
+
+    addButton.onclick = () => openItem(item);
+
+    content.append(title, description);
+    footer.append(price, addButton);
+    card.append(content, footer);
+
     box.appendChild(card);
   });
 }
