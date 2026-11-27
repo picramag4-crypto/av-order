@@ -1023,36 +1023,4 @@ function bindLoyaltyRules() {
     snowContainer.appendChild(flake);
   }
 })();
-/* ===== WINTER DECOR TEST ===== */
-
-(function () {
-  const decor = document.querySelector(".winter-decoration");
-
-  if (!decor) {
-    alert("Баннер зимнего декора не найден!");
-    return;
-  }
-
-  decor.innerHTML = "ТЕСТ ДЕКОРА";
-
-  decor.style.cssText = `
-    position:absolute;
-    inset:0;
-    z-index:9999;
-    background:rgba(255,0,0,0.25);
-    color:red;
-    font-size:30px;
-    font-weight:bold;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    pointer-events:none;
-  `;
-})();
-
-/* ===== END TEST ===== */
-  document.body.insertAdjacentHTML(
-  "beforeend",
-  '<div style="position:fixed;top:20px;left:10px;right:10px;z-index:999999;background:red;color:white;padding:20px;text-align:center;font-size:20px;">APP.JS ЗАГРУЖЕН</div>'
-);
-  
+}
