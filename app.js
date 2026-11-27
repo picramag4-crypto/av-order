@@ -959,4 +959,68 @@ function bindLoyaltyRules() {
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && !modal.classList.contains("hidden")) close();
   });
-}
+  
+/* ===== AV REAL WINTER SNOW ===== */
+
+(() => {
+  const snowContainer = document.getElementById("winterSnow");
+
+  if (!snowContainer || snowContainer.dataset.initialized) return;
+
+  snowContainer.dataset.initialized = "true";
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #winterSnow {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden !important;
+      pointer-events: none !important;
+      z-index: 2147483647 !important;
+    }
+
+    .av-snowflake {
+      position: absolute;
+      top: -20px;
+      color: white;
+      pointer-events: none;
+      user-select: none;
+      text-shadow: 0 0 4px rgba(255,255,255,.5);
+      animation: avSnowMove linear infinite;
+    }
+
+    @keyframes avSnowMove {
+      0% {
+        transform: translate3d(0, -10vh, 0) rotate(0deg);
+      }
+
+      100% {
+        transform: translate3d(var(--snow-drift), 110vh, 0) rotate(360deg);
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+
+  for (let i = 0; i < 50; i++) {
+    const flake = document.createElement("span");
+
+    flake.className = "av-snowflake";
+    flake.textContent = "❄";
+
+    flake.style.left = Math.random() * 100 + "%";
+    flake.style.fontSize = (8 + Math.random() * 14) + "px";
+    flake.style.opacity = 0.3 + Math.random() * 0.7;
+    flake.style.animationDuration = (7 + Math.random() * 13) + "s";
+    flake.style.animationDelay = (-Math.random() * 20) + "s";
+    flake.style.setProperty(
+      "--snow-drift",
+      (Math.random() * 120 - 60) + "px"
+    );
+
+    snowContainer.appendChild(flake);
+  }
+})();
