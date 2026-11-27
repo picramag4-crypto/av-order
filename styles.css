@@ -2155,3 +2155,18 @@ body{
 .section-heading{
   margin-bottom:13px;
 }
+/* WINTER AV — COOLER BACKGROUND */
+
+body {
+  background:
+    radial-gradient(circle at 90% 0%, rgba(120,48,57,.06), transparent 28%),
+    linear-gradient(180deg, #e5e8e5 0%, #dce2de 45%, #e8e6df 100%) !important;
+}
+
+.hero {
+  background: rgba(235,239,235,.95) !important;
+}
+
+.categories {
+  background: transparent;
+}
