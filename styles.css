@@ -2254,3 +2254,73 @@ body {
 .section-heading p {
   color: #786b63 !important;
 }
+/* AV WINTER — HEADER, LOYALTY & CART */
+
+/* Верхняя шапка */
+.hero {
+  border-bottom: 1px solid rgba(58,23,28,.08) !important;
+}
+
+/* Логотип */
+.logo {
+  border-color: #3a171c !important;
+  color: #3a171c !important;
+}
+
+/* Кнопка корзины */
+.cart-btn {
+  background: linear-gradient(135deg,#57252c,#3a171c) !important;
+  color: #fffaf3 !important;
+  box-shadow: 0 5px 15px rgba(58,23,28,.16) !important;
+}
+
+/* Бонусная карта */
+#loyaltyCard {
+  background: linear-gradient(145deg,#f4e9dd,#e9ddcf) !important;
+  color: #3a171c !important;
+  border: 1px solid rgba(58,23,28,.09) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 8px 22px rgba(58,23,28,.06) !important;
+}
+
+/* Блок прогресса доставки */
+.delivery-progress {
+  background: linear-gradient(145deg,#edf1ed,#e3e9e4) !important;
+  border: 1px solid rgba(58,23,28,.07) !important;
+  border-radius: 20px !important;
+}
+
+/* Заголовок доставки */
+.delivery-progress-title strong {
+  color: #3a171c !important;
+}
+
+/* Полоса прогресса */
+#deliveryProgressFill {
+  background: linear-gradient(90deg,#57252c,#7b3039) !important;
+}
+
+/* Окно корзины */
+.drawer-card,
+.modal-card {
+  background: #f5f1eb !important;
+}
+
+/* Итоговая сумма */
+.cart-summary .total strong {
+  color: #57252c !important;
+}
+
+/* Кнопка оформления */
+.primary {
+  background: linear-gradient(135deg,#57252c,#3a171c) !important;
+  color: #fffaf3 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 5px 15px rgba(58,23,28,.15) !important;
+}
+
+/* Выбранные варианты */
+.choice-card:has(input:checked) {
+  border-color: #7b3039 !important;
+  background: #f2e5dc !important;
+}
