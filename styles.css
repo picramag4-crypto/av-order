@@ -3040,7 +3040,6 @@ body {
 
   z-index: 0;
 }
-
 /* ===== AV WINTER BOTANICAL DECOR ===== */
 
 .winter-hero {
@@ -3053,19 +3052,38 @@ body {
   inset: 0 !important;
   pointer-events: none !important;
   overflow: hidden !important;
-  z-index: 0 !important;
+  z-index: 3 !important;
 }
 
+/* Ветка хвои */
+
 .winter-decoration::before {
-  content: "❦";
+  content: "";
   position: absolute;
-  top: -18px;
-  right: -8px;
-  font-size: 130px;
-  color: rgba(61, 91, 68, 0.22);
+  top: 8px;
+  right: -28px;
+  width: 180px;
+  height: 100px;
+
+  opacity: 0.85;
   transform: rotate(25deg);
-  line-height: 1;
+
+  background:
+    repeating-linear-gradient(
+      115deg,
+      transparent 0px,
+      transparent 5px,
+      rgba(55, 91, 67, 0.95) 6px,
+      rgba(55, 91, 67, 0.95) 8px,
+      transparent 9px,
+      transparent 12px
+    );
+
+  border-top: 2px solid rgba(55, 91, 67, 0.65);
+  border-radius: 50%;
 }
+
+/* Золотые снежинки */
 
 .winter-decoration::after {
   content: "✦   ❄   ✦";
@@ -3077,10 +3095,11 @@ body {
   color: rgba(190, 155, 105, 0.75);
 }
 
+/* Текст поверх декора */
+
 .winter-hero > *:not(.winter-decoration) {
   position: relative;
   z-index: 2;
 }
 
 /* ===== END AV WINTER DECOR ===== */
-
