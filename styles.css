@@ -2324,3 +2324,31 @@ body {
   border-color: #7b3039 !important;
   background: #f2e5dc !important;
 }
+/* AV WINTER — HERO REFINEMENT */
+
+.winter-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.winter-hero h2 {
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.winter-hero p {
+  max-width: 280px;
+  line-height: 1.55;
+}
+
+.winter-hero .season-button {
+  border-radius: 15px;
+  font-weight: 600;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.winter-hero .season-button:active {
+  transform: scale(.97);
+  opacity: .9;
+}
