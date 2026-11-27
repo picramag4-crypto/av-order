@@ -2070,3 +2070,88 @@ body{
   border-color:#7b3039;
   background:#f7e9df;
 }
+/* =========================
+   WINTER AV — DETAILS
+========================= */
+
+/* Заголовки разделов */
+
+.section-heading h2{
+  color:#3a171c;
+}
+
+.section-heading p{
+  color:#84736a;
+}
+
+/* Категории */
+
+.categories button{
+  background:rgba(255,250,243,.85);
+  border-color:rgba(58,23,28,.12);
+  color:#3a171c;
+}
+
+.categories button.active{
+  background:#3a171c;
+  color:#fffaf3;
+  box-shadow:0 5px 13px rgba(58,23,28,.18);
+}
+
+/* Карточки товаров */
+
+.card{
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.65),transparent 65%),
+    #fffaf3;
+  border:1px solid rgba(107,64,50,.12);
+  border-radius:20px;
+}
+
+.card h3{
+  color:#321e1d;
+}
+
+.price{
+  color:#57252c;
+}
+
+/* Кнопка добавления */
+
+.add{
+  background:linear-gradient(145deg,#57252c,#3a171c);
+  color:#fffaf3;
+  box-shadow:0 4px 12px rgba(58,23,28,.16);
+}
+
+/* Бонусный блок */
+
+#loyaltyCard{
+  border-radius:22px;
+  box-shadow:0 8px 24px rgba(58,23,28,.07);
+}
+
+/* Прогресс доставки */
+
+.delivery-progress{
+  background:linear-gradient(145deg,#f6ead9,#efe0cf);
+  border-color:rgba(58,23,28,.08);
+  border-radius:20px;
+}
+
+.delivery-progress-title strong{
+  color:#3a171c;
+}
+
+/* Праздничный тон у кнопок */
+
+.primary{
+  background:linear-gradient(135deg,#57252c,#3a171c);
+  border-radius:16px;
+}
+
+/* Аккуратные разделители */
+
+.section-heading{
+  margin-bottom:13px;
+}
