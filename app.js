@@ -1023,5 +1023,76 @@ function bindLoyaltyRules() {
     snowContainer.appendChild(flake);
   }
 })();
+  /* ===== AV WINTER FIR VIA JS ===== */
+
+(function () {
+  const decor = document.querySelector(".winter-decoration");
+  if (!decor) return;
+
+  decor.innerHTML = `
+    <svg
+      viewBox="0 0 300 220"
+      xmlns="http://www.w3.org/2000/svg"
+      style="
+        position:absolute;
+        top:0;
+        right:0;
+        width:220px;
+        height:180px;
+        pointer-events:none;
+        overflow:visible;
+      "
+    >
+      <g
+        fill="none"
+        stroke="#496c50"
+        stroke-width="2"
+        stroke-linecap="round"
+        opacity="0.8"
+      >
+        <path d="M300 5 Q210 45 145 100 Q85 145 10 215"/>
+
+        <path d="M265 22 L280 3 M255 28 L270 5 M245 34 L260 9
+        M235 40 L250 13 M225 46 L240 17 M215 52 L230 21
+        M205 58 L220 25 M195 64 L210 29 M185 70 L200 33
+        M175 76 L190 37 M165 82 L180 41 M155 88 L170 45
+        M145 94 L160 49 M135 100 L150 53 M125 106 L140 57
+        M115 112 L130 61 M105 118 L120 65 M95 124 L110 69
+        M85 130 L100 73 M75 136 L90 77 M65 142 L80 81
+        M55 148 L70 85 M45 154 L60 89 M35 160 L50 93
+        M25 166 L40 97"/>
+
+        <path d="M265 22 L290 35 M255 28 L285 43
+        M245 34 L280 51 M235 40 L275 59
+        M225 46 L270 67 M215 52 L265 75
+        M205 58 L260 83 M195 64 L255 91
+        M185 70 L250 99 M175 76 L245 107
+        M165 82 L240 115 M155 88 L235 123
+        M145 94 L230 131 M135 100 L225 139
+        M125 106 L220 147 M115 112 L215 155
+        M105 118 L210 163 M95 124 L205 171
+        M85 130 L200 179 M75 136 L195 187
+        M65 142 L190 195 M55 148 L185 203
+        M45 154 L180 211"/>
+      </g>
+
+      <g fill="#b89a68" opacity="0.9">
+        <circle cx="218" cy="40" r="2.5"/>
+        <circle cx="178" cy="78" r="2"/>
+        <circle cx="112" cy="119" r="2.5"/>
+      </g>
+    </svg>
+  `;
+
+  decor.style.cssText = `
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:5;
+  `;
+})();
+
+/* ===== END AV WINTER FIR ===== */
 }
     
