@@ -3013,5 +3013,31 @@ body {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
   }
-} 
+/* ===== AV WINTER AMBIENT LIGHT ===== */
+
+#winterSnow::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(201, 164, 112, 0.12),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 100% 10%,
+      rgba(120, 145, 119, 0.10),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(183, 120, 93, 0.08),
+      transparent 40%
+    );
+
+  z-index: 0;
+}
 
