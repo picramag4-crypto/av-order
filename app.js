@@ -1023,4 +1023,4 @@ function bindLoyaltyRules() {
 
     snowContainer.appendChild(flake);
   }
-})();
+ }
