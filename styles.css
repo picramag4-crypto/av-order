@@ -1919,3 +1919,154 @@ body.loyalty-rules-open { overflow: hidden; }
   color: #70442f !important;
   border: 1px solid #d8bda4 !important;
 }
+/* =========================
+   WINTER AV — NEW YEAR 2026
+========================= */
+
+:root{
+  --bg:#eee5d8;
+  --card:#fffaf3;
+  --card2:#f3e7d8;
+  --text:#281c1a;
+  --muted:#786b63;
+  --line:#dfcdbb;
+  --brown:#3a171c;
+  --brown2:#57252c;
+  --accent:#7b3039;
+  --accent-light:#ead5c9;
+  --white:#fffaf4;
+}
+
+/* Зимний фон */
+
+body{
+  background:
+    radial-gradient(circle at 90% 5%,rgba(190,157,109,.13),transparent 25%),
+    radial-gradient(circle at 10% 20%,rgba(255,255,255,.8),transparent 30%),
+    linear-gradient(180deg,#f5ede3 0%,#eee3d5 55%,#e8dac9 100%);
+}
+
+/* Верхняя панель */
+
+.hero{
+  background:rgba(245,237,227,.92);
+  border-bottom:1px solid rgba(58,23,28,.10);
+}
+
+.logo{
+  border-color:var(--brown);
+  color:var(--brown);
+}
+
+/* Новогодний баннер */
+
+.season-hero{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(218,183,119,.23),transparent 30%),
+    radial-gradient(circle at 10% 100%,rgba(255,255,255,.06),transparent 40%),
+    linear-gradient(145deg,#291519 0%,#491f27 55%,#71353b 100%);
+
+  color:#fff8ef;
+  box-shadow:0 14px 32px rgba(58,23,28,.20);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.season-hero:after{
+  content:"❄";
+  position:absolute;
+  right:5px;
+  bottom:-22px;
+  font-size:115px;
+  color:#e8d2b0;
+  opacity:.13;
+  transform:rotate(-15deg);
+}
+
+.season-badge{
+  background:rgba(255,248,239,.10);
+  border:1px solid rgba(255,248,239,.20);
+  color:#f4dfc6;
+}
+
+.season-hero h2{
+  color:#fff8ef;
+}
+
+.season-hero p{
+  color:rgba(255,248,239,.78);
+}
+
+.season-button{
+  background:#ead7bd;
+  color:#3a171c;
+}
+
+/* Кнопки */
+
+.cart-btn,
+.primary,
+.add{
+  background:var(--brown);
+}
+
+.primary,
+.cart-btn{
+  box-shadow:0 6px 18px rgba(58,23,28,.18);
+}
+
+/* Активные категории */
+
+.categories button.active{
+  background:var(--brown);
+  border-color:var(--brown);
+}
+
+/* Сезонные акценты */
+
+.season-categories button.active{
+  background:var(--accent);
+  border-color:var(--accent);
+}
+
+/* Карточки меню */
+
+.card{
+  border-color:rgba(122,72,61,.12);
+  box-shadow:0 5px 18px rgba(58,23,28,.06);
+}
+
+/* Акции */
+
+#lunchPromo{
+  background:linear-gradient(135deg,#3a171c,#71353b);
+}
+
+/* Бонусная карта */
+
+#loyaltyCard{
+  background:#f3e7d8;
+  border-color:#dfc9b5;
+  color:#3a171c;
+}
+
+/* Доставка */
+
+#deliveryProgressFill{
+  background:#7b3039;
+}
+
+/* Корзина и окна */
+
+.drawer-card,
+.modal-card{
+  background:#f4e9dd;
+}
+
+.cart-summary .total strong{
+  color:#7b3039;
+}
+
+.choice-card:has(input:checked){
+  border-color:#7b3039;
+  background:#f7e9df;
+}
