@@ -3258,4 +3258,90 @@ body {
     height: 29px !important;
     min-width: 29px !important;
   }
+/* AV WINTER — CART SUMMARY & LOYALTY */
+
+#loyaltyRedeemCard {
+  margin-top: 16px !important;
+  padding: 18px !important;
+  border-radius: 22px !important;
+  background: linear-gradient(145deg, #e4ebe5, #dce5df) !important;
+  border: 1px solid rgba(48,72,57,.08) !important;
+  box-shadow: 0 4px 14px rgba(40,28,26,.035) !important;
+}
+
+#loyaltyRedeemCard input {
+  border-radius: 14px !important;
+  border: 1px solid rgba(58,23,28,.12) !important;
+  background: #fffaf4 !important;
+  color: #321d20 !important;
+}
+
+#redeemMaxBtn {
+  border-radius: 13px !important;
+  background: #3a171c !important;
+  color: #fffaf3 !important;
+  font-weight: 700 !important;
+}
+
+#loyaltyHint,
+#loyaltyMaxRedeem {
+  color: #5f6d61 !important;
+}
+
+#deliveryProgress {
+  margin-top: 16px !important;
+  padding: 17px !important;
+  border-radius: 20px !important;
+  background: #f4eee5 !important;
+  border: 1px solid rgba(58,23,28,.06) !important;
+}
+
+#deliveryProgressFill {
+  background: linear-gradient(90deg, #748879, #3e6349) !important;
+  border-radius: 99px !important;
+}
+
+#subtotal,
+#deliveryFee,
+#loyaltyDiscount {
+  font-weight: 600 !important;
+}
+
+#loyaltyDiscountRow {
+  color: #64806a !important;
+}
+
+#total {
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  color: #57252c !important;
+}
+
+#checkoutBtn {
+  width: 100% !important;
+  min-height: 56px !important;
+  border-radius: 19px !important;
+  background: linear-gradient(135deg, #3a171c, #57252c) !important;
+  color: #fffaf3 !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  letter-spacing: .2px !important;
+  box-shadow: 0 8px 20px rgba(58,23,28,.16) !important;
+  transition: transform .2s ease, box-shadow .2s ease !important;
+}
+
+#checkoutBtn:active {
+  transform: scale(.98) !important;
+}
+
+@media (max-width: 480px) {
+  #loyaltyRedeemCard,
+  #deliveryProgress {
+    padding: 15px !important;
+    border-radius: 18px !important;
+  }
+
+  #total {
+    font-size: 22px !important;
+  }
 }
