@@ -3344,4 +3344,124 @@ body {
   #total {
     font-size: 22px !important;
   }
+/* AV — WARM WINTER ATMOSPHERE */
+
+body {
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(120, 74, 47, .08),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      #eee5d8 0%,
+      #e9dfd2 50%,
+      #e5d8c8 100%
+    ) !important;
+}
+
+/* Main header */
+.hero {
+  background: linear-gradient(
+    145deg,
+    #432126,
+    #30171c 65%,
+    #241419
+  ) !important;
+  color: #fff6eb !important;
+  border: 1px solid rgba(255,255,255,.06) !important;
+  box-shadow: 0 12px 30px rgba(48,23,28,.16) !important;
+}
+
+/* Winter banner */
+.winter-hero {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(191,151,93,.24),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(109,74,54,.25),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      #542a30 0%,
+      #3b1c23 52%,
+      #29161b 100%
+    ) !important;
+  border: 1px solid rgba(255,255,255,.07) !important;
+  box-shadow: 0 12px 28px rgba(58,23,28,.17) !important;
+}
+
+/* Warm decorative glow */
+.winter-hero::before {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  right: -90px;
+  top: -85px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(226,190,130,.16),
+    rgba(226,190,130,.02) 65%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+/* Soft winter ornament */
+.winter-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255,246,228,.20) 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      circle,
+      rgba(255,246,228,.09) 1px,
+      transparent 2px
+    );
+  background-size: 37px 43px, 61px 67px;
+  background-position: 7px 12px, 21px 31px;
+  opacity: .38;
+}
+
+/* Banner text */
+.winter-hero h2 {
+  color: #fff6eb !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,.16);
+}
+
+.winter-hero p {
+  color: rgba(255,246,235,.82) !important;
+}
+
+/* Winter badge */
+.winter-hero .season-badge {
+  background: rgba(225,195,145,.13) !important;
+  color: #e7c99a !important;
+  border: 1px solid rgba(225,195,145,.24) !important;
+}
+
+/* Main banner buttons */
+.winter-hero .season-button {
+  border-radius: 16px !important;
+  transition: transform .2s ease !important;
+}
+
+.winter-hero .season-button:active {
+  transform: scale(.97) !important;
 }
