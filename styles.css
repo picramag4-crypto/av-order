@@ -3052,6 +3052,7 @@ body {
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 1;
 }
 
 .winter-decoration::before {
@@ -3060,7 +3061,7 @@ body {
   top: -18px;
   right: -8px;
   font-size: 130px;
-  color: rgba(61, 91, 68, 0.16);
+  color: rgba(61, 91, 68, 0.22);
   transform: rotate(25deg);
   line-height: 1;
 }
@@ -3072,8 +3073,14 @@ body {
   right: 18px;
   font-size: 16px;
   letter-spacing: 7px;
-  color: rgba(190, 155, 105, 0.65);
+  color: rgba(190, 155, 105, 0.75);
+}
+
+/* Содержимое баннера располагаем поверх декора */
+
+.winter-hero > *:not(.winter-decoration) {
+  position: relative;
+  z-index: 2;
 }
 
 /* ===== END AV WINTER BOTANICAL DECOR ===== */
-
