@@ -3465,3 +3465,48 @@ body {
 .winter-hero .season-button:active {
   transform: scale(.97) !important;
 }
+/* AV — WINTER HERO FINAL ATMOSPHERE */
+
+.winter-hero {
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(183,137,85,.23),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(89,111,84,.28),
+      transparent 43%
+    ),
+    linear-gradient(
+      135deg,
+      #482027 0%,
+      #35171e 55%,
+      #26151b 100%
+    ) !important;
+}
+
+/* Убираем прежние декоративные элементы */
+.winter-hero::before,
+.winter-hero::after {
+  content: none !important;
+}
+
+/* Более выразительный бейдж */
+.winter-hero .season-badge {
+  background: rgba(218,190,150,.10) !important;
+  border: 1px solid rgba(218,190,150,.26) !important;
+  color: #e8d2ad !important;
+}
+
+.winter-hero .season-badge {
+  box-shadow: inset 0 0 12px rgba(218,190,150,.04) !important;
+}
+
+/* Тёплая кнопка */
+.winter-hero .season-button {
+  background: #ead8b9 !important;
+  color: #35171e !important;
+  box-shadow: 0 5px 18px rgba(0,0,0,.12) !important;
+}
