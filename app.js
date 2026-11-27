@@ -1020,7 +1020,8 @@ function bindLoyaltyRules() {
       "--snow-drift",
       (Math.random() * 120 - 60) + "px"
     );
-
     snowContainer.appendChild(flake);
   }
- }
+})();
+}
+    
