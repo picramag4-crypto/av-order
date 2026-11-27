@@ -1051,3 +1051,8 @@ function bindLoyaltyRules() {
 })();
 
 /* ===== END TEST ===== */
+  document.body.insertAdjacentHTML(
+  "beforeend",
+  '<div style="position:fixed;top:20px;left:10px;right:10px;z-index:999999;background:red;color:white;padding:20px;text-align:center;font-size:20px;">APP.JS ЗАГРУЖЕН</div>'
+);
+  
