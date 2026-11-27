@@ -1919,936 +1919,68 @@ body.loyalty-rules-open { overflow: hidden; }
   color: #70442f !important;
   border: 1px solid #d8bda4 !important;
 }
-/* =========================
-   WINTER AV — NEW YEAR 2026
-========================= */
 
-:root{
-  --bg:#eee5d8;
-  --card:#fffaf3;
-  --card2:#f3e7d8;
-  --text:#281c1a;
-  --muted:#786b63;
-  --line:#dfcdbb;
-  --brown:#3a171c;
-  --brown2:#57252c;
-  --accent:#7b3039;
-  --accent-light:#ead5c9;
-  --white:#fffaf4;
+/* =========================================
+   АВ — WINTER 2026
+   CLEAN DESIGN SYSTEM
+========================================= */
+
+:root {
+  --bg: #eee5d8;
+  --card: #fffaf4;
+  --card2: #f2e9df;
+  --text: #321e1d;
+  --muted: #81756d;
+  --line: #e1d5c8;
+  --brown: #3a171c;
+  --brown2: #57252c;
+  --accent: #7b3039;
+  --accent-light: #ead5c9;
+  --green: #657d69;
+  --green-light: #e4ebe5;
+  --white: #fffaf3;
 }
 
-/* Зимний фон */
-
-body{
-  background:
-    radial-gradient(circle at 90% 5%,rgba(190,157,109,.13),transparent 25%),
-    radial-gradient(circle at 10% 20%,rgba(255,255,255,.8),transparent 30%),
-    linear-gradient(180deg,#f5ede3 0%,#eee3d5 55%,#e8dac9 100%);
-}
-
-/* Верхняя панель */
-
-.hero{
-  background:rgba(245,237,227,.92);
-  border-bottom:1px solid rgba(58,23,28,.10);
-}
-
-.logo{
-  border-color:var(--brown);
-  color:var(--brown);
-}
-
-/* Новогодний баннер */
-
-.season-hero{
-  background:
-    radial-gradient(circle at 90% 10%,rgba(218,183,119,.23),transparent 30%),
-    radial-gradient(circle at 10% 100%,rgba(255,255,255,.06),transparent 40%),
-    linear-gradient(145deg,#291519 0%,#491f27 55%,#71353b 100%);
-
-  color:#fff8ef;
-  box-shadow:0 14px 32px rgba(58,23,28,.20);
-  border:1px solid rgba(255,255,255,.06);
-}
-
-.season-hero:after{
-  content:"❄";
-  position:absolute;
-  right:5px;
-  bottom:-22px;
-  font-size:115px;
-  color:#e8d2b0;
-  opacity:.13;
-  transform:rotate(-15deg);
-}
-
-.season-badge{
-  background:rgba(255,248,239,.10);
-  border:1px solid rgba(255,248,239,.20);
-  color:#f4dfc6;
-}
-
-.season-hero h2{
-  color:#fff8ef;
-}
-
-.season-hero p{
-  color:rgba(255,248,239,.78);
-}
-
-.season-button{
-  background:#ead7bd;
-  color:#3a171c;
-}
-
-/* Кнопки */
-
-.cart-btn,
-.primary,
-.add{
-  background:var(--brown);
-}
-
-.primary,
-.cart-btn{
-  box-shadow:0 6px 18px rgba(58,23,28,.18);
-}
-
-/* Активные категории */
-
-.categories button.active{
-  background:var(--brown);
-  border-color:var(--brown);
-}
-
-/* Сезонные акценты */
-
-.season-categories button.active{
-  background:var(--accent);
-  border-color:var(--accent);
-}
-
-/* Карточки меню */
-
-.card{
-  border-color:rgba(122,72,61,.12);
-  box-shadow:0 5px 18px rgba(58,23,28,.06);
-}
-
-/* Акции */
-
-#lunchPromo{
-  background:linear-gradient(135deg,#3a171c,#71353b);
-}
-
-/* Бонусная карта */
-
-#loyaltyCard{
-  background:#f3e7d8;
-  border-color:#dfc9b5;
-  color:#3a171c;
-}
-
-/* Доставка */
-
-#deliveryProgressFill{
-  background:#7b3039;
-}
-
-/* Корзина и окна */
-
-.drawer-card,
-.modal-card{
-  background:#f4e9dd;
-}
-
-.cart-summary .total strong{
-  color:#7b3039;
-}
-
-.choice-card:has(input:checked){
-  border-color:#7b3039;
-  background:#f7e9df;
-}
-/* =========================
-   WINTER AV — DETAILS
-========================= */
-
-/* Заголовки разделов */
-
-.section-heading h2{
-  color:#3a171c;
-}
-
-.section-heading p{
-  color:#84736a;
-}
-
-/* Категории */
-
-.categories button{
-  background:rgba(255,250,243,.85);
-  border-color:rgba(58,23,28,.12);
-  color:#3a171c;
-}
-
-.categories button.active{
-  background:#3a171c;
-  color:#fffaf3;
-  box-shadow:0 5px 13px rgba(58,23,28,.18);
-}
-
-/* Карточки товаров */
-
-.card{
-  background:
-    linear-gradient(155deg,rgba(255,255,255,.65),transparent 65%),
-    #fffaf3;
-  border:1px solid rgba(107,64,50,.12);
-  border-radius:20px;
-}
-
-.card h3{
-  color:#321e1d;
-}
-
-.price{
-  color:#57252c;
-}
-
-/* Кнопка добавления */
-
-.add{
-  background:linear-gradient(145deg,#57252c,#3a171c);
-  color:#fffaf3;
-  box-shadow:0 4px 12px rgba(58,23,28,.16);
-}
-
-/* Бонусный блок */
-
-#loyaltyCard{
-  border-radius:22px;
-  box-shadow:0 8px 24px rgba(58,23,28,.07);
-}
-
-/* Прогресс доставки */
-
-.delivery-progress{
-  background:linear-gradient(145deg,#f6ead9,#efe0cf);
-  border-color:rgba(58,23,28,.08);
-  border-radius:20px;
-}
-
-.delivery-progress-title strong{
-  color:#3a171c;
-}
-
-/* Праздничный тон у кнопок */
-
-.primary{
-  background:linear-gradient(135deg,#57252c,#3a171c);
-  border-radius:16px;
-}
-
-/* Аккуратные разделители */
-
-.section-heading{
-  margin-bottom:13px;
-}
-/* WINTER AV — COOLER BACKGROUND */
-
-body {
-  background:
-    radial-gradient(circle at 90% 0%, rgba(120,48,57,.06), transparent 28%),
-    linear-gradient(180deg, #e5e8e5 0%, #dce2de 45%, #e8e6df 100%) !important;
-}
-
-.hero {
-  background: rgba(235,239,235,.95) !important;
-}
-
-.categories {
-  background: transparent;
-}
-/* AV WINTER — BACKGROUND REFINEMENT */
+/* =========================================
+   ОСНОВА
+========================================= */
 
 body {
   background:
     radial-gradient(
-      circle at 92% 4%,
-      rgba(87, 37, 44, 0.045),
-      transparent 28%
+      ellipse at 50% 0%,
+      rgba(120,74,47,.08),
+      transparent 40%
     ),
     linear-gradient(
       180deg,
-      #e4e9e5 0%,
-      #dce3df 50%,
-      #e6e8e3 100%
+      #eee5d8 0%,
+      #e9dfd2 50%,
+      #e5d8c8 100%
     ) !important;
+  color: var(--text);
 }
 
-/* Верхняя шапка */
+/* =========================================
+   ШАПКА
+========================================= */
+
 .hero {
-  background: rgba(235, 240, 236, 0.96) !important;
-}
-
-/* Область категорий */
-#categories {
-  background: transparent !important;
-}
-
-/* Не затрагиваем действующую осеннюю акцию */
-#lunchPromo {
-  background: linear-gradient(135deg, #3a171c, #71353b);
-}
-/* AV WINTER — MENU DETAILS */
-
-/* Карточки товаров */
-.card {
   background: linear-gradient(
-    160deg,
-    rgba(255,255,255,.72),
-    rgba(255,250,243,.96)
+    145deg,
+    #432126,
+    #30171c 65%,
+    #241419
   ) !important;
-  border: 1px solid rgba(58,23,28,.09) !important;
-  border-radius: 22px !important;
-  box-shadow: 0 5px 16px rgba(40,28,26,.055) !important;
-}
 
-/* Названия товаров */
-.card h3 {
-  color: #321e1d !important;
-}
-
-/* Цены */
-.price {
-  color: #57252c !important;
-}
-
-/* Кнопки добавления */
-.add {
-  background: linear-gradient(145deg,#57252c,#3a171c) !important;
-  color: #fffaf3 !important;
-  border-radius: 14px !important;
-  box-shadow: 0 4px 12px rgba(58,23,28,.13) !important;
-}
-
-/* Категории меню */
-.categories button {
-  border-color: rgba(58,23,28,.10);
-}
-
-/* Активная категория */
-.categories button.active {
-  background: #3a171c !important;
-  color: #fffaf3 !important;
-  border-color: #3a171c !important;
-}
-
-/* Заголовки разделов */
-.section-heading h2 {
-  color: #3a171c !important;
-}
-
-/* Подписи разделов */
-.section-heading p {
-  color: #786b63 !important;
-}
-/* AV WINTER — HEADER, LOYALTY & CART */
-
-/* Верхняя шапка */
-.hero {
-  border-bottom: 1px solid rgba(58,23,28,.08) !important;
-}
-
-/* Логотип */
-.logo {
-  border-color: #3a171c !important;
-  color: #3a171c !important;
-}
-
-/* Кнопка корзины */
-.cart-btn {
-  background: linear-gradient(135deg,#57252c,#3a171c) !important;
-  color: #fffaf3 !important;
-  box-shadow: 0 5px 15px rgba(58,23,28,.16) !important;
-}
-
-/* Бонусная карта */
-#loyaltyCard {
-  background: linear-gradient(145deg,#f4e9dd,#e9ddcf) !important;
-  color: #3a171c !important;
-  border: 1px solid rgba(58,23,28,.09) !important;
-  border-radius: 22px !important;
-  box-shadow: 0 8px 22px rgba(58,23,28,.06) !important;
-}
-
-/* Блок прогресса доставки */
-.delivery-progress {
-  background: linear-gradient(145deg,#edf1ed,#e3e9e4) !important;
-  border: 1px solid rgba(58,23,28,.07) !important;
-  border-radius: 20px !important;
-}
-
-/* Заголовок доставки */
-.delivery-progress-title strong {
-  color: #3a171c !important;
-}
-
-/* Полоса прогресса */
-#deliveryProgressFill {
-  background: linear-gradient(90deg,#57252c,#7b3039) !important;
-}
-
-/* Окно корзины */
-.drawer-card,
-.modal-card {
-  background: #f5f1eb !important;
-}
-
-/* Итоговая сумма */
-.cart-summary .total strong {
-  color: #57252c !important;
-}
-
-/* Кнопка оформления */
-.primary {
-  background: linear-gradient(135deg,#57252c,#3a171c) !important;
-  color: #fffaf3 !important;
-  border-radius: 16px !important;
-  box-shadow: 0 5px 15px rgba(58,23,28,.15) !important;
-}
-
-/* Выбранные варианты */
-.choice-card:has(input:checked) {
-  border-color: #7b3039 !important;
-  background: #f2e5dc !important;
-}
-/* AV WINTER — HERO REFINEMENT */
-
-.winter-hero {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.winter-hero h2 {
-  letter-spacing: -0.035em;
-  line-height: 1.12;
-}
-
-.winter-hero p {
-  max-width: 280px;
-  line-height: 1.55;
-}
-
-.winter-hero .season-button {
-  border-radius: 15px;
-  font-weight: 600;
-  transition: transform .2s ease, opacity .2s ease;
-}
-
-.winter-hero .season-button:active {
-  transform: scale(.97);
-  opacity: .9;
-}
-/* AV WINTER — NEW PRODUCT CARDS */
-
-/* Сетка каталога */
-#menu {
-  align-items: stretch;
-}
-
-/* Карточка */
-#menu .card {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  min-height: 230px !important;
-  padding: 17px 15px 15px !important;
-  border-radius: 21px !important;
-  background: #faf8f4 !important;
-  border: 1px solid rgba(58,23,28,.07) !important;
-  box-shadow: 0 4px 14px rgba(40,28,26,.035) !important;
-}
-
-/* Содержание */
-#menu .product-content {
-  flex: 1;
-}
-
-/* Название */
-#menu .card h3 {
-  font-size: 17px !important;
-  line-height: 1.3 !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.3px !important;
-  margin: 0 0 9px !important;
-}
-
-/* Описание */
-#menu .card p {
-  font-size: 13px !important;
-  line-height: 1.5 !important;
-  color: #81756d !important;
-  margin: 0 !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 4 !important;
-  overflow: hidden !important;
-}
-
-/* Нижняя часть */
-#menu .card-footer {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 8px !important;
-  margin-top: 18px !important;
-}
-
-/* Цена */
-#menu .price {
-  font-size: 17px !important;
-  line-height: 1.25 !important;
-  font-weight: 800 !important;
-  color: #57252c !important;
-}
-
-/* Старая цена */
-#menu .old-price {
-  font-size: 12px !important;
-  color: #a99591 !important;
-  font-weight: 500 !important;
-}
-
-/* Акционная цена */
-#menu .promo-price {
-  font-size: 17px !important;
-  color: #57252c !important;
-  font-weight: 800 !important;
-}
-
-/* Кнопка */
-#menu .add {
-  width: 43px !important;
-  height: 43px !important;
-  min-width: 43px !important;
-  padding: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 14px !important;
-  font-size: 25px !important;
-  line-height: 1 !important;
-  background: #3a171c !important;
-  color: #fffaf3 !important;
-  box-shadow: none !important;
-}
-
-/* Нажатие */
-#menu .add:active {
-  transform: scale(.95);
-}
-/* =========================================
-   AV WINTER — CART REDESIGN
-   ========================================= */
-
-/* Затемнение фона */
-#cartDrawer.drawer {
-  background: rgba(24, 17, 18, .58) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 12px !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Основное окно корзины */
-#cartDrawer .drawer-card {
-  background: #f4f6f2 !important;
-  color: #321e1d !important;
-  border: 1px solid rgba(255,255,255,.5) !important;
-  border-radius: 28px !important;
-  width: 100% !important;
-  max-width: 520px !important;
-  max-height: 92dvh !important;
-  overflow-y: auto !important;
-  padding: 22px 18px 28px !important;
-  box-shadow: 0 25px 70px rgba(0,0,0,.22) !important;
-  overscroll-behavior: contain;
-}
-
-/* Заголовок */
-#cartDrawer .cart-head {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding-bottom: 18px !important;
-  border-bottom: 1px solid #dce2dc !important;
-  margin-bottom: 18px !important;
-}
-
-/* Заголовок корзины */
-#cartDrawer .cart-head h2 {
-  color: #3a171c !important;
-  font-size: 23px !important;
-  font-weight: 800 !important;
-  letter-spacing: -.5px !important;
-  margin: 0 !important;
-}
-
-/* Подзаголовок */
-#cartDrawer .cart-meta {
-  color: #81756d !important;
-  font-size: 13px !important;
-  margin-top: 5px !important;
-}
-
-/* Кнопка закрытия */
-#cartDrawer .drawer-close {
-  width: 42px !important;
-  height: 42px !important;
-  border-radius: 14px !important;
-  border: 1px solid #e0d8d0 !important;
-  background: #fffaf4 !important;
-  color: #3a171c !important;
-  font-size: 19px !important;
-}
-
-/* Список товаров */
-#cartDrawer .cart-items {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-}
-
-/* Строка товара */
-#cartDrawer .cart-row {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 12px !important;
-  padding: 15px !important;
-  background: #fffaf5 !important;
-  border: 1px solid rgba(58,23,28,.07) !important;
-  border-radius: 19px !important;
-}
-
-/* Информация о товаре */
-#cartDrawer .cart-row > div:first-child {
-  min-width: 0 !important;
-  flex: 1 !important;
-}
-
-/* Название */
-#cartDrawer .cart-row strong {
-  display: block !important;
-  font-size: 15px !important;
-  line-height: 1.4 !important;
-  color: #321e1d !important;
-}
-
-/* Дополнительная информация */
-#cartDrawer .cart-row .small {
-  color: #84776f !important;
-  font-size: 12px !important;
-  margin: 4px 0 !important;
-}
-
-/* Стоимость товара */
-#cartDrawer .cart-row > div:first-child > div:last-child {
-  font-weight: 800 !important;
-  color: #57252c !important;
-  margin-top: 6px !important;
-}
-
-/* Управление количеством */
-#cartDrawer .qty {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  flex-shrink: 0 !important;
-}
-
-/* Кнопки количества */
-#cartDrawer .qty button {
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  border-radius: 11px !important;
-  border: 1px solid #e3d7ce !important;
-  background: #f2e8de !important;
-  color: #3a171c !important;
-  font-size: 17px !important;
-}
-
-/* Число */
-#cartDrawer .qty span {
-  min-width: 20px !important;
-  text-align: center !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-}
-
-/* Удаление */
-#cartDrawer .qty .cart-delete {
-  background: #f7e8e5 !important;
-  color: #9b4c48 !important;
-  border-color: #edd8d3 !important;
-  font-size: 14px !important;
-}
-
-/* Бонусная секция */
-#cartDrawer .loyalty-redeem-card {
-  margin-top: 18px !important;
-  padding: 18px !important;
-  background: linear-gradient(145deg,#ecefe8,#e4e9e2) !important;
-  border: 1px solid #dce3da !important;
-  border-radius: 22px !important;
-}
-
-/* Заголовки бонусов */
-#cartDrawer .loyalty-section-title h3 {
-  color: #3a171c !important;
-  font-size: 18px !important;
-  margin: 5px 0 0 !important;
-}
-
-/* Подсказка */
-#cartDrawer .loyalty-hint {
-  color: #746c65 !important;
-  font-size: 13px !important;
-  line-height: 1.5 !important;
-  margin: 12px 0 !important;
-}
-
-/* Поле бонусов */
-#cartDrawer .loyalty-input-wrap {
-  display: flex !important;
-  align-items: center !important;
-  background: #fffaf4 !important;
-  border: 1px solid #d9d8cf !important;
-  border-radius: 14px !important;
-  padding: 0 14px !important;
-}
-
-/* Ввод */
-#cartDrawer .loyalty-input-wrap input {
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  min-width: 0 !important;
-  padding: 14px 0 !important;
-  color: #3a171c !important;
-}
-
-/* Максимум бонусов */
-#cartDrawer .loyalty-max-btn {
-  border-radius: 13px !important;
-  background: #3a171c !important;
-  color: #fffaf3 !important;
-  margin-top: 12px !important;
-}
-
-/* Прогресс доставки */
-#cartDrawer .delivery-progress {
-  margin-top: 16px !important;
-  padding: 17px !important;
-  border-radius: 20px !important;
-  background: #e8eee8 !important;
-  border: 1px solid #dbe3db !important;
-}
-
-/* Прогресс-бар */
-#cartDrawer .delivery-progress-bar {
-  overflow: hidden !important;
-  border-radius: 999px !important;
-  background: #d3ddd4 !important;
-  height: 8px !important;
-  margin-top: 12px !important;
-}
-
-/* Заполнение */
-#cartDrawer #deliveryProgressFill {
-  border-radius: 999px !important;
-  background: #57252c !important;
-}
-
-/* Итоговая сумма */
-#cartDrawer .cart-summary {
-  background: #fffaf5 !important;
-  border: 1px solid rgba(58,23,28,.07) !important;
-  border-radius: 22px !important;
-  padding: 18px !important;
-  margin-top: 18px !important;
-}
-
-/* Строки суммы */
-#cartDrawer .cart-summary > div {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  margin-bottom: 12px !important;
-  color: #786b63 !important;
-}
-
-/* Итого */
-#cartDrawer .cart-summary .total {
-  border-top: 1px solid #e5dcd2 !important;
-  padding-top: 14px !important;
-  margin-top: 8px !important;
-  margin-bottom: 0 !important;
-}
-
-/* Значение итого */
-#cartDrawer .cart-summary .total strong {
-  color: #3a171c !important;
-  font-size: 24px !important;
-  font-weight: 800 !important;
-}
-
-/* Блок оформления */
-#cartDrawer .checkout {
-  margin-top: 24px !important;
-}
-
-/* Заголовки оформления */
-#cartDrawer .checkout h3 {
-  color: #3a171c !important;
-  font-size: 17px !important;
-  font-weight: 800 !important;
-  margin: 22px 0 12px !important;
-}
-
-/* Варианты получения и оплаты */
-#cartDrawer .choice-group {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 10px !important;
-}
-
-/* Карточки выбора */
-#cartDrawer .choice-card {
-  display: flex !important;
-  align-items: center !important;
-  gap: 9px !important;
-  padding: 14px 12px !important;
-  border-radius: 17px !important;
-  background: #fffaf5 !important;
-  border: 1px solid #e3d9d0 !important;
-}
-
-/* Выбранный вариант */
-#cartDrawer .choice-card:has(input:checked) {
-  border: 1.5px solid #57252c !important;
-  background: #f1e6df !important;
-}
-
-/* Иконки */
-#cartDrawer .choice-icon {
-  font-size: 22px !important;
-}
-
-/* Текст выбора */
-#cartDrawer .choice-text strong {
-  color: #3a171c !important;
-  font-size: 13px !important;
-}
-
-/* Подписи */
-#cartDrawer .choice-text small {
-  color: #84776f !important;
-  font-size: 11px !important;
-}
-
-/* Поля */
-#cartDrawer .contact-fields {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 11px !important;
-}
-
-/* Поля контактов и адрес */
-#cartDrawer input:not([type="radio"]),
-#cartDrawer textarea {
-  width: 100% !important;
-  box-sizing: border-box !important;
-  background: #fffaf5 !important;
-  color: #321e1d !important;
-  border: 1px solid #e2d8cf !important;
-  border-radius: 15px !important;
-  padding: 15px !important;
-  font-size: 15px !important;
-  outline: none !important;
-}
-
-/* Фокус */
-#cartDrawer input:focus,
-#cartDrawer textarea:focus {
-  border-color: #8b5a5c !important;
-  box-shadow: 0 0 0 3px rgba(87,37,44,.08) !important;
-}
-
-/* Комментарий */
-#cartDrawer textarea {
-  min-height: 90px !important;
-  resize: vertical !important;
-}
-
-/* Основная кнопка */
-#cartDrawer .checkout-main-btn {
-  width: 100% !important;
-  min-height: 56px !important;
-  margin-top: 22px !important;
-  border-radius: 18px !important;
-  background: linear-gradient(135deg,#57252c,#3a171c) !important;
-  color: #fffaf3 !important;
-  font-size: 16px !important;
-  font-weight: 800 !important;
-  box-shadow: 0 8px 20px rgba(58,23,28,.16) !important;
-}
-
-/* Подпись под оформлением */
-#cartDrawer .checkout-note {
-  color: #84776f !important;
-  text-align: center !important;
-  font-size: 12px !important;
-  line-height: 1.5 !important;
-  margin-top: 12px !important;
-}
-
-/* Адаптация под маленькие экраны */
-@media (max-width: 380px) {
-  #cartDrawer .drawer-card {
-    padding: 18px 13px 24px !important;
-  }
-
-  #cartDrawer .choice-card {
-    padding: 11px 9px !important;
-  }
-
-  #cartDrawer .qty {
-    gap: 4px !important;
-  }
-
-  #cartDrawer .qty button {
-    width: 29px !important;
-    height: 29px !important;
-    min-width: 29px !important;
-  }
-}
-/* =========================================
-   AV WINTER — FIRST SCREEN REFINEMENT
-   ========================================= */
-
-/* Шапка */
-.hero {
+  color: #fff6eb !important;
+  border: 1px solid rgba(255,255,255,.06) !important;
+  box-shadow: 0 12px 30px rgba(48,23,28,.16) !important;
   padding: 14px 16px !important;
 }
 
 .hero h1 {
+  color: #fff6eb !important;
   font-size: 20px !important;
   line-height: 1.2 !important;
   letter-spacing: -.5px !important;
@@ -2856,56 +1988,170 @@ body {
 }
 
 .hero p {
+  color: rgba(255,246,235,.75) !important;
   font-size: 12px !important;
   line-height: 1.4 !important;
-  color: #81756d !important;
 }
 
 .logo {
-  border-radius: 14px !important;
   width: 44px !important;
   height: 44px !important;
+  border-radius: 14px !important;
+  border-color: #ead8b9 !important;
+  color: #ead8b9 !important;
 }
 
-/* Корзина в шапке */
 .hero .cart-btn {
   border-radius: 15px !important;
   min-height: 44px !important;
 }
 
-/* Зимний баннер */
-.winter-hero {
+/* =========================================
+   КНОПКИ
+========================================= */
+
+.cart-btn,
+.primary,
+.add {
+  background: linear-gradient(
+    135deg,
+    #57252c,
+    #3a171c
+  ) !important;
+
+  color: #fffaf3 !important;
+}
+
+.primary,
+.cart-btn {
+  box-shadow: 0 5px 15px rgba(58,23,28,.16) !important;
+}
+
+.primary {
+  border-radius: 16px !important;
+}
+
+/* =========================================
+   ЗИМНИЙ БАННЕР
+========================================= */
+
+.winter-hero,
+.season-hero {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(183,137,85,.23),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(89,111,84,.28),
+      transparent 43%
+    ),
+    linear-gradient(
+      135deg,
+      #482027 0%,
+      #35171e 55%,
+      #26151b 100%
+    ) !important;
+
+  color: #fff6eb !important;
+  border: 1px solid rgba(255,255,255,.07) !important;
   border-radius: 25px !important;
   margin: 14px 14px 22px !important;
   padding: 25px 22px !important;
-  box-shadow: 0 12px 28px rgba(58,23,28,.13) !important;
+  box-shadow: 0 12px 28px rgba(58,23,28,.17) !important;
 }
 
-.winter-hero .season-badge {
-  font-size: 10px !important;
-  letter-spacing: 1.5px !important;
+/* Декоративное свечение */
+
+.winter-hero::before,
+.season-hero::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 210px !important;
+  height: 210px !important;
+  right: -90px !important;
+  top: -85px !important;
+  border-radius: 50% !important;
+
+  background: radial-gradient(
+    circle,
+    rgba(226,190,130,.16),
+    rgba(226,190,130,.02) 65%,
+    transparent 72%
+  ) !important;
+
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* Бейдж */
+
+.winter-hero .season-badge,
+.season-hero .season-badge {
+  background: rgba(218,190,150,.10) !important;
+  border: 1px solid rgba(218,190,150,.26) !important;
+  color: #e8d2ad !important;
+  box-shadow: inset 0 0 12px rgba(218,190,150,.04) !important;
   border-radius: 999px !important;
   padding: 7px 11px !important;
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
 }
 
-.winter-hero h2 {
+/* Заголовок */
+
+.winter-hero h2,
+.season-hero h2 {
+  color: #fff6eb !important;
   font-size: clamp(25px,7vw,32px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em !important;
   margin: 18px 0 12px !important;
   max-width: 310px !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,.16);
 }
 
-.winter-hero p {
+/* Текст */
+
+.winter-hero p,
+.season-hero p {
+  color: rgba(255,246,235,.82) !important;
   font-size: 14px !important;
+  line-height: 1.55 !important;
   max-width: 270px !important;
 }
 
-.winter-hero .season-button {
+/* Кнопка баннера */
+
+.winter-hero .season-button,
+.season-hero .season-button {
+  background: #ead8b9 !important;
+  color: #35171e !important;
+  border-radius: 16px !important;
   min-height: 46px !important;
   padding: 12px 16px !important;
   font-size: 13px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 5px 18px rgba(0,0,0,.12) !important;
+  transition: transform .2s ease, opacity .2s ease !important;
 }
 
-/* Подборка сегодня в АВ */
+.winter-hero .season-button:active,
+.season-hero .season-button:active {
+  transform: scale(.97) !important;
+  opacity: .9 !important;
+}
+
+/* =========================================
+   ПОДБОРКА СЕГОДНЯ В АВ
+========================================= */
+
 .quick-picks {
   margin: 22px 14px 28px !important;
   padding: 20px 17px !important;
@@ -2915,7 +2161,6 @@ body {
   box-shadow: 0 5px 18px rgba(40,28,26,.035) !important;
 }
 
-/* Заголовок подборки */
 .quick-picks-heading {
   display: flex !important;
   align-items: flex-start !important;
@@ -2942,7 +2187,6 @@ body {
   margin: 5px 0 0 !important;
 }
 
-/* Карточки подборки */
 .quick-picks-list {
   display: flex !important;
   flex-direction: column !important;
@@ -3002,58 +2246,9 @@ body {
   font-size: 22px !important;
 }
 
-/* Микроанимации */
-@media (hover:hover) {
-  .quick-pick-card:hover {
-    transform: translateY(-2px);
-    background: #ece6dd !important;
-  }
-
-  #menu .card:hover {
-    transform: translateY(-2px);
-  }
-}
-
-.quick-pick-card:active {
-  transform: scale(.985) !important;
-}
-
-#menu .card,
-.quick-pick-card,
-.season-button,
-.add,
-.cart-btn {
-  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease !important;
-}
-
-/* Плавное появление карточек */
-@keyframes avFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(7px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-#menu .card {
-  animation: avFadeUp .3s ease both;
-}
-
-.quick-pick-card {
-  animation: avFadeUp .35s ease both;
-}
-
-/* Уважение к настройкам уменьшения движения */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-/* AV WINTER — CATEGORY NAVIGATION */
+/* =========================================
+   КАТЕГОРИИ
+========================================= */
 
 #categories {
   display: flex !important;
@@ -3066,6 +2261,7 @@ body {
   scroll-behavior: smooth !important;
   -webkit-overflow-scrolling: touch !important;
   scrollbar-width: none !important;
+  background: transparent !important;
 }
 
 #categories::-webkit-scrollbar {
@@ -3096,7 +2292,26 @@ body {
 #categories button:active {
   transform: scale(.97) !important;
 }
-/* AV WINTER — MENU SPACING & RHYTHM */
+
+/* =========================================
+   ЗАГОЛОВКИ РАЗДЕЛОВ
+========================================= */
+
+.section-heading {
+  margin-bottom: 13px !important;
+}
+
+.section-heading h2 {
+  color: #3a171c !important;
+}
+
+.section-heading p {
+  color: #786b63 !important;
+}
+
+/* =========================================
+   КАТАЛОГ
+========================================= */
 
 #menu {
   gap: 12px !important;
@@ -3105,56 +2320,222 @@ body {
 }
 
 #menu .card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 230px !important;
   margin: 0 !important;
+  padding: 17px 15px 15px !important;
   overflow: hidden !important;
+  border-radius: 22px !important;
+
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,.72),
+    rgba(255,250,243,.96)
+  ) !important;
+
+  border: 1px solid rgba(58,23,28,.09) !important;
+  box-shadow: 0 5px 16px rgba(40,28,26,.055) !important;
 }
 
 #menu .product-content {
+  flex: 1 !important;
   padding: 0 !important;
 }
 
 #menu .card h3 {
-  margin-bottom: 8px !important;
+  color: #321e1d !important;
+  font-size: 17px !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  letter-spacing: -.3px !important;
+  margin: 0 0 9px !important;
 }
 
 #menu .card p {
-  margin-top: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  color: #81756d !important;
+  margin: 0 !important;
+
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 4 !important;
+  overflow: hidden !important;
 }
 
 #menu .card-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
   margin-top: 16px !important;
   padding-top: 10px !important;
   border-top: 1px solid rgba(58,23,28,.07) !important;
 }
 
-#menu .add {
-  flex-shrink: 0 !important;
+#menu .price {
+  font-size: 17px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  color: #57252c !important;
 }
 
-@media (max-width: 480px) {
-  #menu {
-    gap: 10px !important;
-  }
+#menu .old-price {
+  font-size: 12px !important;
+  color: #a99591 !important;
+  font-weight: 500 !important;
+}
 
-  #menu .card {
-    padding: 14px 12px 12px !important;
-    border-radius: 19px !important;
-  }
+#menu .promo-price {
+  font-size: 17px !important;
+  color: #57252c !important;
+  font-weight: 800 !important;
+}
 
-  #menu .card h3 {
-    font-size: 15px !important;
-  }
+#menu .add {
+  width: 43px !important;
+  height: 43px !important;
+  min-width: 43px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  border-radius: 14px !important;
+  font-size: 25px !important;
+  line-height: 1 !important;
+  background: #3a171c !important;
+  color: #fffaf3 !important;
+  box-shadow: none !important;
+}
 
-  #menu .card p {
-    font-size: 12px !important;
-    line-height: 1.45 !important;
-  }
+#menu .add:active {
+  transform: scale(.95) !important;
+}
 
-  #menu .card-footer {
-    margin-top: 13px !important;
-    padding-top: 9px !important;
-  }
-/* AV WINTER — CART ITEM ROWS */
+/* =========================================
+   ДЕЙСТВУЮЩАЯ АКЦИЯ
+========================================= */
+
+#lunchPromo {
+  background: linear-gradient(
+    135deg,
+    #3a171c,
+    #71353b
+  ) !important;
+}
+
+/* =========================================
+   БОНУСНАЯ КАРТА
+========================================= */
+
+#loyaltyCard {
+  background: linear-gradient(
+    145deg,
+    #f4e9dd,
+    #e9ddcf
+  ) !important;
+
+  color: #3a171c !important;
+  border: 1px solid rgba(58,23,28,.09) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 8px 22px rgba(58,23,28,.06) !important;
+}
+
+/* =========================================
+   ПРОГРЕСС ДОСТАВКИ
+========================================= */
+
+.delivery-progress {
+  background: linear-gradient(
+    145deg,
+    #edf1ed,
+    #e3e9e4
+  ) !important;
+
+  border: 1px solid rgba(58,23,28,.07) !important;
+  border-radius: 20px !important;
+}
+
+.delivery-progress-title strong {
+  color: #3a171c !important;
+}
+
+#deliveryProgressFill {
+  background: linear-gradient(
+    90deg,
+    #748879,
+    #3e6349
+  ) !important;
+}
+
+/* =========================================
+   КОРЗИНА — ОКНО
+========================================= */
+
+#cartDrawer.drawer {
+  background: rgba(24,17,18,.58) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#cartDrawer .drawer-card {
+  background: #f4f6f2 !important;
+  color: #321e1d !important;
+  border: 1px solid rgba(255,255,255,.5) !important;
+  border-radius: 28px !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  max-height: 92dvh !important;
+  overflow-y: auto !important;
+  padding: 22px 18px 28px !important;
+  box-shadow: 0 25px 70px rgba(0,0,0,.22) !important;
+  overscroll-behavior: contain;
+}
+
+/* Заголовок корзины */
+
+#cartDrawer .cart-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-bottom: 18px !important;
+  border-bottom: 1px solid #dce2dc !important;
+  margin-bottom: 18px !important;
+}
+
+#cartDrawer .cart-head h2 {
+  color: #3a171c !important;
+  font-size: 23px !important;
+  font-weight: 800 !important;
+  letter-spacing: -.5px !important;
+  margin: 0 !important;
+}
+
+#cartDrawer .cart-meta {
+  color: #81756d !important;
+  font-size: 13px !important;
+  margin-top: 5px !important;
+}
+
+#cartDrawer .drawer-close {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 14px !important;
+  border: 1px solid #e0d8d0 !important;
+  background: #fffaf4 !important;
+  color: #3a171c !important;
+  font-size: 19px !important;
+}
+
+/* =========================================
+   ТОВАРЫ В КОРЗИНЕ
+========================================= */
 
 #cartItems {
   display: flex !important;
@@ -3198,6 +2579,8 @@ body {
   font-weight: 800 !important;
   margin-top: 6px !important;
 }
+
+/* Количество */
 
 #cartItems .qty {
   display: flex !important;
@@ -3243,30 +2626,34 @@ body {
   transform: scale(.94) !important;
 }
 
-@media (max-width: 480px) {
-  #cartItems > .cart-row {
-    padding: 13px 10px !important;
-    gap: 8px !important;
-  }
-
-  #cartItems .qty {
-    gap: 3px !important;
-  }
-
-  #cartItems .qty button {
-    width: 29px !important;
-    height: 29px !important;
-    min-width: 29px !important;
-  }
-/* AV WINTER — CART SUMMARY & LOYALTY */
+/* =========================================
+   БОНУСЫ В КОРЗИНЕ
+========================================= */
 
 #loyaltyRedeemCard {
   margin-top: 16px !important;
   padding: 18px !important;
   border-radius: 22px !important;
-  background: linear-gradient(145deg, #e4ebe5, #dce5df) !important;
+  background: linear-gradient(
+    145deg,
+    #e4ebe5,
+    #dce5df
+  ) !important;
   border: 1px solid rgba(48,72,57,.08) !important;
   box-shadow: 0 4px 14px rgba(40,28,26,.035) !important;
+}
+
+#cartDrawer .loyalty-section-title h3 {
+  color: #3a171c !important;
+  font-size: 18px !important;
+  margin: 5px 0 0 !important;
+}
+
+#cartDrawer .loyalty-hint {
+  color: #746c65 !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin: 12px 0 !important;
 }
 
 #loyaltyRedeemCard input {
@@ -3288,7 +2675,11 @@ body {
   color: #5f6d61 !important;
 }
 
-#deliveryProgress {
+/* =========================================
+   ПРОГРЕСС ДОСТАВКИ В КОРЗИНЕ
+========================================= */
+
+#cartDrawer #deliveryProgress {
   margin-top: 16px !important;
   padding: 17px !important;
   border-radius: 20px !important;
@@ -3296,9 +2687,42 @@ body {
   border: 1px solid rgba(58,23,28,.06) !important;
 }
 
-#deliveryProgressFill {
-  background: linear-gradient(90deg, #748879, #3e6349) !important;
+#cartDrawer .delivery-progress-bar {
+  overflow: hidden !important;
+  border-radius: 999px !important;
+  background: #d3ddd4 !important;
+  height: 8px !important;
+  margin-top: 12px !important;
+}
+
+#cartDrawer #deliveryProgressFill {
   border-radius: 99px !important;
+  background: linear-gradient(
+    90deg,
+    #748879,
+    #3e6349
+  ) !important;
+}
+
+/* =========================================
+   ИТОГИ КОРЗИНЫ
+========================================= */
+
+#cartDrawer .cart-summary {
+  background: #fffaf5 !important;
+  border: 1px solid rgba(58,23,28,.07) !important;
+  border-radius: 22px !important;
+  padding: 18px !important;
+  margin-top: 18px !important;
+}
+
+#cartDrawer .cart-summary > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+  color: #786b63 !important;
 }
 
 #subtotal,
@@ -3311,32 +2735,229 @@ body {
   color: #64806a !important;
 }
 
-#total {
-  font-size: 24px !important;
-  font-weight: 800 !important;
-  color: #57252c !important;
+#cartDrawer .cart-summary .total {
+  border-top: 1px solid #e5dcd2 !important;
+  padding-top: 14px !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
 }
 
-#checkoutBtn {
+#total,
+#cartDrawer .cart-summary .total strong {
+  color: #57252c !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+}
+
+/* =========================================
+   ОФОРМЛЕНИЕ ЗАКАЗА
+========================================= */
+
+#cartDrawer .checkout {
+  margin-top: 24px !important;
+}
+
+#cartDrawer .checkout h3 {
+  color: #3a171c !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  margin: 22px 0 12px !important;
+}
+
+/* Выбор */
+
+#cartDrawer .choice-group {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+}
+
+#cartDrawer .choice-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 14px 12px !important;
+  border-radius: 17px !important;
+  background: #fffaf5 !important;
+  border: 1px solid #e3d9d0 !important;
+}
+
+#cartDrawer .choice-card:has(input:checked) {
+  border: 1.5px solid #57252c !important;
+  background: #f1e6df !important;
+}
+
+#cartDrawer .choice-icon {
+  font-size: 22px !important;
+}
+
+#cartDrawer .choice-text strong {
+  color: #3a171c !important;
+  font-size: 13px !important;
+}
+
+#cartDrawer .choice-text small {
+  color: #84776f !important;
+  font-size: 11px !important;
+}
+
+/* Поля */
+
+#cartDrawer .contact-fields {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 11px !important;
+}
+
+#cartDrawer input:not([type="radio"]),
+#cartDrawer textarea {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: #fffaf5 !important;
+  color: #321e1d !important;
+  border: 1px solid #e2d8cf !important;
+  border-radius: 15px !important;
+  padding: 15px !important;
+  font-size: 15px !important;
+  outline: none !important;
+}
+
+#cartDrawer input:focus,
+#cartDrawer textarea:focus {
+  border-color: #8b5a5c !important;
+  box-shadow: 0 0 0 3px rgba(87,37,44,.08) !important;
+}
+
+#cartDrawer textarea {
+  min-height: 90px !important;
+  resize: vertical !important;
+}
+
+/* Кнопка заказа */
+
+#checkoutBtn,
+#cartDrawer .checkout-main-btn {
   width: 100% !important;
   min-height: 56px !important;
-  border-radius: 19px !important;
-  background: linear-gradient(135deg, #3a171c, #57252c) !important;
+  margin-top: 22px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(
+    135deg,
+    #57252c,
+    #3a171c
+  ) !important;
   color: #fffaf3 !important;
   font-size: 16px !important;
   font-weight: 800 !important;
-  letter-spacing: .2px !important;
   box-shadow: 0 8px 20px rgba(58,23,28,.16) !important;
   transition: transform .2s ease, box-shadow .2s ease !important;
 }
 
-#checkoutBtn:active {
+#checkoutBtn:active,
+#cartDrawer .checkout-main-btn:active {
   transform: scale(.98) !important;
 }
 
+#cartDrawer .checkout-note {
+  color: #84776f !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  margin-top: 12px !important;
+}
+
+/* =========================================
+   МОДАЛЬНЫЕ ОКНА
+========================================= */
+
+.modal-card {
+  background: #f5f1eb !important;
+}
+
+/* =========================================
+   МИКРОАНИМАЦИИ
+========================================= */
+
+@keyframes avFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#menu .card {
+  animation: avFadeUp .3s ease both;
+}
+
+.quick-pick-card {
+  animation: avFadeUp .35s ease both;
+}
+
+#menu .card,
+.quick-pick-card,
+.season-button,
+.add,
+.cart-btn {
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    opacity .18s ease !important;
+}
+
+.quick-pick-card:active {
+  transform: scale(.985) !important;
+}
+
+/* =========================================
+   АДАПТАЦИЯ
+========================================= */
+
 @media (max-width: 480px) {
+  #menu {
+    gap: 10px !important;
+  }
+
+  #menu .card {
+    padding: 14px 12px 12px !important;
+    border-radius: 19px !important;
+  }
+
+  #menu .card h3 {
+    font-size: 15px !important;
+  }
+
+  #menu .card p {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  #menu .card-footer {
+    margin-top: 13px !important;
+    padding-top: 9px !important;
+  }
+
+  #cartItems > .cart-row {
+    padding: 13px 10px !important;
+    gap: 8px !important;
+  }
+
+  #cartItems .qty {
+    gap: 3px !important;
+  }
+
+  #cartItems .qty button {
+    width: 29px !important;
+    height: 29px !important;
+    min-width: 29px !important;
+  }
+
   #loyaltyRedeemCard,
-  #deliveryProgress {
+  #cartDrawer #deliveryProgress {
     padding: 15px !important;
     border-radius: 18px !important;
   }
@@ -3344,249 +2965,52 @@ body {
   #total {
     font-size: 22px !important;
   }
-/* AV — WARM WINTER ATMOSPHERE */
-
-body {
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(120, 74, 47, .08),
-      transparent 40%
-    ),
-    linear-gradient(
-      180deg,
-      #eee5d8 0%,
-      #e9dfd2 50%,
-      #e5d8c8 100%
-    ) !important;
 }
 
-/* Main header */
-.hero {
-  background: linear-gradient(
-    145deg,
-    #432126,
-    #30171c 65%,
-    #241419
-  ) !important;
-  color: #fff6eb !important;
-  border: 1px solid rgba(255,255,255,.06) !important;
-  box-shadow: 0 12px 30px rgba(48,23,28,.16) !important;
+@media (max-width: 380px) {
+  #cartDrawer .drawer-card {
+    padding: 18px 13px 24px !important;
+  }
+
+  #cartDrawer .choice-card {
+    padding: 11px 9px !important;
+  }
+
+  #cartItems .qty {
+    gap: 4px !important;
+  }
+
+  #cartItems .qty button {
+    width: 29px !important;
+    height: 29px !important;
+    min-width: 29px !important;
+  }
 }
 
-/* Winter banner */
-.winter-hero {
-  position: relative !important;
-  overflow: hidden !important;
-  background:
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(191,151,93,.24),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 0% 100%,
-      rgba(109,74,54,.25),
-      transparent 38%
-    ),
-    linear-gradient(
-      145deg,
-      #542a30 0%,
-      #3b1c23 52%,
-      #29161b 100%
-    ) !important;
-  border: 1px solid rgba(255,255,255,.07) !important;
-  box-shadow: 0 12px 28px rgba(58,23,28,.17) !important;
+/* =========================================
+   HOVER — ТОЛЬКО ДЛЯ УСТРОЙСТВ С МЫШЬЮ
+========================================= */
+
+@media (hover:hover) {
+  .quick-pick-card:hover {
+    transform: translateY(-2px);
+    background: #ece6dd !important;
+  }
+
+  #menu .card:hover {
+    transform: translateY(-2px);
+  }
 }
 
-/* Warm decorative glow */
-.winter-hero::before {
-  content: "";
-  position: absolute;
-  width: 210px;
-  height: 210px;
-  right: -90px;
-  top: -85px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(226,190,130,.16),
-    rgba(226,190,130,.02) 65%,
-    transparent 72%
-  );
-  pointer-events: none;
-}
+/* =========================================
+   УМЕНЬШЕНИЕ АНИМАЦИЙ
+========================================= */
 
-/* Soft winter ornament */
-.winter-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(
-      circle,
-      rgba(255,246,228,.20) 1px,
-      transparent 1.8px
-    ),
-    radial-gradient(
-      circle,
-      rgba(255,246,228,.09) 1px,
-      transparent 2px
-    );
-  background-size: 37px 43px, 61px 67px;
-  background-position: 7px 12px, 21px 31px;
-  opacity: .38;
-}
-
-/* Banner text */
-.winter-hero h2 {
-  color: #fff6eb !important;
-  text-shadow: 0 2px 14px rgba(0,0,0,.16);
-}
-
-.winter-hero p {
-  color: rgba(255,246,235,.82) !important;
-}
-
-/* Winter badge */
-.winter-hero .season-badge {
-  background: rgba(225,195,145,.13) !important;
-  color: #e7c99a !important;
-  border: 1px solid rgba(225,195,145,.24) !important;
-}
-
-/* Main banner buttons */
-.winter-hero .season-button {
-  border-radius: 16px !important;
-  transition: transform .2s ease !important;
-}
-
-.winter-hero .season-button:active {
-  transform: scale(.97) !important;
-}
-/* AV — WINTER HERO FINAL ATMOSPHERE */
-
-.winter-hero {
-  background:
-    radial-gradient(
-      ellipse at 100% 0%,
-      rgba(183,137,85,.23),
-      transparent 40%
-    ),
-    radial-gradient(
-      ellipse at 100% 100%,
-      rgba(89,111,84,.28),
-      transparent 43%
-    ),
-    linear-gradient(
-      135deg,
-      #482027 0%,
-      #35171e 55%,
-      #26151b 100%
-    ) !important;
-}
-
-/* Убираем прежние декоративные элементы */
-.winter-hero::before,
-.winter-hero::after {
-  content: none !important;
-}
-
-/* Более выразительный бейдж */
-.winter-hero .season-badge {
-  background: rgba(218,190,150,.10) !important;
-  border: 1px solid rgba(218,190,150,.26) !important;
-  color: #e8d2ad !important;
-}
-
-.winter-hero .season-badge {
-  box-shadow: inset 0 0 12px rgba(218,190,150,.04) !important;
-}
-
-/* Тёплая кнопка */
-.winter-hero .season-button {
-  background: #ead8b9 !important;
-  color: #35171e !important;
-  box-shadow: 0 5px 18px rgba(0,0,0,.12) !
-}
-/* AV — WINTER DECORATION LAYER */
-
-.winter-hero {
-  position: relative !important;
-  isolation: isolate !important;
-  overflow: hidden !important;
-}
-
-/* Декоративный слой */
-.winter-hero .winter-decoration {
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  width: 58% !important;
-  height: 100% !important;
-  z-index: -1 !important;
-  pointer-events: none !important;
-  opacity: .85 !important;
-  background:
-    radial-gradient(
-      ellipse at 85% 20%,
-      rgba(215,179,120,.25),
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at 100% 100%,
-      rgba(78,105,79,.35),
-      transparent 65%
-    ) !important;
-}
-
-/* Ветка хвои */
-.winter-hero .winter-decoration::before {
-  content: "" !important;
-  position: absolute !important;
-  width: 240px !important;
-  height: 240px !important;
-  right: -75px !important;
-  bottom: -70px !important;
-  transform: rotate(-35deg) !important;
-  opacity: .65 !important;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      transparent 0px,
-      transparent 8px,
-      rgba(126,150,113,.55) 9px,
-      rgba(126,150,113,.55) 11px,
-      transparent 12px,
-      transparent 17px
-    ) !important;
-  border-radius: 50% !important;
-  mask-image: radial-gradient(
-    circle,
-    black 20%,
-    transparent 72%
-  ) !important;
-}
-
-/* Мягкие огоньки */
-.winter-hero .winter-decoration::after {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  background:
-    radial-gradient(circle at 78% 26%, rgba(255,222,168,.65) 1px, transparent 4px),
-    radial-gradient(circle at 89% 39%, rgba(255,222,168,.45) 1px, transparent 5px),
-    radial-gradient(circle at 72% 48%, rgba(255,222,168,.35) 1px, transparent 4px),
-    radial-gradient(circle at 94% 61%, rgba(255,222,168,.5) 1px, transparent 5px),
-    radial-gradient(circle at 83% 73%, rgba(255,222,168,.35) 1px, transparent 4px) !important;
-}
-
-/* Текст поверх декора */
-.winter-hero > h2,
-.winter-hero > p,
-.winter-hero > .season-badge,
-.winter-hero > .season-button {
-  position: relative !important;
-  z-index: 2 !important;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
