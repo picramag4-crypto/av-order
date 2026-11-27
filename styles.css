@@ -2201,3 +2201,56 @@ body {
 #lunchPromo {
   background: linear-gradient(135deg, #3a171c, #71353b);
 }
+/* AV WINTER — MENU DETAILS */
+
+/* Карточки товаров */
+.card {
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,.72),
+    rgba(255,250,243,.96)
+  ) !important;
+  border: 1px solid rgba(58,23,28,.09) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 5px 16px rgba(40,28,26,.055) !important;
+}
+
+/* Названия товаров */
+.card h3 {
+  color: #321e1d !important;
+}
+
+/* Цены */
+.price {
+  color: #57252c !important;
+}
+
+/* Кнопки добавления */
+.add {
+  background: linear-gradient(145deg,#57252c,#3a171c) !important;
+  color: #fffaf3 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 12px rgba(58,23,28,.13) !important;
+}
+
+/* Категории меню */
+.categories button {
+  border-color: rgba(58,23,28,.10);
+}
+
+/* Активная категория */
+.categories button.active {
+  background: #3a171c !important;
+  color: #fffaf3 !important;
+  border-color: #3a171c !important;
+}
+
+/* Заголовки разделов */
+.section-heading h2 {
+  color: #3a171c !important;
+}
+
+/* Подписи разделов */
+.section-heading p {
+  color: #786b63 !important;
+}
